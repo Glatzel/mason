@@ -57,7 +57,7 @@
   <!--analyser-->
   <ItemGroup>
     <ProjectReference Include="$(SolutionDir)external/pyxis/csharp/src/Pyxis/Pyxis.csproj" />
-    <PackageReference Include="CSharpier.MsBuild" Version="1.0.0">
+    <PackageReference Include="CSharpier.MsBuild" Version="1.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
