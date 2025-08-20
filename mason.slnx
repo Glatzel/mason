@@ -29,7 +29,6 @@
     <File Path="src\Directory.Build.props" />
     <Project Path="src\Mason\Mason.csproj">
       <Platform Project="x64" />
-      <BuildType Solution="Debug2019|*" Project="Debug2020" />
       <BuildType Solution="Debug|*" Project="Debug2025" />
     </Project>
     <Project Path="src\Mason.ClashAndJoin\Mason.ClashAndJoin.csproj">
