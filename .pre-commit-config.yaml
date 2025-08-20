@@ -1,10 +1,8 @@
-ci:
-  autofix_prs: false
-  autoupdate_commit_msg: "ci(pre-commit): pre-commit autoupdate"
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+  - repo: https://github.com/Glatzel/template
+    rev: v0.0.6
     hooks:
+      # pre-commit-hooks
       - id: check-added-large-files
       - id: check-ast
       - id: check-json
@@ -15,3 +13,10 @@ repos:
       - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: trailing-whitespace
+      # csharp
+      - id: csharpier
+      # misc
+      - id: taplo
+      - id: actionlint
+      - id: typos
+      - id: markdown
