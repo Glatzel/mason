@@ -6,6 +6,5 @@
   <ItemGroup>
     <ProjectReference Include="../Mason.Core/Mason.Core.csproj" />
     <ProjectReference Include="../Mason.Geometry/Mason.Geometry.csproj" />
-    <ProjectReference Include="../Mason.OTLS/Mason.OTLS.csproj" />
   </ItemGroup>
 </Project>

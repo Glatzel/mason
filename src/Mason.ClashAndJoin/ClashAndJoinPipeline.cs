@@ -1,8 +1,8 @@
 ﻿using Autodesk.Revit.DB;
-using Glatzel.Algorithm;
-using Mason.Geometry;
 
 namespace Mason.ClashAndJoin;
+
+using Pyxis;
 
 internal sealed class ClashAndJoinPipeline
 {
@@ -41,7 +41,7 @@ internal sealed class ClashAndJoinPipeline
     {
         if (ContinueFlag)
         {
-            ContinueFlag = BoundingBox.IsIntersect(E1.CachedBBox, E2.CachedBBox)
+            ContinueFlag = BoundingBox.IsIntersect(ref E1.CachedBBox, ref E2.CachedBBox)
                 ? continueIfIntersect
                 : !continueIfIntersect;
         }

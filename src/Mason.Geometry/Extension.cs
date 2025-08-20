@@ -1,5 +1,5 @@
 ﻿using Autodesk.Revit.DB;
-using Glatzel.Algorithm;
+using Pyxis;
 
 namespace Mason.Geometry;
 
@@ -7,7 +7,9 @@ public static class Extension
 {
     public static BoundingBox ToBoundingBox(this BoundingBoxXYZ bbox)
     {
-        return new(bbox.Min.ToVec3(), bbox.Max.ToVec3());
+        Vec3 min = bbox.Min.ToVec3();
+        Vec3 max = bbox.Max.ToVec3();
+        return new BoundingBox(ref min, ref max);
     }
 
     public static BoundingBoxXYZ ToBoundingBoxXYZ(this BoundingBox bbox)

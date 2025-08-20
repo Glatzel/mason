@@ -12,11 +12,23 @@
     <Platform Name="x64" />
     <BuildType Name="Debug" />
   </Configurations>
+  <Folder Name="/external/">
+    <Project Path="external/pyxis/csharp/src/Pyxis/Pyxis.csproj">
+      <BuildType Solution="Debug2018|*" Project="Debug" />
+      <BuildType Solution="Debug2019|*" Project="Debug" />
+      <BuildType Solution="Debug2020|*" Project="Debug" />
+      <BuildType Solution="Debug2021|*" Project="Debug" />
+      <BuildType Solution="Debug2022|*" Project="Debug" />
+      <BuildType Solution="Debug2023|*" Project="Debug" />
+      <BuildType Solution="Debug2024|*" Project="Debug" />
+      <BuildType Solution="Debug2025|*" Project="Debug" />
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
   <Folder Name="/src/">
     <File Path="src\Directory.Build.props" />
     <Project Path="src\Mason\Mason.csproj">
       <Platform Project="x64" />
-      <BuildType Solution="Debug2019|*" Project="Debug2020" />
       <BuildType Solution="Debug|*" Project="Debug2025" />
     </Project>
     <Project Path="src\Mason.ClashAndJoin\Mason.ClashAndJoin.csproj">
@@ -38,19 +50,6 @@
     <Project Path="src\Mason.OTLS\Mason.OTLS.csproj">
       <Platform Project="x64" />
       <BuildType Solution="Debug|*" Project="Debug2025" />
-    </Project>
-  </Folder>
-  <Folder Name="/解决方案项/">
-    <Project Path="external/pyxis/csharp/src/Pyxis/Pyxis.csproj">
-      <BuildType Solution="Debug2018|*" Project="Debug" />
-      <BuildType Solution="Debug2019|*" Project="Debug" />
-      <BuildType Solution="Debug2020|*" Project="Debug" />
-      <BuildType Solution="Debug2021|*" Project="Debug" />
-      <BuildType Solution="Debug2022|*" Project="Debug" />
-      <BuildType Solution="Debug2023|*" Project="Debug" />
-      <BuildType Solution="Debug2024|*" Project="Debug" />
-      <BuildType Solution="Debug2025|*" Project="Debug" />
-      <Platform Project="x64" />
     </Project>
   </Folder>
 </Solution>

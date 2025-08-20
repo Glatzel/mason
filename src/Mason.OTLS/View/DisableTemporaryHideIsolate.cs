@@ -3,7 +3,7 @@ using Mason.Core;
 
 namespace Mason.OTLS.View;
 
-public class DisableTemporayHideIsolate : AbsOperator<object>
+public class DisableTemporaryHideIsolate : AbsOperator<object>
 {
     public override void Cook()
     {

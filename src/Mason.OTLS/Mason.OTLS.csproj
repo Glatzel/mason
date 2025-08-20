@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!--property-->
   <PropertyGroup>
-    <AssemblyName>Mason</AssemblyName>
-    <RootNamespace>Mason</RootNamespace>
+    <AssemblyName>Mason.OTLS</AssemblyName>
+    <RootNamespace>Mason.OTLS</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../Mason.Core/Mason.Core.csproj" />
-    <ProjectReference Include="../Mason.OTLS/Mason.OTLS.csproj" />
     <ProjectReference Include="../Mason.Command/Mason.Command.csproj" />
     <ProjectReference Include="../Mason.ClashAndJoin/Mason.ClashAndJoin.csproj" />
   </ItemGroup>

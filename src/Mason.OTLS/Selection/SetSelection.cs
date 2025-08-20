@@ -4,11 +4,11 @@ using Mason.Core;
 
 namespace Mason.OTLS.Selection;
 
-public class SetSelction : AbsOperator<object>
+public class SetSelection : AbsOperator<object>
 {
-    public SetSelction() { }
+    public SetSelection() { }
 
-    public SetSelction(params Element[] elements)
+    public SetSelection(params Element[] elements)
     {
         foreach (Element element in elements)
         {
@@ -16,7 +16,7 @@ public class SetSelction : AbsOperator<object>
         }
     }
 
-    public SetSelction(params ElementId[] ids)
+    public SetSelection(params ElementId[] ids)
     {
         Ids.AddRange(ids);
     }
