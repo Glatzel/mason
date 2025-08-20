@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <AssemblyName>Mason.OTLS</AssemblyName>
-    <RootNamespace>Mason.OTLS</RootNamespace>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="../Mason.Core/Mason.Core.csproj" />
-  </ItemGroup>
-</Project>
