@@ -94,9 +94,46 @@
           "System.Runtime.CompilerServices.Unsafe": "6.1.2"
         }
       },
+      "mason.clashandjoin": {
+        "type": "Project",
+        "dependencies": {
+          "Mason.Core": "[0.0.1-rc.2, )",
+          "Mason.Geometry": "[0.0.1-rc.2, )",
+          "Mason.OTLS": "[0.0.1-rc.2, )",
+          "NLog": "[6.0.0, )",
+          "Pyxis": "[0.0.35, )",
+          "Revit_All_Main_Versions_API_x64": "[2020.*, )"
+        }
+      },
+      "mason.command": {
+        "type": "Project",
+        "dependencies": {
+          "Mason.Core": "[0.0.1-rc.2, )",
+          "NLog": "[6.0.0, )",
+          "Pyxis": "[0.0.35, )",
+          "Revit_All_Main_Versions_API_x64": "[2020.*, )"
+        }
+      },
       "mason.core": {
         "type": "Project",
         "dependencies": {
+          "NLog": "[6.0.0, )",
+          "Pyxis": "[0.0.35, )",
+          "Revit_All_Main_Versions_API_x64": "[2020.*, )"
+        }
+      },
+      "mason.geometry": {
+        "type": "Project",
+        "dependencies": {
+          "NLog": "[6.0.0, )",
+          "Pyxis": "[0.0.35, )",
+          "Revit_All_Main_Versions_API_x64": "[2020.*, )"
+        }
+      },
+      "mason.otls": {
+        "type": "Project",
+        "dependencies": {
+          "Mason.Core": "[0.0.1-rc.2, )",
           "NLog": "[6.0.0, )",
           "Pyxis": "[0.0.35, )",
           "Revit_All_Main_Versions_API_x64": "[2020.*, )"
