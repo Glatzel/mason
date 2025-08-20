@@ -1,7 +1,9 @@
 ﻿using Autodesk.Revit.DB;
 
 namespace Mason.ClashAndJoin;
+
 using Pyxis;
+
 internal sealed class ClashAndJoinPipeline
 {
     public bool ContinueFlag;

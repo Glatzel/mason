@@ -6,6 +6,7 @@ using Autodesk.Revit.UI.Selection;
 using Mason.ClashAndJoin.Command.Bench.Misc;
 using Mason.Core;
 using Pyxis;
+
 namespace Mason.ClashAndJoin.Command.Bench;
 
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
@@ -40,7 +41,10 @@ public class BenchBoundingBoxIntersect : AbsCommand
         {
             for (int j = i + 1; j < elements.Count; j++)
             {
-                BoundingBox.IsIntersect(ref proxyelements[i].CachedBBox,ref  proxyelements[j].CachedBBox);
+                BoundingBox.IsIntersect(
+                    ref proxyelements[i].CachedBBox,
+                    ref proxyelements[j].CachedBBox
+                );
             }
         }
         watch.Stop();
