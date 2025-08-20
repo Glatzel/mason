@@ -288,7 +288,7 @@ internal sealed class CommandRegister(UIControlledApplication uicapp)
 
             ribbonPanel.AddItem(NewPushButtonData<GroupClashDetection>(text: "Clash\nDetection"));
             ribbonPanel.AddItem(NewPushButtonData<GroupJoin>(text: "Join\nElements"));
-            ribbonPanel.AddItem(NewPushButtonData<GroupUnjoin>(text: "Unoin\nElements"));
+            ribbonPanel.AddItem(NewPushButtonData<GroupUnjoin>(text: "Union\nElements"));
             ribbonPanel.AddItem(NewPushButtonData<GroupSwitchJoin>(text: "Switch\nJoin"));
 
             SplitButtonData spbd1 = new("SplitButtonSelectJoinGroup1", "Group1");
