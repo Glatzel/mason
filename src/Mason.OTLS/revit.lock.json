@@ -1,61 +1,113 @@
 {
   "version": 1,
   "dependencies": {
-    "net8.0-windows7.0": {
+    ".NETFramework,Version=v4.8": {
       "CSharpier.MsBuild": {
         "type": "Direct",
-        "requested": "[0.*, )",
-        "resolved": "0.30.6",
-        "contentHash": "m/KjEvc7f4+IGAL05F+tXwY5JHje6CeMjCc6mS4nlQlFJA36DM+UmoPCS5hDnLUw2s0aKMDoXdCxUrNe9PHBsA=="
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "yvhLdwywGyod0lw4kIHJWjmZ17fThXFrRQsznZTA66LBdHxp6SWNBL9C7tw1OB6aOe8ZRw6bbbaSPrwUsKVi+g=="
       },
       "NLog": {
         "type": "Direct",
-        "requested": "[5.*, )",
-        "resolved": "5.4.0",
-        "contentHash": "LwMcGSW3soF3/SL68rlJN3Eh3ktrAPycC3zZR/07OYBPraZUu0bygEC7kIN10lUQgMXT4s84Fi1chglGdGrQEg=="
+        "requested": "[6.0.0, )",
+        "resolved": "6.0.0",
+        "contentHash": "3wqlcN80L6OHh0ZTQR/F+eZBeaAZ109XbvCEbtZ/nG5B/S+XzGOxv67RAfMx0YMkHY1aAHyW245k0/OE7J0ZxA=="
       },
       "Revit_All_Main_Versions_API_x64": {
         "type": "Direct",
-        "requested": "[2025.*, )",
-        "resolved": "2025.0.0",
-        "contentHash": "WyY9eYbUmMrv2SV7tAc72no2fT/ZKi57VAvxkScKesB5TSWVCiujYJZqf0/Eoc5QZysNS1dfw9BJjhTMHwo0mg=="
+        "requested": "[2020.*, )",
+        "resolved": "2020.0.1",
+        "contentHash": "M6qYA19sS2y1cK1JMQoZzfCgKiTWMQemIYHUHqqpCROi8+dK5gZHVOV0pBN8jMD5sxjbaE+dgOQXid2hEGBYDA=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
         "requested": "[4.*, )",
-        "resolved": "4.13.0",
-        "contentHash": "SSYEq2tPT4nmElTGJvpDsLmEw1mWY+Z+CM+H7gO49fSq4VyFivrmHyCeP3gWcDmgqMg77h2tLYRoZ0cjgnKmuA=="
+        "resolved": "4.14.0",
+        "contentHash": "AEWQMrb1rcmjv9FGzrwYSBb4INhDhsauS+wwTumG0wq8N1Il+CIQHqUZJ7bt0zYJEA1qXSqgpg8Fgwc88WrR/Q=="
       },
       "Roslynator.CodeAnalysis.Analyzers": {
         "type": "Direct",
         "requested": "[4.*, )",
-        "resolved": "4.13.0",
-        "contentHash": "U3B78km4IZ6LX3MlHHk1dPN3MyEgvzNGt4RURNgpjpXtBmdP98gCYuTjwt97dK3z76E45GisaXg6b0+HNqc8cg=="
+        "resolved": "4.14.0",
+        "contentHash": "iUiC7mfaLWgUxnKyG90sCIwd4fLLrnDtOsVqh1PuAL+drDNi8If+2lG9B+gPjRrP/pYSfcu9TMRYSDMKOEpnoQ=="
       },
       "Roslynator.Formatting.Analyzers": {
         "type": "Direct",
         "requested": "[4.*, )",
-        "resolved": "4.13.0",
-        "contentHash": "WxayP0vkpigClbmsRmt1Mn2kBEAE+klgeE9HSHECDyWDAvuPS2BV6CKWkm7/J/cGtFuaGn0yQhv3v4bbD6GnPg=="
+        "resolved": "4.14.0",
+        "contentHash": "qGxeOq3qYZQo3nxCPqcU+QX82k2iPnStoE4mwIU1nMlOiN8yciOrGKfU4v7UgBv66GRi6Sqoc0/UDXoSdP+e1Q=="
       },
       "Microsoft.Bcl.HashCode": {
         "type": "Transitive",
         "resolved": "6.0.0",
         "contentHash": "GI4jcoi6eC9ZhNOQylIBaWOQjyGaR8T6N3tC1u8p3EXfndLCVNNWa+Zp+ocjvvS3kNBN09Zma2HXL0ezO0dRfw=="
       },
-      "glatzel.algorithm": {
-        "type": "Project",
+      "Microsoft.Bcl.Memory": {
+        "type": "Transitive",
+        "resolved": "9.0.6",
+        "contentHash": "jd2uTwzSNgnOz8vS7CTgh9dzdb+LPcZym36JSrHsQ/28M9tJyjcRJen8hfgsBpZshzXb0r2rmSzWY/qytG/h4A==",
         "dependencies": {
-          "Microsoft.Bcl.HashCode": "[6.0.0, )",
-          "NLog": "[5.3.4, )"
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.ValueTuple": "4.5.0"
+        }
+      },
+      "System.Buffers": {
+        "type": "Transitive",
+        "resolved": "4.6.1",
+        "contentHash": "N8GXpmiLMtljq7gwvyS+1QvKT/W2J8sNAvx+HVg4NGmsG/H+2k/y9QI23auLJRterrzCiDH+IWAw4V/GPwsMlw=="
+      },
+      "System.Memory": {
+        "type": "Transitive",
+        "resolved": "4.6.3",
+        "contentHash": "qdcDOgnFZY40+Q9876JUHnlHu7bosOHX8XISRoH94fwk6hgaeQGSgfZd8srWRZNt5bV9ZW2TljcegDNxsf+96A==",
+        "dependencies": {
+          "System.Buffers": "4.6.1",
+          "System.Numerics.Vectors": "4.6.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.1.2"
+        }
+      },
+      "System.Numerics.Vectors": {
+        "type": "Transitive",
+        "resolved": "4.6.1",
+        "contentHash": "sQxefTnhagrhoq2ReR0D/6K0zJcr9Hrd6kikeXsA1I8kOCboTavcUC4r7TSfpKFeE163uMuxZcyfO1mGO3EN8Q=="
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Transitive",
+        "resolved": "6.1.2",
+        "contentHash": "2hBr6zdbIBTDE3EhK7NSVNdX58uTK6iHW/P/Axmm9sl1xoGSLqDvMtpecn226TNwHByFokYwJmt/aQQNlO5CRw=="
+      },
+      "System.ValueTuple": {
+        "type": "Transitive",
+        "resolved": "4.5.0",
+        "contentHash": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ=="
+      },
+      "ZLinq": {
+        "type": "Transitive",
+        "resolved": "1.5.2",
+        "contentHash": "Zd/afYvmwHMzAWFhK9XAEW9BN4iqXswuWUNsaVFPy4INnxZe/HdbC/DTMUkxmeG+8vPc/8VFVWnCvEYQcRwwmw==",
+        "dependencies": {
+          "Microsoft.Bcl.Memory": "9.0.6",
+          "System.Buffers": "4.6.1",
+          "System.Memory": "4.6.3",
+          "System.Runtime.CompilerServices.Unsafe": "6.1.2"
         }
       },
       "mason.core": {
         "type": "Project",
         "dependencies": {
-          "Glatzel.Algorithm": "[0.0.1, )",
-          "NLog": "[5.*, )",
-          "Revit_All_Main_Versions_API_x64": "[2025.*, )"
+          "NLog": "[6.0.0, )",
+          "Pyxis": "[0.0.35, )",
+          "Revit_All_Main_Versions_API_x64": "[2020.*, )"
+        }
+      },
+      "pyxis": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Bcl.HashCode": "[6.0.0, )",
+          "NLog": "[6.0.3, )",
+          "ZLinq": "[1.5.2, )"
         }
       }
     }
