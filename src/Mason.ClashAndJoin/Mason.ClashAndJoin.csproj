@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<AssemblyName>Mason.ClashAndJoin</AssemblyName>
-		<RootNamespace>Mason.ClashAndJoin</RootNamespace>
-	</PropertyGroup>
-	<ItemGroup>
-		<ProjectReference Include="../Mason.Core/Mason.Core.csproj" />
-		<ProjectReference Include="../Mason.Geometry/Mason.Geometry.csproj" />
-		<ProjectReference Include="../Mason.OTLS/Mason.OTLS.csproj" />
-	</ItemGroup>
+  <PropertyGroup>
+    <AssemblyName>Mason.ClashAndJoin</AssemblyName>
+    <RootNamespace>Mason.ClashAndJoin</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Mason.Core/Mason.Core.csproj" />
+    <ProjectReference Include="../Mason.Geometry/Mason.Geometry.csproj" />
+    <ProjectReference Include="../Mason.OTLS/Mason.OTLS.csproj" />
+  </ItemGroup>
 </Project>
