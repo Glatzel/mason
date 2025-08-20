@@ -1,3 +1,3 @@
 [submodule "external/pyxis"]
 	path = external/pyxis
-	url = https://github.com/Glatzel/pyxis.git
+	url = https://github.com/Glatzel/pyxis
