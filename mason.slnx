@@ -1,0 +1,56 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug2018" />
+    <BuildType Name="Debug2019" />
+    <BuildType Name="Debug2020" />
+    <BuildType Name="Debug2021" />
+    <BuildType Name="Debug2022" />
+    <BuildType Name="Debug2023" />
+    <BuildType Name="Debug2024" />
+    <BuildType Name="Debug2025" />
+    <BuildType Name="Release" />
+    <Platform Name="x64" />
+    <BuildType Name="Debug" />
+  </Configurations>
+  <Folder Name="/src/">
+    <File Path="src\Directory.Build.props" />
+    <Project Path="src\Mason\Mason.csproj">
+      <Platform Project="x64" />
+      <BuildType Solution="Debug2019|*" Project="Debug2020" />
+      <BuildType Solution="Debug|*" Project="Debug2025" />
+    </Project>
+    <Project Path="src\Mason.ClashAndJoin\Mason.ClashAndJoin.csproj">
+      <Platform Project="x64" />
+      <BuildType Solution="Debug|*" Project="Debug2025" />
+    </Project>
+    <Project Path="src\Mason.Command\Mason.Command.csproj">
+      <Platform Project="x64" />
+      <BuildType Solution="Debug|*" Project="Debug2025" />
+    </Project>
+    <Project Path="src\Mason.Core\Mason.Core.csproj">
+      <Platform Project="x64" />
+      <BuildType Solution="Debug|*" Project="Debug2025" />
+    </Project>
+    <Project Path="src\Mason.Geometry/Mason.Geometry.csproj">
+      <BuildType Solution="Debug|*" Project="Debug2025" />
+      <Platform Project="x64" />
+    </Project>
+    <Project Path="src\Mason.OTLS\Mason.OTLS.csproj">
+      <Platform Project="x64" />
+      <BuildType Solution="Debug|*" Project="Debug2025" />
+    </Project>
+  </Folder>
+  <Folder Name="/解决方案项/">
+    <Project Path="external/pyxis/csharp/src/Pyxis/Pyxis.csproj">
+      <BuildType Solution="Debug2018|*" Project="Debug" />
+      <BuildType Solution="Debug2019|*" Project="Debug" />
+      <BuildType Solution="Debug2020|*" Project="Debug" />
+      <BuildType Solution="Debug2021|*" Project="Debug" />
+      <BuildType Solution="Debug2022|*" Project="Debug" />
+      <BuildType Solution="Debug2023|*" Project="Debug" />
+      <BuildType Solution="Debug2024|*" Project="Debug" />
+      <BuildType Solution="Debug2025|*" Project="Debug" />
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+</Solution>

@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      upload:
+        type: boolean
+        default: false
+  # push:
+  #   branches: main
+  #   paths-ignore:
+  #   - "scripts/**"
+  #   - "misc/**"
+  #   - "*.md"
+  # pull_request:
+  #   types:
+  #     - opened
+  #     - edited
+  #     - synchronize
+  #     - ready_for_review
+
+permissions:
+  pull-requests: read
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update Submodule
+        run: git submodule update --init --recursive
+
+      - name: restore dotnet cache (push)
+        if: ${{ github.event_name == 'push' }}
+        id: restore-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json') }}
+
+      - name: restore dotnet cache (pull_request)
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: nuget-${{ runner.os }}
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: install magick
+        run: choco install imagemagick
+
+      - name: build
+        run: |
+          foreach ($v in 2018..2025) {
+            Write-Output "::group::Build $v"
+            $env:RevitVersion=$v
+            dotnet build --configuration Release
+            Write-Output "::endgroup::"
+          }
+
+      # upload
+      - name: pack
+        if: ${{inputs.upload=='true'}}
+        run: Compress-Archive -Path ./bin/Mason -DestinationPath ./bin/Mason.zip -PassThru
+
+      - uses: actions/upload-artifact@v4
+        if: ${{inputs.upload=='true'}}
+        with:
+          name: Mason
+          path: bin/Mason.zip
+          if-no-files-found: error
+
+      - name: save dotnet cache (push)
+        uses: actions/cache/save@v4
+        if: ${{ github.event_name == 'push' && !steps.restore-cache.outputs.cache-hit }}
+        with:
+          path: ~/.nuget/packages
+          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
+
