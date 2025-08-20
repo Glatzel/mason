@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0-windows7.0": {
+      "CSharpier.MsBuild": {
+        "type": "Direct",
+        "requested": "[0.*, )",
+        "resolved": "0.30.3",
+        "contentHash": "K7aZIOVzHU9L9ck3l+7nWW1GnuvJt3Zqj23FrL4r17pJPAxqbEqEslXsYK9P0SWl9+oS+FozI6vKXonI6hrYOQ=="
+      },
+      "NLog": {
+        "type": "Direct",
+        "requested": "[5.*, )",
+        "resolved": "5.3.4",
+        "contentHash": "gLy7+O1hEYJXIlcTr1/VWjGXrZTQFZzYNO18IWasD64pNwz0BreV+nHLxWKXWZzERRzoKnsk2XYtwLkTVk7J1A=="
+      },
+      "Revit_All_Main_Versions_API_x64": {
+        "type": "Direct",
+        "requested": "[2025.*, )",
+        "resolved": "2025.0.0",
+        "contentHash": "WyY9eYbUmMrv2SV7tAc72no2fT/ZKi57VAvxkScKesB5TSWVCiujYJZqf0/Eoc5QZysNS1dfw9BJjhTMHwo0mg=="
+      },
+      "Roslynator.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.*, )",
+        "resolved": "4.12.10",
+        "contentHash": "Wecq3nfhTvnJPxX87hKbjMdX1xeCAMJf9rdBX3nQLTntQs9v0fFbUB2eQSSOArXMuFh7MxjLWaL4+b6XMi1NDA=="
+      },
+      "Roslynator.CodeAnalysis.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.*, )",
+        "resolved": "4.12.10",
+        "contentHash": "P/8rraJ0lDO792C8VajyKsaljMR4pWheoSv6bJnCspydf8gNZe+r2JJNis0IxMO2a8vLOyB+8CMIaVLIUndSNQ=="
+      },
+      "Roslynator.Formatting.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.*, )",
+        "resolved": "4.12.10",
+        "contentHash": "Yz0OhQtuECTPBMoURxcv1XKgquVpUcUOpRGac8tormJSJzbMYK8qvVSvjIvQkQOrfYPLFa8aak5200BEAq/X9Q=="
+      },
+      "Microsoft.Bcl.HashCode": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "GI4jcoi6eC9ZhNOQylIBaWOQjyGaR8T6N3tC1u8p3EXfndLCVNNWa+Zp+ocjvvS3kNBN09Zma2HXL0ezO0dRfw=="
+      },
+      "glatzel.algorithm": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Bcl.HashCode": "[6.0.0, )",
+          "NLog": "[5.3.4, )"
+        }
+      },
+      "mason.core": {
+        "type": "Project",
+        "dependencies": {
+          "Glatzel.Algorithm": "[0.0.1, )",
+          "NLog": "[5.*, )",
+          "Revit_All_Main_Versions_API_x64": "[2025.*, )"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0-windows7.0": {
+      "CSharpier.MsBuild": {
+        "type": "Direct",
+        "requested": "[0.*, )",
+        "resolved": "0.30.6",
+        "contentHash": "m/KjEvc7f4+IGAL05F+tXwY5JHje6CeMjCc6mS4nlQlFJA36DM+UmoPCS5hDnLUw2s0aKMDoXdCxUrNe9PHBsA=="
+      },
+      "NLog": {
+        "type": "Direct",
+        "requested": "[5.*, )",
+        "resolved": "5.4.0",
+        "contentHash": "LwMcGSW3soF3/SL68rlJN3Eh3ktrAPycC3zZR/07OYBPraZUu0bygEC7kIN10lUQgMXT4s84Fi1chglGdGrQEg=="
+      },
+      "Revit_All_Main_Versions_API_x64": {
+        "type": "Direct",
+        "requested": "[2025.*, )",
+        "resolved": "2025.0.0",
+        "contentHash": "WyY9eYbUmMrv2SV7tAc72no2fT/ZKi57VAvxkScKesB5TSWVCiujYJZqf0/Eoc5QZysNS1dfw9BJjhTMHwo0mg=="
+      },
+      "Roslynator.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.*, )",
+        "resolved": "4.13.0",
+        "contentHash": "SSYEq2tPT4nmElTGJvpDsLmEw1mWY+Z+CM+H7gO49fSq4VyFivrmHyCeP3gWcDmgqMg77h2tLYRoZ0cjgnKmuA=="
+      },
+      "Roslynator.CodeAnalysis.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.*, )",
+        "resolved": "4.13.0",
+        "contentHash": "U3B78km4IZ6LX3MlHHk1dPN3MyEgvzNGt4RURNgpjpXtBmdP98gCYuTjwt97dK3z76E45GisaXg6b0+HNqc8cg=="
+      },
+      "Roslynator.Formatting.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.*, )",
+        "resolved": "4.13.0",
+        "contentHash": "WxayP0vkpigClbmsRmt1Mn2kBEAE+klgeE9HSHECDyWDAvuPS2BV6CKWkm7/J/cGtFuaGn0yQhv3v4bbD6GnPg=="
+      },
+      "Microsoft.Bcl.HashCode": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "GI4jcoi6eC9ZhNOQylIBaWOQjyGaR8T6N3tC1u8p3EXfndLCVNNWa+Zp+ocjvvS3kNBN09Zma2HXL0ezO0dRfw=="
+      },
+      "glatzel.algorithm": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Bcl.HashCode": "[6.0.0, )",
+          "NLog": "[5.3.4, )"
+        }
+      },
+      "mason.core": {
+        "type": "Project",
+        "dependencies": {
+          "Glatzel.Algorithm": "[0.0.1, )",
+          "NLog": "[5.*, )",
+          "Revit_All_Main_Versions_API_x64": "[2025.*, )"
+        }
+      },
+      "mason.geometry": {
+        "type": "Project",
+        "dependencies": {
+          "Glatzel.Algorithm": "[0.0.1, )",
+          "NLog": "[5.*, )",
+          "Revit_All_Main_Versions_API_x64": "[2025.*, )"
+        }
+      },
+      "mason.otls": {
+        "type": "Project",
+        "dependencies": {
+          "Glatzel.Algorithm": "[0.0.1, )",
+          "Mason.Core": "[0.0.1-rc.2, )",
+          "NLog": "[5.*, )",
+          "Revit_All_Main_Versions_API_x64": "[2025.*, )"
+        }
+      }
+    }
+  }
+}

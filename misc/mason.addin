@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Mason</Name>
+    <FullClassName>Mason.App</FullClassName>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <Assembly></Assembly>
+    <AddInId>2ff1163c-7770-54b2-8fca-a5a50ebcb4ca</AddInId>
+    <VendorId>Glatzel</VendorId>
+    <VendorDescription>https://github.com/Glatzel/mason</VendorDescription>
+  </AddIn>
+</RevitAddIns>

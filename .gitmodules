@@ -1,0 +1,3 @@
+[submodule "external/cs-glatzel"]
+	path = external/cs-glatzel
+	url = https://github.com/Glatzel/cs-glatzel.git
