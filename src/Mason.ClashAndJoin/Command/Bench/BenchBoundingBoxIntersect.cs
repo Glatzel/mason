@@ -3,11 +3,9 @@ using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-using Glatzel.Algorithm;
 using Mason.ClashAndJoin.Command.Bench.Misc;
 using Mason.Core;
-using Mason.Geometry;
-
+using Pyxis;
 namespace Mason.ClashAndJoin.Command.Bench;
 
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
@@ -42,7 +40,7 @@ public class BenchBoundingBoxIntersect : AbsCommand
         {
             for (int j = i + 1; j < elements.Count; j++)
             {
-                BoundingBox.IsIntersect(proxyelements[i].CachedBBox, proxyelements[j].CachedBBox);
+                BoundingBox.IsIntersect(ref proxyelements[i].CachedBBox,ref  proxyelements[j].CachedBBox);
             }
         }
         watch.Stop();

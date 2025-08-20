@@ -39,18 +39,9 @@ jobs:
         run: choco install imagemagick
 
       - name: build
-        run: |
-          foreach ($v in 2018..2025) {
-            Write-Output "::group::Build $v"
-            $env:RevitVersion=$v
-            dotnet build --configuration Release
-            Write-Output "::endgroup::"
-          }
+        run: ./scripts/build.ps1
 
       # upload
-      - name: pack
-        run: Compress-Archive -Path ./bin/Mason -DestinationPath ./bin/Mason.zip -PassThru
-
       - uses: actions/upload-artifact@v4
         with:
           name: Mason
