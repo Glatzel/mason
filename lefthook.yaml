@@ -1,0 +1,106 @@
+# This File is automatically synchronized from https://github.com/Glatzel/template
+
+lefthook: pixi run --no-progress --manifest-path ./lefthook/pixi.toml lefthook
+
+templates:
+  run: run --no-progress --manifest-path ./lefthook/pixi.toml
+
+colors: true
+
+output:
+  - meta # Print lefthook version
+  - summary # Print summary block (successful and failed steps)
+  - empty_summary # Print summary heading when there are no steps to run
+  # - success # Print successful steps
+  # - failure # Print failed steps printing
+  # - execution # Print any execution logs
+  # - execution_out # Print execution output
+  # - execution_info # Print `EXECUTE > ...` logging
+  - skips # Print "skip" (i.e. no files matched)
+
+pre-commit:
+  piped: true
+  jobs:
+    - name: pre-commit-hook
+      stage_fixed: true
+      group:
+        jobs:
+          - name: check-json
+            glob: "*.json"
+            run: pixi {run} check-json
+          - name: check-toml
+            glob: "*.toml"
+            run: pixi {run} check-toml
+          - name: check-yaml
+            glob: "*.yaml"
+            run: pixi {run} check-yaml
+          - name: check-xml
+            glob: "*.xml"
+            run: pixi {run} check-xml
+          - name: end-of-file-fixer
+            file_types:
+              - text
+            run: pixi {run} end-of-file-fixer
+          - name: end-of-file-fixer
+            file_types:
+              - text
+            run: pixi {run} end-of-file-fixer
+          - name: trailing-whitespace-fixer
+            file_types:
+              - text
+            run: pixi {run} trailing-whitespace-fixer
+
+    - name: csharpier
+      stage_fixed: true
+      glob: "*.csproj"
+      run: pixi {run} hook-csharpier {staged_files}
+
+    - name: python
+      glob: "*.{py,pyi}"
+      stage_fixed: true
+      group:
+        jobs:
+          - name: ruff lint
+            run: pixi {run} hook-ruff-lint {staged_files}
+          - name: ruff format
+            run: pixi {run} hook-ruff-format {staged_files}
+          - name: numpydoc
+            run: pixi {run} hook-numpydoc {staged_files}
+
+    - name: rust
+      stage_fixed: true
+      exclude:
+        - "**target**/Cargo.toml"
+        - "**crates**/Cargo.toml"
+      glob: "**Cargo.toml"
+      group:
+        jobs:
+          - name: cargo-machete
+            run: pixi {run} cargo-machete {staged_files}
+
+          - name: cargo-clippy
+            run: pixi {run} hook-cargo-clippy {staged_files}
+
+          - name: cargo-fmt
+            run: pixi {run} hook-cargo-fmt {staged_files}
+
+    - name: misc
+      stage_fixed: true
+      group:
+        jobs:
+          - name: taplo
+            glob: "*.toml"
+            run: pixi {run} hook-taplo {all_files}
+
+          - name: typos
+            run: pixi {run} actionlint
+
+          - name: actionlint
+            run: pixi {run} hook-typos
+
+          - name: markdown
+            exclude:
+              - changelog.md
+              - CHANGELOG.md
+            glob: "*.md"
+            run: pixi {run} hook-markdown {all_files}
