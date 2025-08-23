@@ -11,13 +11,13 @@ hook-actionlint = "cd ..;actionlint"
 hook-cargo-clippy = "pwsh -f ./cargo-clippy.ps1"
 hook-cargo-fmt = "pwsh -f ./cargo-fmt.ps1"
 hook-cargo-machete = "pwsh -f ./cargo-machete.ps1"
-hook-csharpier = "cd ..;pwsh -CommandWithArgs 'if($args){dotnet tool install -g csharpier; csharpier format .; csharpier check .}'"
-hook-markdown = "cd ..; pwsh -CommandWithArgs 'if(-not $IsWindows){markdownlint-cli2 --fix $args}'"
-hook-numpydoc = "cd ..; pwsh -CommandWithArgs 'if($args){numpydoc lint $args --ignore ES01 EX01 GL08 PR04 RT03 SA01 SA04}'"
-hook-ruff-format = "cd ..; ruff format --force-exclude --exit-non-zero-on-format"
-hook-ruff-lint = "cd ..; ruff check --fix --show-fixes --exit-non-zero-on-fix --force-exclude"
-hook-taplo = { cmd = "cd ..; taplo format -o 'reorder_keys=true'", env = { RUST_LOG = "warn" } }
-hook-typos = "pwsh -f ./typos.ps1"
+hook-csharpier = "pwsh -f ./csharpier.ps1"
+hook-markdown = "pwsh -f ./markdown.ps1"
+hook-numpydoc = "pwsh -f ./numpydoc.ps1"
+hook-ruff-format = "cd ..;ruff format --force-exclude --exit-non-zero-on-format"
+hook-ruff-lint = "cd ..;ruff check --fix --show-fixes --exit-non-zero-on-fix --force-exclude"
+hook-taplo = { cmd = "taplo format -o 'reorder_keys=true'", env = { RUST_LOG = "warn" } }
+hook-typos = "cd ..;typos --force-exclude"
 
 [dependencies]
 actionlint = "==1.7.7"

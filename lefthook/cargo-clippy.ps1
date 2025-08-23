@@ -1,10 +1,7 @@
 # This File is automatically synchronized from https://github.com/Glatzel/template
 
 if (-not $args) { exit 0 }
-$ErrorActionPreference = "Stop"
-$PSNativeCommandUseErrorActionPreference = $true
-$ROOT = git rev-parse --show-toplevel
-Set-Location $ROOT
+&$PSScriptRoot/setup.ps1
 foreach ($file in $args) {
     $dir = (Split-Path (Resolve-Path $file) -Parent)
     Set-Location $dir
@@ -13,7 +10,7 @@ foreach ($file in $args) {
         &./scripts/setup.ps1
         Set-Location $dir
     }
-    cargo +stable clippy --fix --all-features
-    cargo +stable clippy --all-features -- -Dwarnings
+    cargo +stable clippy --fix --all-features --quiet
+    cargo +stable clippy --all-features --quiet -- -Dwarnings
     Set-Location $ROOT
 }

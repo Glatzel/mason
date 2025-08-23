@@ -46,10 +46,15 @@ pre-commit:
           - name: trailing-whitespace-fixer
             run: pixi {run} trailing-whitespace-fixer {staged_files}
 
-    - name: csharpier
+    - name: csharp
       stage_fixed: true
-      glob: "*.csproj"
-      run: pixi {run} hook-csharpier {staged_files}
+      exclude:
+        - "**external/**"
+      group:
+        jobs:
+          - name: csharpier
+            glob: "*.csproj"
+            run: pixi {run} hook-csharpier {staged_files}
 
     - name: python
       glob: "*.{py,pyi}"

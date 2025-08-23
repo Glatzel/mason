@@ -2,4 +2,5 @@
 
 if (-not $args) { exit 0 }
 &$PSScriptRoot/setup.ps1
-dotnet tool install -g csharpier; csharpier format .; csharpier check .
+Set-Location ..
+markdownlint-cli2 --fix $args
