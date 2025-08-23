@@ -1,4 +1,4 @@
-name: pre-commit
+name: lefthook
 
 on:
   workflow_dispatch:
@@ -17,5 +17,5 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  pre-commit:
-    uses: Glatzel/template/.github/workflows/pre-commit.yml@main
+  lefthook:
+    uses: Glatzel/template/.github/workflows/ci-lefthook.yml@main
