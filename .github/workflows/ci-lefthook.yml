@@ -1,0 +1,21 @@
+name: lefthook
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
+
+permissions: read-all
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lefthook:
+    uses: Glatzel/template/.github/workflows/ci-lefthook.yml@main
