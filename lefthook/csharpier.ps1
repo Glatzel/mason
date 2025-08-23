@@ -5,9 +5,4 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 $ROOT = git rev-parse --show-toplevel
 Set-Location $ROOT
-foreach ($file in $args) {
-    Set-Location (Split-Path (Resolve-Path $file) -Parent)
-    Write-Output "Cargo machete in: $pwd"
-    cargo machete
-}
-Set-Location $ROOT
+dotnet tool install -g csharpier; csharpier format .; csharpier check .

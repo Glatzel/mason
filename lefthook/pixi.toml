@@ -7,6 +7,7 @@ platforms = ["linux-64", "win-64"]
 [tasks]
 lefthook-run = "lefthook run pre-commit --all-files --force"
 
+hook-actionlint = "cd ..;actionlint"
 hook-cargo-clippy = "pwsh -f ./cargo-clippy.ps1"
 hook-cargo-fmt = "pwsh -f ./cargo-fmt.ps1"
 hook-cargo-machete = "pwsh -f ./cargo-machete.ps1"
@@ -16,7 +17,7 @@ hook-numpydoc = "cd ..; pwsh -CommandWithArgs 'if($args){numpydoc lint $args --i
 hook-ruff-format = "cd ..; ruff format --force-exclude --exit-non-zero-on-format"
 hook-ruff-lint = "cd ..; ruff check --fix --show-fixes --exit-non-zero-on-fix --force-exclude"
 hook-taplo = { cmd = "cd ..; taplo format -o 'reorder_keys=true'", env = { RUST_LOG = "warn" } }
-hook-typos = "cd ..; typos --force-exclude"
+hook-typos = "pwsh -f ./typos.ps1"
 
 [dependencies]
 actionlint = "==1.7.7"

@@ -1,13 +1,10 @@
 # This File is automatically synchronized from https://github.com/Glatzel/template
 
-if (-not $args) { exit 0 }
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 $ROOT = git rev-parse --show-toplevel
 Set-Location $ROOT
-foreach ($file in $args) {
-    Set-Location (Split-Path (Resolve-Path $file) -Parent)
-    Write-Output "Cargo machete in: $pwd"
-    cargo machete
+if ($args) {
+    pixi run --no-progress --manifest-path ./lefthook/pixi.toml typos --force-exclude $args
 }
 Set-Location $ROOT
