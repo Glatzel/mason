@@ -80,7 +80,7 @@ pre-commit:
       group:
         jobs:
           - name: cargo-machete
-            run: pixi {run} cargo-machete {staged_files}
+            run: pixi {run} hook-cargo-machete {staged_files}
 
           - name: cargo-clippy
             run: pixi {run} hook-cargo-clippy {staged_files}
