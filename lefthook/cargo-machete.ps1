@@ -6,4 +6,5 @@ foreach ($file in $args) {
     Set-Location (Split-Path (Resolve-Path $file) -Parent)
     Write-Output "Cargo machete in: $pwd"
     cargo machete
+    Set-Location $ROOT
 }
