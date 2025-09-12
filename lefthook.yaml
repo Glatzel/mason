@@ -46,6 +46,30 @@ pre-commit:
           - name: trailing-whitespace-fixer
             run: pixi {run} trailing-whitespace-fixer {staged_files}
 
+    - name: misc
+      stage_fixed: true
+      exclude:
+        - "**external/**"
+      group:
+        jobs:
+          - name: taplo
+            glob: "*.toml"
+            run: pixi {run} hook-taplo {staged_files}
+
+          - name: actionlint
+            glob: ".github/workflows/*.yml"
+            run: pixi {run} hook-actionlint {staged_files}
+
+          - name: typos
+            run: pixi {run} hook-typos {staged_files}
+
+          - name: markdown
+            exclude:
+              - changelog.md
+              - CHANGELOG.md
+            glob: "*.md"
+            run: pixi {run} hook-markdown {all_files}
+
     - name: csharp
       stage_fixed: true
       exclude:
@@ -87,27 +111,3 @@ pre-commit:
 
           - name: cargo-fmt
             run: pixi {run} hook-cargo-fmt {staged_files}
-
-    - name: misc
-      stage_fixed: true
-      exclude:
-        - "**external/**"
-      group:
-        jobs:
-          - name: taplo
-            glob: "*.toml"
-            run: pixi {run} hook-taplo {staged_files}
-
-          - name: actionlint
-            glob: ".github/workflows/*.yml"
-            run: pixi {run} hook-actionlint {staged_files}
-
-          - name: typos
-            run: pixi {run} hook-typos {staged_files}
-
-          - name: markdown
-            exclude:
-              - changelog.md
-              - CHANGELOG.md
-            glob: "*.md"
-            run: pixi {run} hook-markdown {all_files}
