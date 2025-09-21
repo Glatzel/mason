@@ -52,7 +52,7 @@
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="NLog" Version="6.0.3" />
+    <PackageReference Include="NLog" Version="6.0.4" />
   </ItemGroup>
   <!--analyser-->
   <ItemGroup>
