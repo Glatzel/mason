@@ -2,6 +2,10 @@
 
 if (-not $args) { exit 0 }
 . $PSScriptRoot/setup.ps1
+if ($env:CI) {
+    rustup toolchain install stable --profile=minimal
+    rustup component add clippy --toolchain stable
+}
 foreach ($file in $args) {
     $dir = (Split-Path (Resolve-Path $file) -Parent)
     Set-Location $dir
