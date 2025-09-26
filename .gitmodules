@@ -1,3 +1,4 @@
 [submodule "external/pyxis"]
 	path = external/pyxis
 	url = https://github.com/Glatzel/pyxis
+	branch = v0.0.35
