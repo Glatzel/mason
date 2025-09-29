@@ -1,17 +1,11 @@
 ﻿<Project>
+  <Import
+    Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
   <PropertyGroup>
-    <Version>0.0.1-rc.2</Version>
-    <LangVersion>latest</LangVersion>
     <OutputType>Library</OutputType>
-    <PlatformTarget>x64</PlatformTarget>
-    <Platforms>x64</Platforms>
-    <Configurations>Release;Debug2018;Debug2019;Debug2020;Debug2021;Debug2022;Debug2023;Debug2024;Debug2025</Configurations>
-    <UseWindowsForms>true</UseWindowsForms>
-    <UseWPF>true</UseWPF>
-    <AnalysisLevel>latest-Recommended</AnalysisLevel>
-    <CSharpier_LogLevel>Warning</CSharpier_LogLevel>
   </PropertyGroup>
-  <!--set debug revit version and constants-->
+  <!--set
+  debug revit version and constants-->
   <PropertyGroup Condition="$(Configuration.StartsWith('Debug'))">
     <RevitVersion>$(Configuration.Replace("Debug",""))</RevitVersion>
     <DefineConstants>$(DefineConstants);Debug</DefineConstants>
@@ -26,20 +20,22 @@
     <RevitVersion Condition="'$(RevitVersion)'==''">2020</RevitVersion>
     <DefineConstants>$(DefineConstants);REVIT$(RevitVersion)</DefineConstants>
   </PropertyGroup>
-  <!--debug action,for revit version < 2019, use "debug-attach to process" to debug -->
+  <!--debug
+  action,for revit version < 2019, use "debug-attach to process" to debug -->
   <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">
     <StartAction Condition="$(RevitVersion) &lt;= '2018'">Project</StartAction>
     <StartAction Condition="$(RevitVersion) &gt;'2018'">Program</StartAction>
     <StartProgram Condition="$(RevitVersion)&gt;'2018'"
-      >C:/Program Files/Autodesk/Revit $(RevitVersion)/Revit.exe</StartProgram
-    >
+    >C:/Program Files/Autodesk/Revit
+      $(RevitVersion)/Revit.exe</StartProgram>
   </PropertyGroup>
   <!--TargetFramework-->
   <PropertyGroup>
     <TargetFramework Condition="$(RevitVersion) &lt;= '2024'">net48</TargetFramework>
     <TargetFramework Condition="$(RevitVersion) == '2025'">net8.0-windows</TargetFramework>
   </PropertyGroup>
-  <!--output path-->
+  <!--output
+  path-->
   <PropertyGroup>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
@@ -52,26 +48,6 @@
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="NLog" Version="6.0.4" />
-  </ItemGroup>
-  <!--analyser-->
-  <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)external/pyxis/csharp/src/Pyxis/Pyxis.csproj" />
-    <PackageReference Include="CSharpier.MsBuild" Version="1.1.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Roslynator.Analyzers" Version="4.14.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.14.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.14.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="ZLinq" Version="1.5.2" />
   </ItemGroup>
 </Project>

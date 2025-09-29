@@ -3,4 +3,7 @@
     <AssemblyName>Mason.Geometry</AssemblyName>
     <RootNamespace>Mason.Geometry</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
+  </ItemGroup>
 </Project>

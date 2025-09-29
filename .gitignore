@@ -1,7 +1,8 @@
 bin
 obj
 .vs
-.VSCodeCounter
 *.png
 /log
 draft
+coverage.xml
+TestResults
