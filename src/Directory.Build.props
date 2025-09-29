@@ -15,7 +15,7 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
- 
+
   <!--output
   path-->
   <PropertyGroup>
