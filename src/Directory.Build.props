@@ -15,25 +15,7 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
-  <PropertyGroup>
-    <RevitVersion Condition="'$(RevitVersion)'==''">2020</RevitVersion>
-    <DefineConstants>$(DefineConstants);REVIT$(RevitVersion)</DefineConstants>
-  </PropertyGroup>
-  <!--debug
-  action,for revit version < 2019, use "debug-attach to process" to debug -->
-  <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">
-    <StartAction Condition="$(RevitVersion) &lt;= '2018'">Project</StartAction>
-    <StartAction Condition="$(RevitVersion) &gt;'2018'">Program</StartAction>
-    <StartProgram Condition="$(RevitVersion)&gt;'2018'"
-      >C:/Program Files/Autodesk/Revit
-      $(RevitVersion)/Revit.exe</StartProgram
-    >
-  </PropertyGroup>
-  <!--TargetFramework-->
-  <PropertyGroup>
-    <TargetFramework Condition="$(RevitVersion) &lt;= '2024'">net48</TargetFramework>
-    <TargetFramework Condition="$(RevitVersion) == '2025'">net8.0-windows</TargetFramework>
-  </PropertyGroup>
+ 
   <!--output
   path-->
   <PropertyGroup>
