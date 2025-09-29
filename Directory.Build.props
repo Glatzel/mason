@@ -12,6 +12,16 @@
       Release;Debug2018;Debug2019;Debug2020;Debug2021;Debug2022;Debug2023;Debug2024;Debug2025
     </Configurations>
   </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.StartsWith('Debug'))">
+    <RevitVersion>$(Configuration.Replace("Debug",""))</RevitVersion>
+    <DefineConstants>$(DefineConstants);Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration)=='Release'">
+    <DefineConstants>$(DefineConstants);Release</DefineConstants>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
   <PropertyGroup>
     <RevitVersion Condition="'$(RevitVersion)'==''">2020</RevitVersion>
     <DefineConstants>$(DefineConstants);REVIT$(RevitVersion)</DefineConstants>

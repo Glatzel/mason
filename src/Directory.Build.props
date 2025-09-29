@@ -3,19 +3,6 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
   </PropertyGroup>
-  <!--set
-  debug revit version and constants-->
-  <PropertyGroup Condition="$(Configuration.StartsWith('Debug'))">
-    <RevitVersion>$(Configuration.Replace("Debug",""))</RevitVersion>
-    <DefineConstants>$(DefineConstants);Debug</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration)=='Release'">
-    <DefineConstants>$(DefineConstants);Release</DefineConstants>
-    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
-    <DebugType>none</DebugType>
-    <DebugSymbols>false</DebugSymbols>
-  </PropertyGroup>
- 
   <!--output
   path-->
   <PropertyGroup>
