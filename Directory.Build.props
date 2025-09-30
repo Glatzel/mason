@@ -31,10 +31,7 @@
   <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">
     <StartAction Condition="$(RevitVersion) &lt;= '2018'">Project</StartAction>
     <StartAction Condition="$(RevitVersion) &gt;'2018'">Program</StartAction>
-    <StartProgram Condition="$(RevitVersion)&gt;'2018'"
-      >C:/Program Files/Autodesk/Revit
-      $(RevitVersion)/Revit.exe</StartProgram
-    >
+    <StartProgram Condition="$(RevitVersion)&gt;'2018'">C:/Program Files/Autodesk/Revit $(RevitVersion)/Revit.exe</StartProgram>
   </PropertyGroup>
   <!--TargetFramework-->
   <PropertyGroup>

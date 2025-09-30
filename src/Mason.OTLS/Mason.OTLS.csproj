@@ -9,25 +9,4 @@
     <ProjectReference Include="../Mason.Command/Mason.Command.csproj" />
     <ProjectReference Include="../Mason.ClashAndJoin/Mason.ClashAndJoin.csproj" />
   </ItemGroup>
-  <Target Name="Generate Icon" BeforeTargets="Embed Icon">
-    <Exec Command="pwsh $(SolutionDir)scripts/generate_icon.ps1" />
-  </Target>
-  <Target Name="Embed Icon" BeforeTargets="PreBuildEvent">
-    <ItemGroup>
-      <EmbeddedResource Include="Icon/*.png" />
-    </ItemGroup>
-  </Target>
-  <Target Name="Copy Files" AfterTargets="PostBuildEvent">
-    <Copy
-      SourceFiles="$(SolutionDir)misc/install.ps1;$(SolutionDir)misc/uninstall.ps1;$(SolutionDir)misc/mason.addin"
-      DestinationFolder="$(SolutionDir)bin/mason"
-    />
-  </Target>
-  <Target
-    Name="Debug Addin Install"
-    AfterTargets="Copy Files"
-    Condition="$(Configuration.StartsWith('Debug'))"
-  >
-    <Exec Command="pwsh $(SolutionDir)bin/mason/install.ps1" />
-  </Target>
 </Project>
