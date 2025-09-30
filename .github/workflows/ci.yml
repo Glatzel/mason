@@ -32,9 +32,6 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
 
-      - name: install magick
-        run: choco install imagemagick
-
       - name: build
         run: ./scripts/build.ps1
 
