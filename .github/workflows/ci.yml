@@ -29,14 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Update Submodule
-        run: git submodule update --init --recursive
-
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
-
-      - name: install magick
-        run: choco install imagemagick
 
       - name: build
         run: ./scripts/build.ps1
@@ -47,3 +41,20 @@ jobs:
           name: Mason
           path: bin/Mason.zip
           if-no-files-found: error
+
+      # test
+      - name: test
+        run: ./scripts/test.ps1
+
+      - name: Upload cov results to Codecov
+        if: ${{ !cancelled()}}
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled()}}
+        uses: codecov/test-results-action@v1
+        with:
+          files: ./tests/*/TestResults/TestResults.xml
+          fail_ci_if_error: true

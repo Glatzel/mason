@@ -2,7 +2,6 @@
 using Autodesk.Revit.DB;
 using Mason.Core;
 using Mason.Geometry;
-using Pyxis;
 
 namespace Mason.ClashAndJoin;
 

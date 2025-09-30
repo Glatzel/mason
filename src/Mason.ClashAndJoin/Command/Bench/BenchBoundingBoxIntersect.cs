@@ -5,7 +5,7 @@ using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using Mason.ClashAndJoin.Command.Bench.Misc;
 using Mason.Core;
-using Pyxis;
+using Mason.Geometry;
 
 namespace Mason.ClashAndJoin.Command.Bench;
 
@@ -16,10 +16,10 @@ public class BenchBoundingBoxIntersect : AbsCommand
 
     public override void CommandBody()
     {
-        List<Element> elements = Selection
-            .PickObjects(ObjectType.Element)
-            .Select(Doc.GetElement)
-            .ToList();
+        List<Element> elements =
+        [
+            .. Selection.PickObjects(ObjectType.Element).Select(Doc.GetElement),
+        ];
         List<ElementId> elementIds = elements.ConvertAll(e => e.Id);
         long timeMasonProxy = MethodMasonProxy(elementIds);
         long timeMasonExtension = MethodMasonExtension(elements);

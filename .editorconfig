@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0160: 转换为块范围限定的 namespace
+csharp_style_namespace_declarations = file_scoped
