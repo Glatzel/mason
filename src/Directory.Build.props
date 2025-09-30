@@ -3,7 +3,6 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
   </PropertyGroup>
-
   <PropertyGroup>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
@@ -11,7 +10,6 @@
     <MSBuildProjectExtensionsPath>$(SolutionDir)obj/$(MSBuildProjectName)/revit$(RevitVersion)/</MSBuildProjectExtensionsPath>
     <OutputPath>$(SolutionDir)bin/$(MSBuildProjectName)/revit$(RevitVersion)/</OutputPath>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*">
       <ExcludeAssets>runtime</ExcludeAssets>
