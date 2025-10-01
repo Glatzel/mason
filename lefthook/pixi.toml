@@ -22,7 +22,7 @@ hook-typos = "cd ..;typos --force-exclude"
 [dependencies]
 actionlint = "==1.7.7"
 cargo-machete = "==0.9.1"
-lefthook = "==1.13.5"
+lefthook = "==1.13.4"
 markdownlint-cli2 = "==0.18.1"
 numpydoc = "==1.9.0"
 pre-commit-hooks = "==5.0.0"
