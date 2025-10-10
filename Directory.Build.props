@@ -42,7 +42,7 @@
   </PropertyGroup>
   <!--packages-->
   <ItemGroup>
-    <PackageReference Include="NLog" Version="6.0.4" />
+    <PackageReference Include="NLog" Version="6.0.5" />
   </ItemGroup>
   <!--analyser-->
   <ItemGroup>
