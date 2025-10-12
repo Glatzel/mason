@@ -41,8 +41,6 @@ pre-commit:
             run: pixi {run} check-xml {staged_files}
           - name: end-of-file-fixer
             run: pixi {run} end-of-file-fixer {staged_files}
-          - name: end-of-file-fixer
-            run: pixi {run} end-of-file-fixer {staged_files}
           - name: trailing-whitespace-fixer
             run: pixi {run} trailing-whitespace-fixer {staged_files}
 
