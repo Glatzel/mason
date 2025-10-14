@@ -12,12 +12,12 @@ if ($Release) {
     $Versions | ForEach-Object -Parallel {
         $env:RevitVersion = $_
         $result = dotnet build --configuration $Release 2>&1
+
         if ($LASTEXITCODE -eq 0) {
-            Write-Host "[$env:RevitVersion] ✅ Build succeeded"
+            Write-Host "$result`n[$env:RevitVersion] ✅ Build succeeded"
         }
         else {
-            Write-Host "[$env:RevitVersion] ❌ Build failed"
-            $result | Out-String | Write-Host
+            Write-Host "$result`n[$env:RevitVersion] ❌ Build failed"
         }
     } 
 }
@@ -25,12 +25,12 @@ else {
     $Versions | ForEach-Object -Parallel {
         $env:RevitVersion = $_
         $result = dotnet build --configuration Debug 2>&1
+        $result | Out-String | Write-Host
         if ($LASTEXITCODE -eq 0) {
-            Write-Host "[$env:RevitVersion] ✅ Build succeeded"
+            Write-Host "$result`n[$env:RevitVersion] ✅ Build succeeded"
         }
         else {
-            Write-Host "[$env:RevitVersion] ❌ Build failed"
-            $result | Out-String | Write-Host
+            Write-Host "$result`n[$env:RevitVersion] ❌ Build failed"
         }
     } 
 }

@@ -9,7 +9,7 @@
     <AnalysisLevel>latest-Recommended</AnalysisLevel>
     <CSharpier_LogLevel>Warning</CSharpier_LogLevel>
     <Configurations>Release;Debug</Configurations>
-    <RevitVersion>2020</RevitVersion>
+    <RevitVersion Condition="'$(RevitVersion)'==''">2020</RevitVersion>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration)=='Debug'">
     <DefineConstants>$(DefineConstants);Debug;REVIT$(RevitVersion)</DefineConstants>
