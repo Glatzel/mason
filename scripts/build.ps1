@@ -16,13 +16,3 @@ foreach ($v in $Versions) {
         dotnet build --configuration Release
     }
 }
-
-# Compress only once after all builds
-if (Test-Path "./bin/Mason") {
-    $zipPath = "./bin/Mason.zip"
-    Compress-Archive -Path ./bin/Mason -DestinationPath $zipPath -Force -PassThru
-    Write-Output "✅ Archive created at $zipPath"
-}
-else {
-    Write-Warning "⚠️ Mason build output not found."
-}
