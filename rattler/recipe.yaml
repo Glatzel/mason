@@ -4,4 +4,3 @@ package:
 build:
   script:
   - pwsh -f %RECIPE_DIR%/build-mason.ps1
-
