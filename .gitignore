@@ -6,3 +6,7 @@ obj
 draft
 coverage.xml
 TestResults
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+rattler/output

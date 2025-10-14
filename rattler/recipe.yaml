@@ -1,0 +1,9 @@
+package:
+  version: 0.0.1
+  name: mason
+build:
+  noarch: python
+  script:
+    - if: linux
+      then:
+        - pwsh -f $RECIPE_DIR/build-mason.ps1
