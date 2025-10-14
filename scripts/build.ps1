@@ -1,9 +1,21 @@
+param(
+    [switch]$Release
+)
+$configuration = if ($Release) { "Release" } else { "Debug" }
 Set-Location $PSScriptRoot
 Set-Location ..
 Remove-Item ./bin -Recurse -ErrorAction SilentlyContinue
 foreach ($v in 2018..2025) {
-    $env:RevitVersion=$v
+    $env:RevitVersion = $v
     Write-Output "Build for Revit $v"
-    dotnet build --configuration Release
+    dotnet build --configuration $configuration
 }
-Compress-Archive -Path ./bin/Mason -DestinationPath ./bin/Mason.zip -PassThru
+# Only compress if build succeeded
+if (Test-Path "./bin/Mason") {
+    $zipPath = "./bin/Mason.zip"
+    Compress-Archive -Path ./bin/Mason -DestinationPath $zipPath -Force -PassThru
+    Write-Output "✅ Archive created at $zipPath"
+}
+else {
+    Write-Warning "⚠️ Mason build output not found."
+}
