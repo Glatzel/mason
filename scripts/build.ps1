@@ -19,7 +19,7 @@ if ($Release) {
             Write-Host "[$env:RevitVersion] ❌ Build failed"
             $result | Out-String | Write-Host
         }
-    } 
+    }
 }
 else {
     $Versions | ForEach-Object -Parallel {
@@ -32,7 +32,7 @@ else {
             Write-Host "[$env:RevitVersion] ❌ Build failed"
             $result | Out-String | Write-Host
         }
-    } 
+    }
 }
 
 
