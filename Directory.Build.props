@@ -21,7 +21,7 @@
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <!--debug action-->
-  <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">   
+  <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">
     <StartProgram >C:/Program Files/Autodesk/Revit $(RevitVersion)/Revit.exe</StartProgram>
   </PropertyGroup>
   <!--TargetFramework-->
