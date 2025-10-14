@@ -60,7 +60,7 @@ jobs:
       - name: download
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download -R Glatzel/toolbox -p "*.conda"
+        run: gh release download -R Glatzel/mason -p "*.conda"
 
       - name: upload
         run: |
