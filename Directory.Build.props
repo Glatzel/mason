@@ -8,7 +8,7 @@
     <UseWPF>true</UseWPF>
     <AnalysisLevel>latest-Recommended</AnalysisLevel>
     <CSharpier_LogLevel>Warning</CSharpier_LogLevel>
-    <Configurations>Release;DEBUG</Configurations>
+    <Configurations>Release;Debug</Configurations>
     <RevitVersion>2020</RevitVersion>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration)=='Debug'">
