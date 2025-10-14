@@ -3,5 +3,17 @@
   "extends": [
     "config:recommended",
     "github>Glatzel/template//renovate"
+  ],
+  "packageRules": [
+    {
+      "description": "Disable update revit",
+      "matchManagers": [
+        "nuget"
+      ],
+      "matchPackageNames": [
+        "Revit_All_Main_Versions_API_x64"
+      ],
+      "enabled": false
+    }
   ]
 }
