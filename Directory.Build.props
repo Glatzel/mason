@@ -8,37 +8,25 @@
     <UseWPF>true</UseWPF>
     <AnalysisLevel>latest-Recommended</AnalysisLevel>
     <CSharpier_LogLevel>Warning</CSharpier_LogLevel>
-    <Configurations>
-      Release;Debug2018;Debug2019;Debug2020;Debug2021;Debug2022;Debug2023;Debug2024;Debug2025
-    </Configurations>
+    <Configurations>Release;DEBUG</Configurations>
+    <RevitVersion>2020</RevitVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="$(Configuration.StartsWith('Debug'))">
-    <RevitVersion>$(Configuration.Replace("Debug",""))</RevitVersion>
-    <DefineConstants>$(DefineConstants);Debug</DefineConstants>
+  <PropertyGroup Condition="$(Configuration)=='Debug'">
+    <DefineConstants>$(DefineConstants);Debug;REVIT$(RevitVersion)</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration)=='Release'">
-    <DefineConstants>$(DefineConstants);Release</DefineConstants>
+    <DefineConstants>$(DefineConstants);Release;REVIT$(RevitVersion)</DefineConstants>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
-  <PropertyGroup>
-    <RevitVersion Condition="'$(RevitVersion)'==''">2020</RevitVersion>
-    <DefineConstants>$(DefineConstants);REVIT$(RevitVersion)</DefineConstants>
-  </PropertyGroup>
-  <!--debug
-  action,for revit version < 2019, use "debug-attach to process" to debug -->
-  <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">
-    <StartAction Condition="$(RevitVersion) &lt;= '2018'">Project</StartAction>
-    <StartAction Condition="$(RevitVersion) &gt;'2018'">Program</StartAction>
-    <StartProgram Condition="$(RevitVersion)&gt;'2018'"
-      >C:/Program Files/Autodesk/Revit $(RevitVersion)/Revit.exe</StartProgram
-    >
+  <!--debug action-->
+  <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">   
+    <StartProgram >C:/Program Files/Autodesk/Revit $(RevitVersion)/Revit.exe</StartProgram>
   </PropertyGroup>
   <!--TargetFramework-->
   <PropertyGroup>
-    <TargetFramework Condition="$(RevitVersion) &lt;= '2024'">net48</TargetFramework>
-    <TargetFramework Condition="$(RevitVersion) == '2025'">net8.0-windows</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
   <!--packages-->
   <ItemGroup>
