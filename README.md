@@ -1,5 +1,7 @@
 # Mason
 
+![Revit](https://img.shields.io/badge/Revit-2018--2025-blue)
+
 **Mason** is a Revit plugin designed to make repetitive tasks effortless.
 Most tools are **one-click** to run, dramatically speeding up workflows, and the system is built to be **easy to extend** with new command tools.
 
