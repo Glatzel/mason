@@ -9,6 +9,7 @@ Set-Location ..
 Remove-Item ./bin -Recurse -ErrorAction SilentlyContinue
 foreach ($v in $Versions) {
     $env:RevitVersion = $v
+    dotnet restore
     if ($Release) {
         dotnet build --configuration Debug
     }
