@@ -10,9 +10,9 @@ Remove-Item ./bin -Recurse -ErrorAction SilentlyContinue
 foreach ($v in $Versions) {
     $env:RevitVersion = $v
     if ($Release) {
-        dotnet build --configuration Debug
+        dotnet build --configuration Release
     }
     else {
-        dotnet build --configuration Release
+        dotnet build --configuration Debug
     }
 }
