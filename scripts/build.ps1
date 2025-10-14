@@ -15,7 +15,6 @@ foreach ($v in $Versions) {
     else { 
         dotnet build --configuration Release 
     }
-   
 }
 
 # Compress only once after all builds
