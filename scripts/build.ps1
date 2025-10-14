@@ -12,7 +12,7 @@ foreach ($v in $Versions) {
     if ($Release) {
         dotnet build --configuration Debug
     }
-    else { 
+    else {
         dotnet build --configuration Release
     }
 }
