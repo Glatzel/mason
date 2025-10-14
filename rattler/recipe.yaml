@@ -1,0 +1,6 @@
+package:
+  version: 0.0.1
+  name: mason
+build:
+  script:
+  - pwsh -f %RECIPE_DIR%/build-mason.ps1

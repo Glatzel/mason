@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release (e.g., v1.2.3)"
+        type: string
+        required: true
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@v0.9.1
+        with:
+          run-install: false
+
+      - name: build
+        run: ./rattler/ci-mason.ps1
+        shell: pwsh
+
+      - name: upload
+        if: ${{runner.os=='Linux'}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mason
+          path: |
+            ./rattler/output/win-64/*.conda
+          if-no-files-found: error
+
+  release:
+    needs: [build]
+    uses: Glatzel/template/.github/workflows/release.yml@main
+    with:
+      override: true
+      tag: ${{ inputs.tag }}
+      have-changelog: true
+      assets: true
