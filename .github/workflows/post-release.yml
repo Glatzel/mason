@@ -16,34 +16,7 @@ permissions:
 
 jobs:
   update-changelog:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Set up pixi
-        uses: prefix-dev/setup-pixi@v0.9.1
-        with:
-          run-install: false
-
-      - run: pixi global install git-cliff
-
-      - run: git-cliff > changelog.md
-
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: update changelog.md"
-          title: "chore: update changelog.md"
-          branch: update-changelog
-          base: main
-          labels: action
-          delete-branch: true
-          add-paths: changelog.md
-          assignees: Glatzel
-          draft: false
+    uses: Glatzel/template/.github/workflows/changelog.yml@main
 
   upload-conda:
     permissions:
