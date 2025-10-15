@@ -8,7 +8,7 @@ environments:
       linux-64:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-2_gnu.tar.bz2
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/actionlint-1.7.7-hd0c01bc_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/actionlint-1.7.8-h965158b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/alabaster-1.0.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/babel-2.17.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/brotli-python-1.1.0-py311hfdbb021_3.conda
@@ -79,7 +79,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/urllib3-2.5.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstandard-0.23.0-py311h9ecbd09_2.conda
       win-64:
-      - conda: https://conda.anaconda.org/conda-forge/win-64/actionlint-1.7.7-h2466b09_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/actionlint-1.7.8-he477eed_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/alabaster-1.0.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/babel-2.17.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/brotli-python-1.1.0-py311hda3d55a_3.conda
@@ -161,31 +161,31 @@ packages:
   license_family: BSD
   size: 23621
   timestamp: 1650670423406
-- conda: https://conda.anaconda.org/conda-forge/linux-64/actionlint-1.7.7-hd0c01bc_0.conda
-  sha256: a6fb8bfb2ef6c7f48195ac2b7683656aecc55429f7fc3123ec6bbb1e1ce06b2b
-  md5: 4dcdf2570573cf76931efb97d14e4641
+- conda: https://conda.anaconda.org/conda-forge/linux-64/actionlint-1.7.8-h965158b_0.conda
+  sha256: a7245cb879a5d2e3c3a76617b55aa1b740d1fd0c8e5d23469c2e6ec69c8c7c26
+  md5: 90f1e02ab112937f37a2322d6e6ebbd0
   depends:
-  - __glibc >=2.17
-  - libgcc >=13
   - __glibc >=2.17,<3.0.a0
+  - libgcc >=14
+  - __glibc >=2.17
   license: MIT
   license_family: MIT
-  size: 1947627
-  timestamp: 1737388180543
-- conda: https://conda.anaconda.org/conda-forge/win-64/actionlint-1.7.7-h2466b09_0.conda
-  sha256: bbfa6aa49bd19117fdc36efb26956a1ff57dab5fddc3579b8c30f6ceb853ba5d
-  md5: bea57e97ccf892453f8dc40f4b72d329
+  size: 1984203
+  timestamp: 1760199609591
+- conda: https://conda.anaconda.org/conda-forge/win-64/actionlint-1.7.8-he477eed_0.conda
+  sha256: 76f90c393903f33564826bbd54055384747b0a6f38e0ff317ada4bbaec69ce0a
+  md5: 3abfff0c12bb43be26bed854d01226f8
   depends:
-  - vc >=14.2,<15
-  - vc14_runtime >=14.29.30139
+  - vc >=14.3,<15
+  - vc14_runtime >=14.44.35208
   - ucrt >=10.0.20348.0
-  - vc >=14.2,<15
-  - vc14_runtime >=14.29.30139
+  - vc >=14.3,<15
+  - vc14_runtime >=14.44.35208
   - ucrt >=10.0.20348.0
   license: MIT
   license_family: MIT
-  size: 2014904
-  timestamp: 1737388233822
+  size: 2053082
+  timestamp: 1760199668776
 - conda: https://conda.anaconda.org/conda-forge/noarch/alabaster-1.0.0-pyhd8ed1ab_1.conda
   sha256: 6c4456a138919dae9edd3ac1a74b6fbe5fd66c05675f54df2f8ab8c8d0cc6cea
   md5: 1fd9696649f65fd6611fcdb4ffec738a
