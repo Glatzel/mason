@@ -1,7 +1,7 @@
-name: lefthook
+# This File is automatically synchronized from https://github.com/Glatzel/template
 
+name: lefthook
 on:
-  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -9,13 +9,40 @@ on:
       - opened
       - synchronize
       - ready_for_review
-
-permissions: read-all
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: read-all
+
 jobs:
   lefthook:
-    uses: Glatzel/template/.github/workflows/ci-lefthook.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ./lefthook/.pixi
+          key: lefthook-${{ hashFiles('lefthook.yaml','./lefthook/*.*')}}
+          restore-keys: |
+            lefthook
+
+      #  pixi setup
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@main
+        with:
+          run-install: false
+
+      # rust setup
+      - uses: Swatinem/rust-cache@v2
+
+      # pre-commit
+      - name: lefthook
+        run: pixi run --manifest-path ./lefthook/pixi.toml lefthook-run
+        shell: pwsh
+
+      - uses: pre-commit-ci/lite-action@v1.1.0
+        if: always()
