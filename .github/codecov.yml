@@ -1,0 +1,12 @@
+# This File is automatically synchronized from https://github.com/Glatzel/template
+
+coverage:
+  status:
+    project:
+      default:
+        informational: true
+    patch:
+      default:
+        informational: true
+comment:
+  behavior: default

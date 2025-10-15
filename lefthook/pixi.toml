@@ -20,7 +20,7 @@ hook-taplo = { cmd = "cd ..;taplo format -o 'reorder_keys=true'", env = { RUST_L
 hook-typos = "cd ..;typos --force-exclude"
 
 [dependencies]
-actionlint = "==1.7.7"
+actionlint = "==1.7.8"
 cargo-machete = "==0.9.1"
 lefthook = "==1.13.6"
 markdownlint-cli2 = "==0.18.1"
