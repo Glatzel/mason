@@ -24,7 +24,6 @@ public class GroupJoin : AbsCommand
     /// </summary>
     public override void CommandBody()
     {
-
         // Ensure the group caches are not null
         List<ProxyElement> group1 = SelectUtils.GroupCache1 ?? [];
         List<ProxyElement> group2 = SelectUtils.GroupCache2 ?? [];
@@ -47,7 +46,4 @@ public class GroupJoin : AbsCommand
 
         Log.Info("Group join operation completed.");
     }
-
-}
-
 }
