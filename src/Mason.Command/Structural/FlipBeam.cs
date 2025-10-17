@@ -12,7 +12,7 @@ namespace Mason.Command.Structural;
 /// Flips the ends of selected structural framing elements (beams) that can be flipped.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class FlipBeam : Core.AbsCommand
+public class FlipBeam : Core.AbsCommand(true)
 {
     /// <summary>Logger for the command.</summary>
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();

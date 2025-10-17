@@ -11,7 +11,7 @@ namespace Mason.Command.Structural;
 /// Disallows joining at both ends of selected structural framing elements (beams).
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class DisallowJoinBeam : Core.AbsCommand
+public class DisallowJoinBeam : Core.AbsCommand(true)
 {
     /// <summary>Logger for the command.</summary>
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
