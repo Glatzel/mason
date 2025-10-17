@@ -39,7 +39,7 @@ public class OperatorManager : IExternalEventHandler
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "Unexpected exception in OperatorManager.Execute");
+            Log.Error(ex, "Exception in OperatorManager.Execute");
             TaskDialog.Show(GetName(), ex.Message);
         }
     }
