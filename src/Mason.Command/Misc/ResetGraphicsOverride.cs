@@ -9,7 +9,6 @@ namespace Mason.Command.Misc;
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
 public class ResetGraphicsOverride : Core.AbsCommand(true)
 {
-
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 
     /// <summary>
