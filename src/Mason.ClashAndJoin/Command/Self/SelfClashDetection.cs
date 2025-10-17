@@ -38,10 +38,7 @@ namespace Mason.ClashAndJoin.Command.Self
             // Initialize filters for all elements
             elements.ForEach(e =>
             {
-
-                    e.InitFilter();
-
-
+                e.InitFilter();
             });
 
             // Iterate through all unique pairs of elements
@@ -53,21 +50,18 @@ namespace Mason.ClashAndJoin.Command.Self
                 {
                     ProxyElement e2 = elements[j];
 
+                    // Run pipeline: check bounding box intersection, not joined, then clash detection
+                    bool isIntersect = pipeline
+                        .Init(Doc, e1, e2)
+                        .IsBoundingBoxIntersect(true)
+                        .IsJoined(false)
+                        .ClashDetection();
 
-                        // Run pipeline: check bounding box intersection, not joined, then clash detection
-                        bool isIntersect = pipeline
-                            .Init(Doc, e1, e2)
-                            .IsBoundingBoxIntersect(true)
-                            .IsJoined(false)
-                            .ClashDetection();
-
-                        // Optionally log or handle clash result
-                        if (isIntersect)
-                        {
-                            Log.Info($"Clash detected between elements {e1.Id} and {e2.Id}.");
-                        }
-
-
+                    // Optionally log or handle clash result
+                    if (isIntersect)
+                    {
+                        Log.Info($"Clash detected between elements {e1.Id} and {e2.Id}.");
+                    }
                 }
             }
 

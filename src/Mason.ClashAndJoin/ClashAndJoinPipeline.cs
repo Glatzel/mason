@@ -131,9 +131,7 @@ internal sealed class ClashAndJoinPipeline
         if (!ContinueFlag)
             return;
 
-
-            JoinGeometryUtils.SwitchJoinOrder(Doc, E1.E, E2.E);
-
+        JoinGeometryUtils.SwitchJoinOrder(Doc, E1.E, E2.E);
     }
 
     /// <summary>

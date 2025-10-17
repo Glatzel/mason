@@ -19,16 +19,14 @@ namespace Mason.ClashAndJoin.Command.Group
         /// </summary>
         public override void CommandBody()
         {
+            if (SelectUtils.GroupCache1 == null)
+            {
+                Log.Warn("GroupCache1 is null. Initializing new list.");
+                SelectUtils.GroupCache1 = [];
+            }
 
-                if (SelectUtils.GroupCache1 == null)
-                {
-                    Log.Warn("GroupCache1 is null. Initializing new list.");
-                    SelectUtils.GroupCache1 = [];
-                }
-
-                SelectUtils.GroupCache1.Clear();
-                Log.Info($"Group1 cleared. Current count: {SelectUtils.GroupCache1.Count}.");
-
+            SelectUtils.GroupCache1.Clear();
+            Log.Info($"Group1 cleared. Current count: {SelectUtils.GroupCache1.Count}.");
         }
     }
 }

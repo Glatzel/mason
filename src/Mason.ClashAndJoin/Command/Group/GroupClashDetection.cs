@@ -25,56 +25,50 @@ namespace Mason.ClashAndJoin.Command.Group
         /// </summary>
         public override void CommandBody()
         {
+            // Ensure the group caches are not null
+            var group1 = SelectUtils.GroupCache1 ?? [];
+            var group2 = SelectUtils.GroupCache2 ?? [];
 
-                // Ensure the group caches are not null
-                var group1 = SelectUtils.GroupCache1 ?? [];
-                var group2 = SelectUtils.GroupCache2 ?? [];
+            Log.Info($"Group1 count: {group1.Count}.");
+            Log.Info($"Group2 count: {group2.Count}.");
 
-                Log.Info($"Group1 count: {group1.Count}.");
-                Log.Info($"Group2 count: {group2.Count}.");
-
-                foreach (ProxyElement e1 in group1)
+            foreach (ProxyElement e1 in group1)
+            {
+                try
                 {
-                    try
+                    // Initialize a Revit filter for the element
+                    e1.Filter = new Autodesk.Revit.DB.ElementIntersectsElementFilter(e1.E);
+
+                    foreach (ProxyElement e2 in group2)
                     {
-                        // Initialize a Revit filter for the element
-                        e1.Filter = new Autodesk.Revit.DB.ElementIntersectsElementFilter(e1.E);
-
-                        foreach (ProxyElement e2 in group2)
+                        try
                         {
-                            try
-                            {
-                                // Perform clash detection using the pipeline
-                                bool isIntersect = pipeline
-                                    .Init(Doc, e1, e2)
-                                    .IsIdenticalElement(false) // Skip identical elements
-                                    .IsBoundingBoxIntersect(true) // Only consider intersecting bounding boxes
-                                    .IsJoined(false) // Only consider elements not already joined
-                                    .ClashDetection();
+                            // Perform clash detection using the pipeline
+                            bool isIntersect = pipeline
+                                .Init(Doc, e1, e2)
+                                .IsIdenticalElement(false) // Skip identical elements
+                                .IsBoundingBoxIntersect(true) // Only consider intersecting bounding boxes
+                                .IsJoined(false) // Only consider elements not already joined
+                                .ClashDetection();
 
-                                if (isIntersect)
-                                {
-                                    Log.Debug($"Clash detected: {e1.Id} ↔ {e2.Id}");
-                                }
-                            }
-                            catch (Exception exInner)
+                            if (isIntersect)
                             {
-                                Log.Warn(
-                                    exInner,
-                                    $"Failed to process element pair: {e1.Id}, {e2.Id}"
-                                );
+                                Log.Debug($"Clash detected: {e1.Id} ↔ {e2.Id}");
                             }
                         }
-                    }
-                    catch (Exception exElement)
-                    {
-                        Log.Warn(exElement, $"Failed to process element: {e1.Id}");
+                        catch (Exception exInner)
+                        {
+                            Log.Warn(exInner, $"Failed to process element pair: {e1.Id}, {e2.Id}");
+                        }
                     }
                 }
+                catch (Exception exElement)
+                {
+                    Log.Warn(exElement, $"Failed to process element: {e1.Id}");
+                }
+            }
 
-                Log.Info("Group clash detection completed.");
-
-
+            Log.Info("Group clash detection completed.");
         }
     }
 }
