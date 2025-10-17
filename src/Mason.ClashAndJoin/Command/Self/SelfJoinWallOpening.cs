@@ -61,8 +61,6 @@ public class SelfJoinWallOpening : AbsCommand
             }
         }
 
-        Log.Info(
-            $"Wall opening join operation completed for {elements.Count} selected elements."
-        );
+        Log.Info($"Wall opening join operation completed for {elements.Count} selected elements.");
     }
 }

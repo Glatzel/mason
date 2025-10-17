@@ -178,8 +178,7 @@ public struct Vec3 : IEquatable<Vec3>, IFormattable
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Vec3 Multiply(ref readonly Vec3 v, double t) =>
-        new(v.X * t, v.Y * t, v.Z * t);
+    public static Vec3 Multiply(ref readonly Vec3 v, double t) => new(v.X * t, v.Y * t, v.Z * t);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vec3 Multiply(ref readonly Vec3 u, ref readonly Vec3 v, ref Vec3 outv)
@@ -239,8 +238,7 @@ public struct Vec3 : IEquatable<Vec3>, IFormattable
         Math.Sqrt((v.X * v.X) + (v.Y * v.Y) + (v.Z * v.Z));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static double Length2(ref readonly Vec3 v) =>
-        (v.X * v.X) + (v.Y * v.Y) + (v.Z * v.Z);
+    public static double Length2(ref readonly Vec3 v) => (v.X * v.X) + (v.Y * v.Y) + (v.Z * v.Z);
 
     #endregion
 
@@ -417,8 +415,7 @@ public struct Vec3 : IEquatable<Vec3>, IFormattable
     public override readonly string ToString() => ToString("G", CultureInfo.CurrentCulture);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly string ToString(string format) =>
-        ToString(format, CultureInfo.CurrentCulture);
+    public readonly string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly string ToString(string format, IFormatProvider formatProvider)

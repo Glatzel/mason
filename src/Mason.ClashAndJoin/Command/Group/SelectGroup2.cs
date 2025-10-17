@@ -19,11 +19,10 @@ public class SelectGroup2 : AbsCommand
     /// </summary>
     public override void CommandBody()
     {
-        System.Collections.Generic.List<ProxyElement> selectedElements = SelectUtils.SelectProxyElements(Selection) ?? [];
+        System.Collections.Generic.List<ProxyElement> selectedElements =
+            SelectUtils.SelectProxyElements(Selection) ?? [];
         SelectUtils.GroupCache2 = selectedElements;
 
-        Log.Info(
-            $"Selected {selectedElements.Count} elements and cached for group operations."
-        );
+        Log.Info($"Selected {selectedElements.Count} elements and cached for group operations.");
     }
 }
