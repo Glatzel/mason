@@ -41,7 +41,6 @@ public static class Graphics
         try
         {
             Transaction tx = null;
-            bool createdTransaction = false;
 
             if (doc.IsModifiable)
             {
