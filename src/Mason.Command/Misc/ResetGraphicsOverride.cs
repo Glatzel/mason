@@ -10,7 +10,8 @@ namespace Mason.Command.Misc;
 public class ResetGraphicsOverride : Core.AbsCommand
 {
     // Ensure autoTransaction is false to avoid nested transactions
-    public ResetGraphicsOverride() : base(autoTransaction: false) { }
+    public ResetGraphicsOverride()
+        : base(autoTransaction: false) { }
 
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 

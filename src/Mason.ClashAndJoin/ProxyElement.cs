@@ -105,8 +105,10 @@ internal sealed class ProxyElement : IDisposable, IEquatable<ProxyElement>
 
     public bool Equals(ProxyElement other)
     {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
+        if (ReferenceEquals(null, other))
+            return false;
+        if (ReferenceEquals(this, other))
+            return true;
         return IntId == other.IntId;
     }
 
@@ -117,8 +119,10 @@ internal sealed class ProxyElement : IDisposable, IEquatable<ProxyElement>
 
     public static bool operator ==(ProxyElement left, ProxyElement right)
     {
-        if (ReferenceEquals(left, right)) return true;
-        if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
+        if (ReferenceEquals(left, right))
+            return true;
+        if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+            return false;
         return left.Equals(right);
     }
 
