@@ -49,11 +49,11 @@ namespace Mason.ClashAndJoin.Command.Self
                 {
                     ProxyElement e2 = elements[j];
 
-                
+
                         // Initialize pipeline for this pair, check if joined, and unjoin
                         pipeline.Init(Doc, e1, e2).IsJoined(true).Unjoin();
-                    
-                 
+
+
                 }
             }
 

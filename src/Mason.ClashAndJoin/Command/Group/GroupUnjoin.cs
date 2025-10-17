@@ -25,7 +25,7 @@ namespace Mason.ClashAndJoin.Command.Group
         /// </summary>
         public override void CommandBody()
         {
-        
+
                 var group1 = SelectUtils.GroupCache1 ?? [];
                 var group2 = SelectUtils.GroupCache2 ?? [];
 
@@ -45,8 +45,8 @@ namespace Mason.ClashAndJoin.Command.Group
                 }
 
                 Log.Info("Group unjoin operation completed.");
-            
-        
+
+
         }
     }
 }

@@ -26,8 +26,8 @@ namespace Mason.ClashAndJoin.Command.Group
                 Log.Info(
                     $"Selected {selectedElements.Count} elements and cached for group operations."
                 );
-            
-          
+
+
         }
     }
 }

@@ -44,9 +44,9 @@ namespace Mason.ClashAndJoin.Command.Self
             // Precompute bounding boxes with slight offset for safety
             elements.ForEach(e =>
             {
-      
+
                     e.CachedBBox = e.BBox.Offset(1);
-              
+
             });
 
             // Iterate over all unique pairs of elements
@@ -64,8 +64,8 @@ namespace Mason.ClashAndJoin.Command.Self
                             .IsBoundingBoxIntersect(true)
                             .IsJoined(false)
                             .Join();
-                    
-                 
+
+
                 }
             }
 
