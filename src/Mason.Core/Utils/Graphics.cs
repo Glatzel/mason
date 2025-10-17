@@ -38,21 +38,12 @@ public static class Graphics
             return;
         }
 
+        OverrideGraphicSettings defaultGraphicSettings = new();
+        foreach (ElementId id in ids)
+        {
+            view.SetElementOverrides(id, defaultGraphicSettings);
+        }
 
-
-
-
-                OverrideGraphicSettings defaultGraphicSettings = new();
-                foreach (ElementId id in ids)
-                {
-                    view.SetElementOverrides(id, defaultGraphicSettings);
-
-                }
-
-
-                Log.Info($"Reset {ids.Length} graphic overrides in active view \"{view.Name}\".");
-            }
-
-
+        Log.Info($"Reset {ids.Length} graphic overrides in active view \"{view.Name}\".");
     }
 }
