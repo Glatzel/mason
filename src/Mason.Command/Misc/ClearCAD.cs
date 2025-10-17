@@ -9,7 +9,7 @@ namespace Mason.Command.Misc;
 /// Deletes all CAD imports (ImportInstance) in the active document that are not linked.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class ClearCAD : AbsCommand
+public class ClearCAD() : AbsCommand(true)
 {
     /// <summary>Logger for this command.</summary>
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();

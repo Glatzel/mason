@@ -7,9 +7,8 @@ namespace Mason.Command.Misc;
 /// Resets all graphics overrides for elements in the active view.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class ResetGraphicsOverride : Core.AbsCommand(true)
+public class ResetGraphicsOverride() : Core.AbsCommand(true)
 {
-
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 
     /// <summary>

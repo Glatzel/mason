@@ -11,7 +11,7 @@ namespace Mason.Command.MEP;
 /// Flips the direction of selected pipe elements by reversing their location curves.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class FlipPipe : Core.AbsCommand(true)
+public class FlipPipe() : Core.AbsCommand(true)
 {
     /// <summary>Logger for the command.</summary>
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
