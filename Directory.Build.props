@@ -21,10 +21,10 @@
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <!--debug action-->
-  <PropertyGroup Condition=" '$(Configuration)' != 'Release' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <StartAction>Program</StartAction>
     <StartProgram>C:/Program Files/Autodesk/Revit $(RevitVersion)/Revit.exe</StartProgram>
   </PropertyGroup>
-  <!--TargetFramework-->
   <!--TargetFramework-->
   <PropertyGroup>
     <TargetFramework Condition="$(RevitVersion) &lt;= '2024'">net48</TargetFramework>

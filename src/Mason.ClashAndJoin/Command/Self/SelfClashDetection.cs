@@ -3,21 +3,54 @@ using Mason.Core;
 
 namespace Mason.ClashAndJoin.Command.Self;
 
+/// <summary>
+/// Command to perform clash detection between selected elements in Revit.
+/// Checks all unique element pairs for bounding box intersection and join status,
+/// then runs the clash detection filter for each pair.
+/// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
 public class SelfClashDetection : AbsCommand
 {
-    internal static ClashAndJoinPipeline pipeline = new();
+    /// <summary>
+    /// Pipeline for clash and join operations.
+    /// </summary>
+    internal static readonly ClashAndJoinPipeline pipeline = new();
 
+    /// <summary>
+    /// Logger for command operations.
+    /// </summary>
+    internal static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
+
+    /// <summary>
+    /// Executes clash detection for all selected elements.
+    /// </summary>
     public override void CommandBody()
     {
-        List<ProxyElement> elements = SelectUtils.SelectProxyElements(Selection);
-        elements.ForEach(e => e.InitFilter());
+        // Select elements from the current selection
+        List<ProxyElement> elements = SelectUtils.SelectProxyElements(Selection) ?? [];
+
+        if (elements.Count == 0)
+        {
+            Log.Warn("No elements selected for clash detection.");
+            return;
+        }
+
+        // Initialize filters for all elements
+        elements.ForEach(e =>
+        {
+            e.InitFilter();
+        });
+
+        // Iterate through all unique pairs of elements
         for (int i = 0; i < elements.Count - 1; i++)
         {
             ProxyElement e1 = elements[i];
+
             for (int j = i + 1; j < elements.Count; j++)
             {
                 ProxyElement e2 = elements[j];
+
+                // Run pipeline: check bounding box intersection, not joined, then clash detection
                 bool isIntersect = pipeline
                     .Init(Doc, e1, e2)
                     .IsBoundingBoxIntersect(true)
@@ -25,5 +58,7 @@ public class SelfClashDetection : AbsCommand
                     .ClashDetection();
             }
         }
+
+        Log.Info($"Clash detection completed for {elements.Count} selected elements.");
     }
 }

@@ -13,13 +13,13 @@ internal static class SelectUtils
 
     internal static List<ProxyElement> GroupCache1
     {
-        get => groupCache1.Distinct().ToList();
+        get => [.. groupCache1.Distinct()];
         set => groupCache1 = value;
     }
 
     internal static List<ProxyElement> GroupCache2
     {
-        get => groupCache2.Distinct().ToList();
+        get => [.. groupCache2.Distinct()];
         set => groupCache2 = value;
     }
 
@@ -31,11 +31,13 @@ internal static class SelectUtils
             .ConvertAll(e => new ProxyElement(e, cacheBBox));
         if (elements.Count == 0)
         {
-            elements = selection
-                .PickObjects(ObjectType.Element)
-                .Select(r => new ProxyElement(r.ElementId, cacheBBox))
-                .Where(i => i.E.Category.CategoryType == CategoryType.Model)
-                .ToList();
+            elements =
+            [
+                .. selection
+                    .PickObjects(ObjectType.Element)
+                    .Select(r => new ProxyElement(r.ElementId, cacheBBox))
+                    .Where(i => i.E.Category.CategoryType == CategoryType.Model),
+            ];
         }
 
         Log.Info($"Select {elements.Count} elements.");
