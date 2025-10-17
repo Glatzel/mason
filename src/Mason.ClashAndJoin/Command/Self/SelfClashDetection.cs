@@ -57,8 +57,7 @@ namespace Mason.ClashAndJoin.Command.Self
                 {
                     ProxyElement e2 = elements[j];
 
-                    try
-                    {
+             
                         // Run pipeline: check bounding box intersection, not joined, then clash detection
                         bool isIntersect = pipeline
                             .Init(Doc, e1, e2)
@@ -71,14 +70,8 @@ namespace Mason.ClashAndJoin.Command.Self
                         {
                             Log.Info($"Clash detected between elements {e1.Id} and {e2.Id}.");
                         }
-                    }
-                    catch (System.Exception ex)
-                    {
-                        Log.Error(
-                            ex,
-                            $"Failed clash detection between elements {e1.Id} and {e2.Id}."
-                        );
-                    }
+                    
+                 
                 }
             }
 

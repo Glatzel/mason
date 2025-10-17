@@ -19,19 +19,15 @@ namespace Mason.ClashAndJoin.Command.Group
         /// </summary>
         public override void CommandBody()
         {
-            try
-            {
+
                 var selectedElements = SelectUtils.SelectProxyElements(Selection) ?? [];
                 SelectUtils.GroupCache1 = selectedElements;
 
                 Log.Info(
                     $"Selected {selectedElements.Count} elements and cached for group operations."
                 );
-            }
-            catch (System.Exception ex)
-            {
-                Log.Error(ex, "Failed to select and cache elements for group operation.");
-            }
+            
+          
         }
     }
 }

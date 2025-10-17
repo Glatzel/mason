@@ -50,19 +50,15 @@ namespace Mason.ClashAndJoin.Command.Self
                 {
                     ProxyElement e2 = elements[j];
 
-                    try
-                    {
+            
                         // Initialize pipeline for this pair, check intersection, not joined, then join
                         pipeline
                             .Init(Doc, e1, e2)
                             .IsBoundingBoxIntersect(true)
                             .IsJoined(false)
                             .Join();
-                    }
-                    catch (System.Exception ex)
-                    {
-                        Log.Error(ex, $"Failed to join elements {e1.Id} and {e2.Id}.");
-                    }
+                    
+                  
                 }
             }
 
