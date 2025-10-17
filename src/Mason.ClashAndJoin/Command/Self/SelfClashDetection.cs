@@ -38,14 +38,10 @@ namespace Mason.ClashAndJoin.Command.Self
             // Initialize filters for all elements
             elements.ForEach(e =>
             {
-                try
-                {
+        
                     e.InitFilter();
-                }
-                catch (System.Exception ex)
-                {
-                    Log.Error(ex, $"Failed to initialize filter for element {e.Id}.");
-                }
+                
+
             });
 
             // Iterate through all unique pairs of elements
