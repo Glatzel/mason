@@ -1,24 +1,68 @@
 using System.Collections.Generic;
 using Mason.Core;
 
-namespace Mason.ClashAndJoin.Command.Self;
-
-[Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class SelfUnjoin() : AbsCommand(true)
+namespace Mason.ClashAndJoin.Command.Self
 {
-    internal static ClashAndJoinPipeline pipeline = new();
-
-    public override void CommandBody()
+    /// <summary>
+    /// Command to unjoin all selected elements in the Revit document.
+    /// Iterates over all selected ProxyElements and unjoins any joined pairs.
+    /// </summary>
+    [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
+    public class SelfUnjoin : AbsCommand
     {
-        List<ProxyElement> elements = SelectUtils.SelectProxyElements(Selection);
-        for (int i = 0; i < elements.Count; i++)
+        /// <summary>
+        /// Pipeline for clash and join operations.
+        /// </summary>
+        internal static readonly ClashAndJoinPipeline pipeline = new();
+
+        /// <summary>
+        /// Logger for command operations.
+        /// </summary>
+        internal static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="SelfUnjoin"/>.
+        /// </summary>
+        public SelfUnjoin()
+            : base(true) { }
+
+        /// <summary>
+        /// Executes the unjoin operation on all selected ProxyElements.
+        /// </summary>
+        public override void CommandBody()
         {
-            ProxyElement e1 = elements[i];
-            for (int j = i + 1; j < elements.Count; j++)
+            // Select elements from the current selection
+            List<ProxyElement> elements = SelectUtils.SelectProxyElements(Selection) ?? [];
+
+            if (elements.Count == 0)
             {
-                ProxyElement e2 = elements[j];
-                pipeline.Init(Doc, e1, e2).IsJoined(true).Unjoin();
+                Log.Warn("No elements selected for unjoining.");
+                return;
             }
+
+            // Iterate over all unique pairs of elements
+            for (int i = 0; i < elements.Count; i++)
+            {
+                ProxyElement e1 = elements[i];
+
+                for (int j = i + 1; j < elements.Count; j++)
+                {
+                    ProxyElement e2 = elements[j];
+
+                    try
+                    {
+                        // Initialize pipeline for this pair, check if joined, and unjoin
+                        pipeline.Init(Doc, e1, e2).IsJoined(true).Unjoin();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        // Log any exceptions during unjoin
+                        Log.Error(ex, $"Failed to unjoin elements {e1.Id} and {e2.Id}.");
+                    }
+                }
+            }
+
+            Log.Info($"Unjoin operation completed for {elements.Count} selected elements.");
         }
     }
 }

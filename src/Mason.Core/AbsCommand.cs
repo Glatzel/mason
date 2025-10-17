@@ -8,36 +8,50 @@ namespace Mason.Core;
 public abstract class AbsCommand(bool autoTransaction = false) : AbsContext, IExternalCommand
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
-    private readonly bool AutoTransaction = autoTransaction;
+    private readonly bool _autoTransaction = autoTransaction;
 
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
         RevitContext.Init(commandData.Application);
-        Log.Info($"Document: {Doc.Title}|Start Execute Command: {GetType().FullName}");
+
+        string commandName = GetType().FullName ?? "UnknownCommand";
+        string documentTitle = Doc?.Title ?? "NoDocument";
+
+        Log.Info($"Document: {documentTitle} | Start Execute Command: {commandName}");
+
         try
         {
-            if (AutoTransaction)
+            if (_autoTransaction)
             {
-                using Transaction ts = new(Doc, GetType().Name);
-                ts.Start();
+                using Transaction tx = new(Doc, commandName);
+                tx.Start();
+
                 CommandBody();
-                ts.Commit();
+
+                tx.Commit();
+                Log.Debug($"Transaction committed for command {commandName}.");
             }
             else
             {
                 CommandBody();
             }
         }
-        catch (Autodesk.Revit.Exceptions.OperationCanceledException e)
+        catch (Autodesk.Revit.Exceptions.OperationCanceledException ex)
         {
-            Log.Warn($"{GetType().FullName}: {e}");
+            Log.Warn($"{commandName}: {ex}");
+            return Result.Cancelled;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            Log.Error($"{GetType().FullName}: {e}");
-            TaskDialog.Show(GetType().FullName, e.Message);
+            Log.Error($"{commandName}: {ex}");
+            TaskDialog.Show(commandName, ex.Message);
+            return Result.Failed;
         }
-        Log.Info($"Document: {Doc.Title}|Finish Execute Command: {GetType().FullName}");
+        finally
+        {
+            Log.Info($"Document: {documentTitle} | Finish Execute Command: {commandName}");
+        }
+
         return Result.Succeeded;
     }
 

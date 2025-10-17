@@ -1,87 +1,118 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using Mason.Core;
 using Mason.Core.Utils;
 
 namespace Mason.Command.Misc;
 
+/// <summary>
+/// Exports each user workset in the active Revit document to individual NWC files.
+/// Each export isolates the workset in the active view.
+/// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class ExportWorksetsNWC : Core.AbsCommand
+public class ExportWorksetsNWC : AbsCommand
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 
+    /// <summary>
+    /// Main execution body of the command.
+    /// </summary>
     public override void CommandBody()
     {
-        //select path
+        // Prompt user to select output folder
         string outPath = IO.SelectFolder();
+        if (string.IsNullOrWhiteSpace(outPath))
+        {
+            throw new InvalidOperationException("Output path not selected.");
+        }
 
-        // get all worksets
+        // Collect all user worksets
         IList<Workset> worksets = new FilteredWorksetCollector(Doc)
             .OfKind(WorksetKind.UserWorkset)
             .ToWorksets();
+
         if (worksets.Count <= 1)
         {
-            Log.Warn("Only one Workset found.");
+            Log.Warn("Only one user workset found. Manual export is recommended.");
             TaskDialog.Show(
                 GetType().FullName,
-                "Only one Workset found.\nPlease export NWC Manually."
+                "Only one user workset found.\nPlease export NWC manually."
             );
             return;
         }
-        Log.Info($"Find {worksets.Count} Worksets in {Doc.Title}.rvt");
 
-        // get current view for export
-        View view = Doc.ActiveView;
-        Log.Info($"Active View: {view.Name}");
+        Log.Info($"Found {worksets.Count} user worksets in {Doc.Title}.");
 
-        // export setting
-        NavisworksExportOptions option = new()
+        // Get active view for export
+        View activeView =
+            Doc.ActiveView ?? throw new InvalidOperationException("No active view found.");
+        Log.Info($"Active View: {activeView.Name}");
+
+        // Prepare Navisworks export options
+        NavisworksExportOptions options = new()
         {
             ExportScope = NavisworksExportScope.View,
-            ViewId = view.Id,
+            ViewId = activeView.Id,
             ExportRoomGeometry = false,
         };
 
-        // export nwc
-        foreach (Workset w in worksets)
+        // Export each workset individually
+        foreach (Workset workset in worksets)
         {
-            Log.Info($"Start Export NWC of Workset: {w.Name}");
-            //Isolate elements
-            using (Transaction tsIsolate = new(Doc, "test"))
+            Log.Info($"Starting NWC export for Workset: {workset.Name}");
+
+            // Isolate the current workset
+            using (Transaction tsIsolate = new(Doc, $"Isolate Workset: {workset.Name}"))
             {
                 tsIsolate.Start();
-                foreach (Workset i in worksets)
+                foreach (Workset w in worksets)
                 {
-                    view.SetWorksetVisibility(i.Id, WorksetVisibility.Hidden);
+                    activeView.SetWorksetVisibility(w.Id, WorksetVisibility.Hidden);
                 }
-                view.SetWorksetVisibility(w.Id, WorksetVisibility.Visible);
+                activeView.SetWorksetVisibility(workset.Id, WorksetVisibility.Visible);
                 tsIsolate.Commit();
             }
-            // check if nothing in view
-            IEnumerable<Element> modelsInView = new FilteredElementCollector(Doc, ActiveView.Id)
+
+            // Check if the workset has any model elements in the view
+            IEnumerable<Element> modelsInView = new FilteredElementCollector(Doc, activeView.Id)
                 .ToElements()
                 .Where(e => e.Category?.CategoryType == CategoryType.Model);
+
             if (!modelsInView.Any())
             {
-                Log.Warn($"No model of workset `{w.Name}` in view `{ActiveView.Name}`");
+                Log.Warn(
+                    $"No model elements found for workset `{workset.Name}` in view `{activeView.Name}`."
+                );
                 continue;
             }
-            // export
-            string outFile = Path.Combine(outPath, $"{w.Name}.nwc");
-            if (!File.Exists(outFile))
+
+            // Build output file path
+            string safeName = workset.Name.Replace('/', '_');
+            string outFile = Path.Combine(outPath, $"{safeName}.nwc");
+
+            if (File.Exists(outFile))
             {
                 Log.Info($"NWC file already exists: {outFile}");
             }
-            Doc.Export(outPath, $"{w.Name.Replace('/', '_')}", option);
-            Log.Info($"Finish Export NWC of Workset: {w.Name}");
+
+            // Perform export
+            Doc.Export(outPath, safeName, options);
+            Log.Info($"Finished NWC export for Workset: {workset.Name}");
         }
 
-        // reset view visibility
-        using Transaction ts = new(Doc, "test");
-        ts.Start();
-        worksets.ToList().ForEach(w => view.SetWorksetVisibility(w.Id, WorksetVisibility.Visible));
-        ts.Commit();
+        // Reset all worksets to visible
+        using Transaction tsReset = new(Doc, "Reset Workset Visibility");
+        tsReset.Start();
+        foreach (Workset w in worksets)
+        {
+            activeView.SetWorksetVisibility(w.Id, WorksetVisibility.Visible);
+        }
+        tsReset.Commit();
+
+        Log.Info("Completed NWC export for all worksets.");
     }
 }

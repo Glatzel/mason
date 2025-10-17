@@ -5,13 +5,22 @@ using Mason.Core;
 
 namespace Mason.Command.Misc;
 
+/// <summary>
+/// Deletes all CAD imports (ImportInstance) in the active document that are not linked.
+/// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class ClearCAD() : AbsCommand(true)
+public class ClearCAD : AbsCommand
 {
+    /// <summary>Logger for this command.</summary>
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 
+    /// <summary>
+    /// Main execution body of the command.
+    /// Deletes all non-linked CAD imports in the active document.
+    /// </summary>
     public override void CommandBody()
     {
+        // Collect all non-linked CAD import instances
         List<ElementId> cadFiles =
         [
             .. new FilteredElementCollector(Doc)
@@ -20,10 +29,17 @@ public class ClearCAD() : AbsCommand(true)
                 .Where(i => !i.IsLinked)
                 .Select(i => i.Id),
         ];
-        Log.Info($"Find {cadFiles.Count} Cad Files.");
-        if (cadFiles.Count > 0)
+
+        Log.Info($"Found {cadFiles.Count} CAD import(s) to delete.");
+
+        if (cadFiles.Count == 0)
         {
-            Doc.Delete(cadFiles);
+            Log.Warn("No CAD imports found to delete.");
+            return;
         }
+
+        // Delete CAD files
+        Doc.Delete(cadFiles);
+        Log.Info("Deleted selected CAD import(s) successfully.");
     }
 }

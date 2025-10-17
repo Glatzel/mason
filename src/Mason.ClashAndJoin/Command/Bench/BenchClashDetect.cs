@@ -14,10 +14,10 @@ public class BenchClashDetect : AbsCommand
 
     public override void CommandBody()
     {
-        List<Element> elements = Selection
-            .PickObjects(ObjectType.Element)
-            .Select(Doc.GetElement)
-            .ToList();
+        List<Element> elements =
+        [
+            .. Selection.PickObjects(ObjectType.Element).Select(Doc.GetElement),
+        ];
         long timeScalar = MethodScalar(elements);
         long timeVector = MethodVector(elements);
         TaskDialog.Show(

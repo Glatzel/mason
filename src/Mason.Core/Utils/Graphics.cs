@@ -1,19 +1,82 @@
-﻿using Autodesk.Revit.DB;
+﻿using System;
+using Autodesk.Revit.DB;
 
 namespace Mason.Core.Utils;
 
+/// <summary>
+/// Utility methods related to Revit graphics and element display overrides.
+/// </summary>
 public static class Graphics
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 
+    /// <summary>
+    /// Resets graphics overrides of the specified elements in the current active view.
+    /// </summary>
+    /// <param name="ids">The element IDs whose overrides should be reset.</param>
     public static void ResetGraphicsOverride(params ElementId[] ids)
     {
-        OverrideGraphicSettings defaultGraphicSettings = new();
-        View view = RevitContext.ActiveView;
-        foreach (ElementId id in ids)
+        if (ids == null || ids.Length == 0)
         {
-            view.SetElementOverrides(id, defaultGraphicSettings);
+            Log.Warn("No element IDs provided for ResetGraphicsOverride.");
+            return;
         }
-        Log.Info($"Reset {ids.Length} graphic overrides of element in active view `{view.Name}`.");
+
+        View view = RevitContext.ActiveView;
+        if (view == null)
+        {
+            Log.Error("Failed to reset graphics overrides: no active view found.");
+            return;
+        }
+
+        Document doc = view.Document;
+        if (doc == null)
+        {
+            Log.Error(
+                "Failed to reset graphics overrides: active view has no associated document."
+            );
+            return;
+        }
+
+        try
+        {
+            Transaction tx = null;
+            bool createdTransaction = false;
+
+            if (doc.IsModifiable)
+            {
+                // Already in a transaction, just proceed
+                OverrideGraphicSettings defaultGraphicSettings = new();
+                foreach (ElementId id in ids)
+                {
+                    view.SetElementOverrides(id, defaultGraphicSettings);
+                    Log.Trace($"Reset graphic override for element ID: {id.IntegerValue}");
+                }
+                Log.Info($"Reset {ids.Length} graphic overrides in active view \"{view.Name}\".");
+            }
+            else
+            {
+                // Not in a transaction, create one
+                tx = new Transaction(doc, "Reset Graphics Override");
+                tx.Start();
+
+                OverrideGraphicSettings defaultGraphicSettings = new();
+                foreach (ElementId id in ids)
+                {
+                    view.SetElementOverrides(id, defaultGraphicSettings);
+                    Log.Trace($"Reset graphic override for element ID: {id.IntegerValue}");
+                }
+
+                tx.Commit();
+                Log.Info($"Reset {ids.Length} graphic overrides in active view \"{view.Name}\".");
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(
+                ex,
+                $"Exception occurred while resetting graphics overrides in view \"{view.Name}\"."
+            );
+        }
     }
 }

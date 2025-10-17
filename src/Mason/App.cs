@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -15,111 +14,171 @@ using NLog;
 
 namespace Mason;
 
+/// <summary>
+/// Entry point for the Mason Revit Add-in.
+/// Handles initialization, logging, and command registration.
+/// </summary>
 public class App : IExternalApplication
 {
     private readonly Logger Log = ConfigLog();
 
+    /// <summary>
+    /// Called when Revit starts up.
+    /// Initializes the logger and registers all Mason commands.
+    /// </summary>
     public Result OnStartup(UIControlledApplication application)
     {
-        Log.Info(Environment.OSVersion.ToString());
+        Log.Info("=== Mason Revit Add-in Startup ===");
+        Log.Info($"Operating System: {Environment.OSVersion}");
+
         string revitVersion = application.ControlledApplication.SubVersionNumber;
         string revitBuildVersion = application.ControlledApplication.VersionBuild;
-        Log.Info($"Autodesk Revit {revitVersion} {revitBuildVersion}");
+        Log.Info($"Detected Autodesk Revit {revitVersion} ({revitBuildVersion})");
+
         string masonVersion = FileVersionInfo
             .GetVersionInfo(Assembly.GetExecutingAssembly().Location)
             .ProductVersion.Split('+')[0];
-        Log.Info($"Mason {masonVersion}");
+        Log.Info($"Mason Version: {masonVersion}");
 
+        Log.Debug("Starting command registration...");
         new CommandRegister(application).Register();
+        Log.Info("Successfully registered all Mason commands.");
+
+        Log.Info("=== Mason Startup Complete ===");
         return Result.Succeeded;
     }
 
+    /// <summary>
+    /// Called when Revit shuts down.
+    /// Performs any necessary cleanup.
+    /// </summary>
     public Result OnShutdown(UIControlledApplication application)
     {
-        Log.Info("Shutdown Mason.");
+        Log.Info("=== Mason Shutdown ===");
+        Log.Info("Mason Revit Add-in is shutting down.");
         return Result.Succeeded;
     }
 
+    /// <summary>
+    /// Configures NLog logging behavior and output file location.
+    /// </summary>
     private static Logger ConfigLog()
     {
-        string logDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/../log";
+        string assemblyLocation = Assembly.GetExecutingAssembly().Location;
+        string? assemblyDir = Path.GetDirectoryName(assemblyLocation);
+
+        if (string.IsNullOrEmpty(assemblyDir))
+        {
+            throw new InvalidOperationException("Cannot determine the assembly directory for logging.");
+        }
+
+        string logDir = Path.Combine(assemblyDir, "../log");
+
+        if (!Directory.Exists(logDir))
+        {
+            Directory.CreateDirectory(logDir);
+        }
+
         NLog.Config.LoggingConfiguration config = new();
+        string logFilePath = Path.Combine(logDir, $"{DateTime.Now:yyyyMMdd-HHmmss}.log");
+
         NLog.Targets.FileTarget logfile = new("MasonLogFile")
         {
-            FileName = $"{logDir}/{DateTime.Now:yyyyMMdd-HHmmss}.log",
+            FileName = logFilePath,
+            Layout =
+                "${longdate} | ${level:uppercase=true} | ${message} ${exception:format=toString,StackTrace}",
         };
-#if Debug
+
+        // Validate that the log file path is within the intended log directory before opening
+        if (Path.GetFullPath(logFilePath).StartsWith(Path.GetFullPath(logDir), StringComparison.OrdinalIgnoreCase)
+            && File.Exists(logFilePath))
+        {
+            Process.Start(new ProcessStartInfo(logFilePath) { UseShellExecute = true });
+        }
+        else
+        {
+            logger.Warn("Attempted to open log file with invalid path: " + logFilePath);
+        }
         config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);
-#endif
-#if Release
-        config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
-#endif
         LogManager.Configuration = config;
-        Logger Logger = LogManager.GetCurrentClassLogger();
-        Logger.Debug("Finish Initialize Logger.");
-#if Debug
-        Process.Start(logfile.FileName.ToString());
+        Logger logger = LogManager.GetCurrentClassLogger();
+        logger.Debug("Logger initialized in Debug mode.");
+        Process.Start(new ProcessStartInfo(logFilePath) { UseShellExecute = true });
+#else
+        config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
+        LogManager.Configuration = config;
+        var logger = LogManager.GetCurrentClassLogger();
+        logger.Info("Logger initialized in Release mode.");
 #endif
-        return Logger;
+
+        return logger;
     }
 }
 
+/// <summary>
+/// Handles the creation of Revit ribbon panels and registration of Mason commands.
+/// </summary>
 internal sealed class CommandRegister(UIControlledApplication uicapp)
 {
     private readonly UIControlledApplication UICApp = uicapp;
     private readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+    /// <summary>
+    /// Adds or retrieves a Revit Ribbon Panel under the specified tab.
+    /// </summary>
     private RibbonPanel AddRibbonPanel(string tabName, string ribbonPanelName)
     {
-        // Create a custom ribbon tab
         try
         {
             UICApp.CreateRibbonTab(tabName);
-            Log.Info($"Add Ribbon Tab: {tabName}");
+            Log.Trace($"Created Ribbon Tab: {tabName}");
         }
         catch
         {
-            //tab already exist
-            Log.Info($"Ribbon Tab already exist: {tabName}");
+            Log.Debug($"Ribbon Tab already exists: {tabName}");
         }
-        // Add a new ribbon panel
-        RibbonPanel ribbonPanel;
-        try
-        {
+            Log.Debug($"Ribbon Panel already exists: {ribbonPanelName}");
+            ribbonPanel = UICApp.GetRibbonPanels(tabName).Find(p => p.Name == ribbonPanelName);
+            if (ribbonPanel == null)
+            {
+                Log.Error($"Ribbon Panel '{ribbonPanelName}' not found under tab '{tabName}'.");
+                throw new InvalidOperationException($"Ribbon Panel '{ribbonPanelName}' not found under tab '{tabName}'.");
+            }
+        }
+        return ribbonPanel;
             ribbonPanel = UICApp.CreateRibbonPanel(tabName, ribbonPanelName);
-            Log.Info($"Add Panel: {tabName}");
+            Log.Trace($"Created Ribbon Panel: {ribbonPanelName} under {tabName}");
         }
         catch
         {
-            //ribbon panel already exist
-            Log.Info($"Ribbon Panel already exist: {ribbonPanelName}");
-            List<RibbonPanel> ribbonPanels = UICApp.GetRibbonPanels(tabName);
-            ribbonPanel = ribbonPanels.Find(panel => panel.Name == ribbonPanelName);
+            Log.Debug($"Ribbon Panel already exists: {ribbonPanelName}");
+            ribbonPanel = UICApp.GetRibbonPanels(tabName).Find(p => p.Name == ribbonPanelName)!;
         }
         return ribbonPanel;
     }
 
+    /// <summary>
+    /// Loads an embedded icon resource by name.
+    /// </summary>
     private BitmapImage GetIcon(string iconName, bool large)
     {
-        if (iconName == null)
-        {
-            iconName = "default";
-            Log.Info("Use default icon.");
-        }
-        Assembly assembly = Assembly.GetExecutingAssembly();
+        iconName ??= "default";
         string resourceName = $"Mason.Icon.{iconName}.png";
+
+        Assembly assembly = Assembly.GetExecutingAssembly();
         Stream stream = assembly.GetManifestResourceStream(resourceName);
+
         if (stream == null)
         {
-            Log.Warn($"Icon file not found: {resourceName}.");
+            Log.Warn($"Icon not found: {resourceName}. Using default icon.");
             stream = assembly.GetManifestResourceStream("Mason.Icon.default.png");
         }
 
-        using Stream fs = stream;
-        System.Drawing.Bitmap bitmap = new(fs);
-
+        using Stream fs = stream!;
+        using System.Drawing.Bitmap bitmap = new(fs);
         using MemoryStream memory = new();
-        Log.Debug($"Pixel format of {iconName}: {bitmap.PixelFormat}");
+
+        Log.Trace($"Loaded icon '{iconName}' with pixel format {bitmap.PixelFormat}");
         bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Tiff);
         memory.Position = 0;
 
@@ -132,17 +191,21 @@ internal sealed class CommandRegister(UIControlledApplication uicapp)
             Math.Round(desiredSize * bitmap.VerticalResolution / 96.0);
         bitmapImage.DecodePixelHeight = (int)
             Math.Round(desiredSize * bitmap.HorizontalResolution / 96.0);
-        Log.Debug($"`HorizontalResolution` of {iconName}.png: {bitmap.HorizontalResolution}");
-        Log.Debug($"`DecodePixelWidth` of {iconName}.png: {bitmapImage.DecodePixelWidth}");
         bitmapImage.EndInit();
         bitmapImage.Freeze();
 
+        Log.Trace(
+            $"Icon '{iconName}' decoded as {bitmapImage.DecodePixelWidth}x{bitmapImage.DecodePixelHeight}"
+        );
         return bitmapImage;
     }
 
+    /// <summary>
+    /// Creates a new Revit push button for a command type.
+    /// </summary>
     private PushButtonData NewPushButtonData<T>(
-        string text = null,
-        string iconName = null,
+        string text = "",
+        string iconName = "",
         string longDescription = "",
         string toolTip = ""
     )
@@ -158,168 +221,167 @@ internal sealed class CommandRegister(UIControlledApplication uicapp)
             LongDescription = longDescription,
             ToolTip = toolTip,
         };
-        Log.Info($"Add Command to PushButtonData: {cls.FullName}");
+
+        Log.Debug($"Created PushButtonData for command: {cls.FullName}");
         return pbd;
     }
 
+    /// <summary>
+    /// Registers all Mason commands under their respective tabs and panels.
+    /// </summary>
     public void Register()
     {
-        Log.Info("Start register.");
+        Log.Info("=== Begin Command Registration ===");
         RegisterCommand();
         RegisterClashAndJoin();
-        Log.Info("Finish register.");
+        Log.Info("=== Command Registration Complete ===");
     }
+
+    #region Command Categories
 
     private void RegisterCommand()
     {
         const string tabName = "Mason";
+        Log.Debug($"Registering general commands under tab: {tabName}");
 
         #region Structure
         {
-            RibbonPanel ribbonPanel = AddRibbonPanel(tabName, "Structure");
-
-            ribbonPanel.AddItem(
+            RibbonPanel panel = AddRibbonPanel(tabName, "Structure");
+            panel.AddItem(
                 NewPushButtonData<DisallowJoinBeam>(
-                    text: "Disallow\nJoin Beam",
+                    "Disallow\nJoin Beam",
                     longDescription: "Sets the indicated end of the framing element to not be allowed to join to others."
                 )
             );
-            ribbonPanel.AddItem(
+            panel.AddItem(
                 NewPushButtonData<FlipBeam>(
-                    text: "Flip\nBeam",
+                    "Flip\nBeam",
                     longDescription: "Flip ends order of beam element."
                 )
             );
         }
-        #endregion Structure
+        #endregion
 
         #region MEP
         {
-            RibbonPanel ribbonPanel = AddRibbonPanel(tabName, "MEP");
-
-            ribbonPanel.AddItem(
+            RibbonPanel panel = AddRibbonPanel(tabName, "MEP");
+            panel.AddItem(
                 NewPushButtonData<FlipPipe>(
-                    text: "Flip\nPipe",
+                    "Flip\nPipe",
                     longDescription: "Flip ends order of pipe element."
                 )
             );
         }
-        #endregion MEP
+        #endregion
 
         #region Misc
         {
-            RibbonPanel ribbonPanel = AddRibbonPanel(tabName, "Misc");
-
-            ribbonPanel.AddItem(
+            RibbonPanel panel = AddRibbonPanel(tabName, "Misc");
+            panel.AddItem(
                 NewPushButtonData<ResetGraphicsOverride>(
-                    text: "Reset\nGraphics",
+                    "Reset\nGraphics",
                     longDescription: "Set graphics override to default."
                 )
             );
-            ribbonPanel.AddItem(
+            panel.AddItem(
                 NewPushButtonData<ExportWorksetsNWC>(
-                    text: "Export\nWorksets NWC",
+                    "Export\nWorksets NWC",
                     iconName: "navisworks",
-                    toolTip: "Export NWC of each worksets in current 3D view."
+                    toolTip: "Export NWC of each workset in current 3D view."
                 )
             );
-            ribbonPanel.AddItem(
+            panel.AddItem(
                 NewPushButtonData<CreateWorksetView>(
-                    text: "Create\nWorksets View",
-                    toolTip: "Create Views for each Workset."
+                    "Create\nWorksets View",
+                    toolTip: "Create views for each Workset."
                 )
             );
-            ribbonPanel.AddItem(
+            panel.AddItem(
                 NewPushButtonData<ClearCAD>(
-                    text: "Clear\nCAD",
+                    "Clear\nCAD",
                     longDescription: "Clear CAD files in current document."
                 )
             );
         }
-        #endregion Misc
+        #endregion
 
         #region DevTool
         {
-            RibbonPanel ribbonPanel = AddRibbonPanel(tabName, "DevTool");
-
-            ribbonPanel.AddItem(
-                NewPushButtonData<Command.DevTool.HelloWorld>(text: "Hello\nWorld")
-            );
-            ribbonPanel.AddItem(
+            RibbonPanel panel = AddRibbonPanel(tabName, "DevTool");
+            panel.AddItem(NewPushButtonData<Command.DevTool.HelloWorld>("Hello\nWorld"));
+            panel.AddItem(
                 NewPushButtonData<Command.DevTool.ThrowError>(
-                    text: "Throw\nError",
-                    longDescription: "Throw a error for test."
+                    "Throw\nError",
+                    longDescription: "Throw a test error."
                 )
             );
-            ribbonPanel.AddItem(
+            panel.AddItem(
                 NewPushButtonData<Command.DevTool.OpenLog>(
-                    text: "Open\nLog",
+                    "Open\nLog",
                     iconName: "log",
                     longDescription: "Open log file."
                 )
             );
-            ribbonPanel.AddItem(
+            panel.AddItem(
                 NewPushButtonData<Command.DevTool.OpenRevitAPI>(
-                    text: "Open\nRevit API",
+                    "Open\nRevit API",
                     iconName: "revit",
-                    longDescription: "Open Revit API in browser."
+                    longDescription: "Open Revit API documentation in browser."
                 )
             );
         }
-        #endregion DevTool
+        #endregion
     }
 
     private void RegisterClashAndJoin()
     {
-        #region Self Clash&Join
+        Log.Debug("Registering Clash & Join commands...");
 
+        #region Self Clash&Join
         {
-            RibbonPanel ribbonPanel = AddRibbonPanel("Clash&Join", "Self Clash&Join");
-            ribbonPanel.AddItem(NewPushButtonData<SelfClashDetection>(text: "Clash\nDetection"));
-            ribbonPanel.AddItem(NewPushButtonData<SelfJoin>(text: "Join\nElements"));
-            ribbonPanel.AddItem(NewPushButtonData<SelfUnjoin>(text: "Unjoin\nElements"));
-            ribbonPanel.AddItem(NewPushButtonData<SelfJoinWallOpening>(text: "Join\nWall Opening"));
+            RibbonPanel panel = AddRibbonPanel("Clash&Join", "Self Clash&Join");
+            panel.AddItem(NewPushButtonData<SelfClashDetection>("Clash\nDetection"));
+            panel.AddItem(NewPushButtonData<SelfJoin>("Join\nElements"));
+            panel.AddItem(NewPushButtonData<SelfUnjoin>("Unjoin\nElements"));
+            panel.AddItem(NewPushButtonData<SelfJoinWallOpening>("Join\nWall Opening"));
         }
-        #endregion Self Clash&Join
+        #endregion
 
         #region Group Clash&Join
         {
-            RibbonPanel ribbonPanel = AddRibbonPanel("Clash&Join", "Group Clash&Join");
+            RibbonPanel panel = AddRibbonPanel("Clash&Join", "Group Clash&Join");
 
-            ribbonPanel.AddItem(NewPushButtonData<GroupClashDetection>(text: "Clash\nDetection"));
-            ribbonPanel.AddItem(NewPushButtonData<GroupJoin>(text: "Join\nElements"));
-            ribbonPanel.AddItem(NewPushButtonData<GroupUnjoin>(text: "Union\nElements"));
-            ribbonPanel.AddItem(NewPushButtonData<GroupSwitchJoin>(text: "Switch\nJoin"));
+            panel.AddItem(NewPushButtonData<GroupClashDetection>("Clash\nDetection"));
+            panel.AddItem(NewPushButtonData<GroupJoin>("Join\nElements"));
+            panel.AddItem(NewPushButtonData<GroupUnjoin>("Union\nElements"));
+            panel.AddItem(NewPushButtonData<GroupSwitchJoin>("Switch\nJoin"));
 
-            SplitButtonData spbd1 = new("SplitButtonSelectJoinGroup1", "Group1");
-            SplitButton spb1 = ribbonPanel.AddItem(spbd1) as SplitButton;
-            Log.Info("Add SplitButton ClashAndJoin Select1.");
-            spb1.AddPushButton(NewPushButtonData<SelectGroup1>(text: "Select\nGroup 1"));
-            spb1.AddPushButton(NewPushButtonData<AppendGroup1>(text: "Append\nGroup 1"));
-            spb1.AddPushButton(NewPushButtonData<ClearGroup1>(text: "Clear\nGroup 1"));
+            SplitButtonData group1 = new("SplitButtonSelectJoinGroup1", "Group1");
+            SplitButton spb1 = (SplitButton)panel.AddItem(group1);
+            spb1.AddPushButton(NewPushButtonData<SelectGroup1>("Select\nGroup 1"));
+            spb1.AddPushButton(NewPushButtonData<AppendGroup1>("Append\nGroup 1"));
+            spb1.AddPushButton(NewPushButtonData<ClearGroup1>("Clear\nGroup 1"));
             spb1.IsSynchronizedWithCurrentItem = false;
 
-            SplitButtonData spbd2 = new("SplitButtonSelectJoinGroup2", "Group2");
-            SplitButton spb2 = ribbonPanel.AddItem(spbd2) as SplitButton;
-            Log.Info("Add SplitButton ClashAndJoin Select2.");
-            spb2.AddPushButton(NewPushButtonData<SelectGroup2>(text: "Select\nGroup 2"));
-            spb2.AddPushButton(NewPushButtonData<AppendGroup2>(text: "Append\nGroup 2"));
-            spb2.AddPushButton(NewPushButtonData<ClearGroup2>(text: "Clear\nGroup 2"));
+            SplitButtonData group2 = new("SplitButtonSelectJoinGroup2", "Group2");
+            SplitButton spb2 = (SplitButton)panel.AddItem(group2);
+            spb2.AddPushButton(NewPushButtonData<SelectGroup2>("Select\nGroup 2"));
+            spb2.AddPushButton(NewPushButtonData<AppendGroup2>("Append\nGroup 2"));
+            spb2.AddPushButton(NewPushButtonData<ClearGroup2>("Clear\nGroup 2"));
             spb2.IsSynchronizedWithCurrentItem = false;
 
-            ribbonPanel.AddItem(NewPushButtonData<ClearAll>(text: "Clear\nSelection"));
+            panel.AddItem(NewPushButtonData<ClearAll>("Clear\nSelection"));
         }
+        #endregion
 
-        #endregion Group Clash&Join
-
-        #region benchmark
+        #region Benchmark
         {
-            RibbonPanel ribbonPanel = AddRibbonPanel("Clash&Join", "Benchmark");
-            ribbonPanel.AddItem(
-                NewPushButtonData<BenchBoundingBoxIntersect>(text: "BoundingBox\nIntersect")
-            );
-            ribbonPanel.AddItem(NewPushButtonData<BenchClashDetect>(text: "Clash\nDetection"));
+            RibbonPanel panel = AddRibbonPanel("Clash&Join", "Benchmark");
+            panel.AddItem(NewPushButtonData<BenchBoundingBoxIntersect>("BoundingBox\nIntersect"));
+            panel.AddItem(NewPushButtonData<BenchClashDetect>("Clash\nDetection"));
         }
-        #endregion benchmark
+        #endregion
     }
+
+    #endregion
 }
