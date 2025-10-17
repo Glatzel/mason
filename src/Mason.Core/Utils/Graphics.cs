@@ -28,7 +28,9 @@ public static class Graphics
         if (view == null)
         {
             Log.Warn("Failed to reset graphics overrides: no active view found.");
-            throw new InvalidOperationException("No active view found in the current Revit context.");
+            throw new InvalidOperationException(
+                "No active view found in the current Revit context."
+            );
         }
 
         Document doc = view.Document;

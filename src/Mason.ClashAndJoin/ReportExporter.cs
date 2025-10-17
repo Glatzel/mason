@@ -49,12 +49,6 @@ public static class ReportExporter
     {
         string filePath = IO.SelectSaveFile("CSV files (*.csv)|*.csv");
 
-        if (string.IsNullOrEmpty(filePath))
-        {
-            // User cancelled save dialog
-            return;
-        }
-
         using StreamWriter sw = new(
             new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read)
         );

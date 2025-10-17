@@ -28,12 +28,7 @@ public class FlipPipe : Core.AbsCommand
                 .PickObjects(ObjectType.Element)
                 .Select(id => Doc.GetElement(id))
                 .OfType<Pipe>(),
-        ]; // Evaluate once to prevent multiple enumeration
-
-        if (!pipes.Any())
-        {
-            throw new InvalidOperationException("No Pipe elements selected.");
-        }
+        ];
 
         Log.Info($"Selected {pipes.Count()} pipe(s) for flipping.");
 

@@ -56,12 +56,6 @@ public class SelfClashDetection : AbsCommand
                     .IsBoundingBoxIntersect(true)
                     .IsJoined(false)
                     .ClashDetection();
-
-                // Optionally log or handle clash result
-                if (isIntersect)
-                {
-                    Log.Info($"Clash detected between elements {e1.Id} and {e2.Id}.");
-                }
             }
         }
 

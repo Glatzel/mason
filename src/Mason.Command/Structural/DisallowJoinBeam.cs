@@ -27,11 +27,6 @@ public class DisallowJoinBeam : Core.AbsCommand
             .. Selection.PickObjects(ObjectType.Element).Select(r => r.ElementId),
         ];
 
-        if (selectedElements.Count == 0)
-        {
-            throw new InvalidOperationException("No elements selected.");
-        }
-
         // Filter for structural framing elements (beams)
         IEnumerable<FamilyInstance> beams =
         [
@@ -40,11 +35,6 @@ public class DisallowJoinBeam : Core.AbsCommand
                 .WhereElementIsNotElementType()
                 .OfType<FamilyInstance>(),
         ];
-
-        if (!beams.Any())
-        {
-            throw new InvalidOperationException("No beams selected.");
-        }
 
         Log.Info($"Selected {beams.Count()} beam(s) to disallow joins.");
 

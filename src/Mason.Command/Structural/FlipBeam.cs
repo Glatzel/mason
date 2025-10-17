@@ -44,11 +44,6 @@ public class FlipBeam : Core.AbsCommand
                 .Where(StructuralFramingUtils.CanFlipEnds),
         ]; // Evaluate once
 
-        if (!beams.Any())
-        {
-            throw new InvalidOperationException("No beams that can be flipped were selected.");
-        }
-
         Log.Info($"Selected {beams.Count()} beam(s) for flipping.");
 
         // Flip ends of each beam
