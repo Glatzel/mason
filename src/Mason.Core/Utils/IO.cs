@@ -19,25 +19,17 @@ public static class IO
     /// </returns>
     public static string SelectFolder()
     {
-        try
-        {
-            using FolderBrowserDialog folder = new() { Description = "Select a folder" };
+        using FolderBrowserDialog folder = new() { Description = "Select a folder" };
 
-            DialogResult result = folder.ShowDialog();
-            if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folder.SelectedPath))
-            {
-                Log.Info($"User selected folder: {folder.SelectedPath}");
-                return folder.SelectedPath;
-            }
-
-            Log.Warn("User canceled folder selection or returned an empty path.");
-            return "./";
-        }
-        catch (Exception ex)
+        DialogResult result = folder.ShowDialog();
+        if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folder.SelectedPath))
         {
-            Log.Error(ex, "Exception occurred during folder selection.");
-            return "./";
+            Log.Info($"User selected folder: {folder.SelectedPath}");
+            return folder.SelectedPath;
         }
+
+        Log.Warn("User canceled folder selection or returned an empty path.");
+        return "./";
     }
 
     /// <summary>
@@ -49,33 +41,25 @@ public static class IO
     /// </returns>
     public static string SelectOpenFile(string filter = null)
     {
-        try
+        Log.Debug($"OpenFileDialog filter: {filter}");
+        using OpenFileDialog dialog = new()
         {
-            Log.Debug($"OpenFileDialog filter: {filter}");
-            using OpenFileDialog dialog = new()
-            {
-                Filter = string.IsNullOrWhiteSpace(filter) ? "All files (*.*)|*.*" : filter,
-                CheckFileExists = true,
-                Multiselect = false,
-                Title = "Select a file to open",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            };
+            Filter = string.IsNullOrWhiteSpace(filter) ? "All files (*.*)|*.*" : filter,
+            CheckFileExists = true,
+            Multiselect = false,
+            Title = "Select a file to open",
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+        };
 
-            DialogResult result = dialog.ShowDialog();
-            if (result == DialogResult.OK && File.Exists(dialog.FileName))
-            {
-                Log.Info($"User selected file to open: {dialog.FileName}");
-                return dialog.FileName;
-            }
-
-            Log.Warn("User canceled file open dialog or selected invalid file.");
-            return null;
-        }
-        catch (Exception ex)
+        DialogResult result = dialog.ShowDialog();
+        if (result == DialogResult.OK && File.Exists(dialog.FileName))
         {
-            Log.Error(ex, "Exception occurred during file open dialog.");
-            return null;
+            Log.Info($"User selected file to open: {dialog.FileName}");
+            return dialog.FileName;
         }
+
+        Log.Warn("User canceled file open dialog or selected invalid file.");
+        return null;
     }
 
     /// <summary>
@@ -87,31 +71,23 @@ public static class IO
     /// </returns>
     public static string SelectSaveFile(string filter = null)
     {
-        try
+        Log.Debug($"SaveFileDialog filter: {filter}");
+        using SaveFileDialog dialog = new()
         {
-            Log.Debug($"SaveFileDialog filter: {filter}");
-            using SaveFileDialog dialog = new()
-            {
-                Filter = string.IsNullOrWhiteSpace(filter) ? "All files (*.*)|*.*" : filter,
-                OverwritePrompt = true,
-                Title = "Select a file to save",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            };
+            Filter = string.IsNullOrWhiteSpace(filter) ? "All files (*.*)|*.*" : filter,
+            OverwritePrompt = true,
+            Title = "Select a file to save",
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+        };
 
-            DialogResult result = dialog.ShowDialog();
-            if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.FileName))
-            {
-                Log.Info($"User selected file to save: {dialog.FileName}");
-                return dialog.FileName;
-            }
-
-            Log.Warn("User canceled save file dialog or returned an empty path.");
-            return null;
-        }
-        catch (Exception ex)
+        DialogResult result = dialog.ShowDialog();
+        if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.FileName))
         {
-            Log.Error(ex, "Exception occurred during save file dialog.");
-            return null;
+            Log.Info($"User selected file to save: {dialog.FileName}");
+            return dialog.FileName;
         }
+
+        Log.Warn("User canceled save file dialog or returned an empty path.");
+        return null;
     }
 }

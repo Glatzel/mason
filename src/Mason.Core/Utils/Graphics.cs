@@ -38,44 +38,21 @@ public static class Graphics
             return;
         }
 
-        try
-        {
-            Transaction tx = null;
 
-            if (doc.IsModifiable)
-            {
-                // Already in a transaction, just proceed
-                OverrideGraphicSettings defaultGraphicSettings = new();
-                foreach (ElementId id in ids)
-                {
-                    view.SetElementOverrides(id, defaultGraphicSettings);
-                    Log.Trace($"Reset graphic override for element ID: {id.IntegerValue}");
-                }
-                Log.Info($"Reset {ids.Length} graphic overrides in active view \"{view.Name}\".");
-            }
-            else
-            {
-                // Not in a transaction, create one
-                tx = new Transaction(doc, "Reset Graphics Override");
-                tx.Start();
+
+
 
                 OverrideGraphicSettings defaultGraphicSettings = new();
                 foreach (ElementId id in ids)
                 {
                     view.SetElementOverrides(id, defaultGraphicSettings);
-                    Log.Trace($"Reset graphic override for element ID: {id.IntegerValue}");
+
                 }
 
-                tx.Commit();
+
                 Log.Info($"Reset {ids.Length} graphic overrides in active view \"{view.Name}\".");
             }
-        }
-        catch (Exception ex)
-        {
-            Log.Error(
-                ex,
-                $"Exception occurred while resetting graphics overrides in view \"{view.Name}\"."
-            );
-        }
+
+
     }
 }
