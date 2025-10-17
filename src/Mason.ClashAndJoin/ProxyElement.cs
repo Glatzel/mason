@@ -105,7 +105,7 @@ internal sealed class ProxyElement : IDisposable, IEquatable<ProxyElement>
 
     public bool Equals(ProxyElement other)
     {
-        if (ReferenceEquals(null, other))
+        if (other is null)
             return false;
         if (ReferenceEquals(this, other))
             return true;
@@ -121,7 +121,7 @@ internal sealed class ProxyElement : IDisposable, IEquatable<ProxyElement>
     {
         if (ReferenceEquals(left, right))
             return true;
-        if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+        if (left is null || right is null)
             return false;
         return left.Equals(right);
     }
