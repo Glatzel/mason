@@ -4,7 +4,6 @@ name: upload-prefix
 
 on:
   workflow_dispatch:
-
   release:
     types: [released]
 
