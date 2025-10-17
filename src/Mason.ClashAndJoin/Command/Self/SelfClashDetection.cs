@@ -38,9 +38,9 @@ namespace Mason.ClashAndJoin.Command.Self
             // Initialize filters for all elements
             elements.ForEach(e =>
             {
-        
+
                     e.InitFilter();
-                
+
 
             });
 
