@@ -505,6 +505,6 @@ public class TestVec3
     {
         Vec3 u = new(1, 2, 3);
         Assert.Equal("Vec3<1, 2, 3>", u.ToString());
-Assert.Equal("Vec3<1, 2, 3>", u.ToString("G"));
+        Assert.Equal("Vec3<1, 2, 3>", u.ToString("G"));
     }
 }
