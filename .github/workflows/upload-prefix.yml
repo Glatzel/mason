@@ -41,4 +41,3 @@ jobs:
             rattler-build upload prefix -c glatzel $pkg_file
             Write-Output "::endgroup::"
           }
-
