@@ -1,7 +1,7 @@
 # This File is automatically synchronized from https://github.com/Glatzel/template
 
 [workspace]
-channels = ["https://repo.prefix.dev/glatzel", "conda-forge"]
+channels = ["https://prefix.dev/glatzel", "conda-forge"]
 platforms = ["linux-64", "win-64"]
 
 [tasks]
@@ -22,11 +22,11 @@ hook-typos = "cd ..;typos --force-exclude"
 [dependencies]
 actionlint = "==1.7.8"
 cargo-machete = "==0.9.1"
-lefthook = "==1.13.6"
+lefthook = "==2.0.1"
 markdownlint-cli2 = "==0.18.1"
 numpydoc = "==1.9.0"
 pre-commit-hooks = "==5.0.0"
 python = "3.11.*"
-ruff = "==0.14.0"
+ruff = "==0.14.2"
 taplo = "==0.10.0"
 typos = "==1.38.1"
