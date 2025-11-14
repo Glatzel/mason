@@ -36,7 +36,7 @@
   </ItemGroup>
   <!--analyser-->
   <ItemGroup>
-    <PackageReference Include="CSharpier.MsBuild" Version="1.1.2">
+    <PackageReference Include="CSharpier.MsBuild" Version="1.2.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
