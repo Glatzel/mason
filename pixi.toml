@@ -4,4 +4,4 @@ platforms = ["win-64"]
 version = "0.1.0"
 
 [dependencies]
-rattler-build = "==0.49.0"
+rattler-build = "==0.53.0"
