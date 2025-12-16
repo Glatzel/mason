@@ -1,8 +1,10 @@
-using Autodesk.Revit.UI;
-using Mason.Core.Utils;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+
+using Autodesk.Revit.UI;
+
+using Mason.Core.Utils;
 
 namespace Mason.ClashAndJoin;
 

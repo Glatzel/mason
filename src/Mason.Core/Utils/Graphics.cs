@@ -1,5 +1,6 @@
-﻿using Autodesk.Revit.DB;
-using System;
+﻿using System;
+
+using Autodesk.Revit.DB;
 
 namespace Mason.Core.Utils;
 

@@ -1,5 +1,6 @@
-using Mason.Core;
 using System.Collections.Generic;
+
+using Mason.Core;
 
 namespace Mason.ClashAndJoin.Command.Self;
 
