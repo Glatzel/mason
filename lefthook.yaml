@@ -67,16 +67,18 @@ pre-commit:
               - changelog.md
               - CHANGELOG.md
             glob: "**/*.md"
-            run: pixi {run} hook-markdown {all_files}
+            run: pixi {run} hook-markdown {staged_files}
 
     - name: csharp
       stage_fixed: true
       exclude:
         - "**/external/**"
+      glob: "**/*.csproj"
       group:
         jobs:
+          - name: dotnet format
+            run: dotnet format
           - name: csharpier
-            glob: "**/*.csproj"
             run: pixi {run} hook-csharpier {staged_files}
 
     - name: python
