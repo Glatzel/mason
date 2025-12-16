@@ -5,14 +5,14 @@ channels = ["https://prefix.dev/glatzel", "conda-forge"]
 platforms = ["linux-64", "win-64"]
 
 [tasks]
-lefthook-run = "lefthook run pre-commit --all-files --force"
+lefthook-run = "lefthook run pre-commit --all-files --no-auto-install"
 
-hook-actionlint = "pwsh -f ./actionlint.ps1"
+hook-actionlint = "cd ..;actionlint"
 hook-cargo-clippy = "pwsh -f ./cargo-clippy.ps1"
 hook-cargo-fmt = "pwsh -f ./cargo-fmt.ps1"
 hook-cargo-machete = "pwsh -f ./cargo-machete.ps1"
-hook-csharpier = "pwsh -f ./csharpier.ps1"
-hook-markdown = "pwsh -f ./markdown.ps1"
+hook-csharpier = "cd ..; dotnet tool install -g csharpier; csharpier format .; csharpier check ."
+hook-markdown = "cd ..;markdownlint-cli2 --fix"
 hook-numpydoc = "pwsh -f ./numpydoc.ps1"
 hook-ruff-format = "cd ..;ruff format --force-exclude --exit-non-zero-on-format"
 hook-ruff-lint = "cd ..;ruff check --fix --show-fixes --exit-non-zero-on-fix --force-exclude"
@@ -22,7 +22,7 @@ hook-typos = "cd ..;typos --force-exclude"
 [dependencies]
 actionlint = "==1.7.9"
 cargo-machete = "==0.9.1"
-lefthook = "==2.0.11"
+lefthook = "==2.0.12"
 markdownlint-cli2 = "==0.20.0"
 numpydoc = "==1.10.0"
 pre-commit-hooks = "==5.0.0"
