@@ -1,5 +1,5 @@
-using System;
 using NLog;
+using System;
 
 namespace Mason.Command.DevTool;
 

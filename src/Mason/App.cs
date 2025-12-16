@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI;
 using Mason.ClashAndJoin.Command.Bench;
 using Mason.ClashAndJoin.Command.Group;
@@ -12,6 +6,12 @@ using Mason.Command.MEP;
 using Mason.Command.Misc;
 using Mason.Command.Structural;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Windows.Media.Imaging;
 
 namespace Mason
 {

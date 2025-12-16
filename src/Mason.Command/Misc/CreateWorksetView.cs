@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Mason.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mason.Command.Misc;
 

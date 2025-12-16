@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.DB;
 using Mason.Core;
+using System.Collections.Generic;
 
 namespace Mason.OTLS.Selection;
 

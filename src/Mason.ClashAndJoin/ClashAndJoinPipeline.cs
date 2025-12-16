@@ -1,6 +1,6 @@
-﻿using System;
-using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.DB;
 using Mason.Geometry;
+using System;
 
 namespace Mason.ClashAndJoin;
 
