@@ -1,5 +1,0 @@
-# This File is automatically synchronized from https://github.com/Glatzel/template
-
-if (-not $args -or $IsWindows) { exit 0 }
-. $PSScriptRoot/setup.ps1
-markdownlint-cli2 --fix $args
