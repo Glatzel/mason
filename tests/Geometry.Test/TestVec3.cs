@@ -1,5 +1,4 @@
 using Mason.Geometry;
-
 using static System.Math;
 
 namespace Geometry.Test;
