@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+
 using Autodesk.Revit.DB;
+
 using Mason.Core;
 
 namespace Mason.OTLS.Selection;
