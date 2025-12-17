@@ -1,39 +1,39 @@
 <Solution>
-  <Configurations>
-    <BuildType Name="Release" />
-    <Platform Name="x64" />
-    <BuildType Name="Debug" />
-  </Configurations>
-  <Folder Name="/src/">
-    <Project Path="src\Mason\Mason.csproj">
-      <Platform Project="x64" />
-      <BuildType Solution="Debug|*" Project="Debug" />
-    </Project>
-    <Project Path="src\Mason.ClashAndJoin\Mason.ClashAndJoin.csproj">
-      <Platform Project="x64" />
-      <BuildType Solution="Debug|*" Project="Debug" />
-    </Project>
-    <Project Path="src\Mason.Command\Mason.Command.csproj">
-      <Platform Project="x64" />
-      <BuildType Solution="Debug|*" Project="Debug" />
-    </Project>
-    <Project Path="src\Mason.Core\Mason.Core.csproj">
-      <Platform Project="x64" />
-      <BuildType Solution="Debug|*" Project="Debug" />
-    </Project>
-    <Project Path="src\Mason.Geometry/Mason.Geometry.csproj">
-      <BuildType Solution="Debug|*" Project="Debug" />
-      <Platform Project="x64" />
-    </Project>
-    <Project Path="src\Mason.OTLS\Mason.OTLS.csproj">
-      <Platform Project="x64" />
-      <BuildType Solution="Debug|*" Project="Debug" />
-    </Project>
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests\Geometry.Test\Geometry.Test.csproj">
-      <Platform Project="x64" />
-      <BuildType Solution="Debug|*" Project="Debug" />
-    </Project>
-  </Folder>
+    <Configurations>
+        <BuildType Name="Release" />
+        <Platform Name="x64" />
+        <BuildType Name="Debug" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src\Mason\Mason.csproj">
+            <Platform Project="x64" />
+            <BuildType Solution="Debug|*" Project="Debug" />
+        </Project>
+        <Project Path="src\Mason.ClashAndJoin\Mason.ClashAndJoin.csproj">
+            <Platform Project="x64" />
+            <BuildType Solution="Debug|*" Project="Debug" />
+        </Project>
+        <Project Path="src\Mason.Command\Mason.Command.csproj">
+            <Platform Project="x64" />
+            <BuildType Solution="Debug|*" Project="Debug" />
+        </Project>
+        <Project Path="src\Mason.Core\Mason.Core.csproj">
+            <Platform Project="x64" />
+            <BuildType Solution="Debug|*" Project="Debug" />
+        </Project>
+        <Project Path="src\Mason.Geometry/Mason.Geometry.csproj">
+            <BuildType Solution="Debug|*" Project="Debug" />
+            <Platform Project="x64" />
+        </Project>
+        <Project Path="src\Mason.OTLS\Mason.OTLS.csproj">
+            <Platform Project="x64" />
+            <BuildType Solution="Debug|*" Project="Debug" />
+        </Project>
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests\Geometry.Test\Geometry.Test.csproj">
+            <Platform Project="x64" />
+            <BuildType Solution="Debug|*" Project="Debug" />
+        </Project>
+    </Folder>
 </Solution>

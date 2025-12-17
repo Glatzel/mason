@@ -53,21 +53,23 @@ pre-commit:
         jobs:
           - name: taplo
             glob: "**/*.toml"
-            run: pixi {run} hook-taplo {staged_files}
+            env:
+              RUST_LOG: warn
+            run: taplo format -o 'reorder_keys=true'
 
           - name: actionlint
             glob: ".github/workflows/*.yml"
-            run: pixi {run} hook-actionlint {staged_files}
+            run: actionlint {staged_files}
 
           - name: typos
-            run: pixi {run} hook-typos {staged_files}
+            run: typos --force-exclude {staged_files}
 
           - name: markdown
             exclude:
               - changelog.md
               - CHANGELOG.md
             glob: "**/*.md"
-            run: pixi {run} hook-markdown {staged_files}
+            run: markdownlint-cli2 --fix {staged_files}
 
     - name: csharp
       stage_fixed: true
@@ -79,7 +81,7 @@ pre-commit:
           - name: dotnet format
             run: dotnet format
           - name: csharpier
-            run: pixi {run} hook-csharpier {staged_files}
+            run: dotnet tool install -g csharpier; csharpier format .; csharpier check .
 
     - name: python
       glob: "**/*.{py,pyi}"
@@ -89,11 +91,11 @@ pre-commit:
       group:
         jobs:
           - name: ruff lint
-            run: pixi {run} hook-ruff-lint {staged_files}
+            run: ruff check --fix --show-fixes --exit-non-zero-on-fix --force-exclude {staged_files}
           - name: ruff format
-            run: pixi {run} hook-ruff-format {staged_files}
+            run: ruff format --force-exclude --exit-non-zero-on-format {staged_files}
           - name: numpydoc
-            run: pixi {run} hook-numpydoc {staged_files}
+            run: numpydoc lint {staged_files} --ignore ES01 EX01 GL08 PR04 RT03 SA01 SA04
 
     - name: rust
       stage_fixed: true
@@ -105,10 +107,52 @@ pre-commit:
       group:
         jobs:
           - name: cargo-machete
-            run: pixi {run} hook-cargo-machete {staged_files}
+            run: |
+              pwsh -CommandWithArgs '''
+              $PSNativeCommandUseErrorActionPreference = $true;
+              foreach ($file in $args) {
+                  Set-Location (Split-Path (Resolve-Path $file) -Parent)
+                  Write-Output "Cargo machete in: $pwd"
+                  cargo machete
+                  Set-Location $ROOT
+              }''' {staged_files}
 
           - name: cargo-clippy
-            run: pixi {run} hook-cargo-clippy {staged_files}
+            run: |
+              pwsh -CommandWithArgs '''
+              $PSNativeCommandUseErrorActionPreference = $true;
+              $ROOT = git rev-parse --show-toplevel;
+              if ($env:CI) {
+                  rustup toolchain install stable --profile=minimal
+                  rustup component add clippy --toolchain stable
+              }
+              foreach ($file in $args) {
+                  $dir = (Split-Path (Resolve-Path $file) -Parent)
+                  Set-Location $dir
+                  Write-Output "Cargo clippy in: $pwd"
+                  if (Test-Path ./scripts/setup.ps1) {
+                      &./scripts/setup.ps1
+                      Set-Location $dir
+                  }
+                  cargo +stable clippy --fix --all-features --quiet
+                  cargo +stable clippy --all-features --quiet -- -Dwarnings
+                  Set-Location $ROOT
+              }
+              ''' {staged_files}
 
           - name: cargo-fmt
-            run: pixi {run} hook-cargo-fmt {staged_files}
+            run: |
+              pwsh -CommandWithArgs '''
+              $PSNativeCommandUseErrorActionPreference = $true;
+              $ROOT = git rev-parse --show-toplevel;
+              if ($env:CI) {
+                  rustup toolchain install nightly --profile=minimal
+                  rustup component add rustfmt --toolchain nightly
+              }
+              foreach ($file in $args) {
+                  Set-Location (Split-Path (Resolve-Path $file) -Parent)
+                  Write-Output "Cargo fmt in: $pwd"
+                  cargo +nightly fmt --all --quiet
+                  Set-Location $ROOT
+              }
+              ''' {staged_files}

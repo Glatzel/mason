@@ -1,4 +1,4 @@
-﻿namespace Mason.Geometry;
+namespace Mason.Geometry;
 
 /// <summary>
 /// Represents a 3D Cartesian axis.

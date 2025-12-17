@@ -1,4 +1,4 @@
-﻿using Mason.Geometry;
+using Mason.Geometry;
 
 namespace Geometry.Test;
 
