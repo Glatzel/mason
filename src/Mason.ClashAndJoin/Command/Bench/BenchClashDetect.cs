@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-
 using Mason.Core;
 
 namespace Mason.ClashAndJoin.Command.Bench;
