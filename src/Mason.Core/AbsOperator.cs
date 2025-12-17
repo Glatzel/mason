@@ -1,4 +1,4 @@
-﻿namespace Mason.Core;
+namespace Mason.Core;
 
 /// <summary>
 /// Defines a Revit operator that performs a unit of work.

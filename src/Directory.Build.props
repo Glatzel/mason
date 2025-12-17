@@ -1,19 +1,19 @@
 ﻿<Project>
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <IntermediateOutputPath>$(SolutionDir)obj/$(MSBuildProjectName)/revit$(RevitVersion)/</IntermediateOutputPath>
-    <MSBuildProjectExtensionsPath>$(SolutionDir)obj/$(MSBuildProjectName)/revit$(RevitVersion)/</MSBuildProjectExtensionsPath>
-    <OutputPath>$(SolutionDir)bin/$(MSBuildProjectName)/revit$(RevitVersion)/</OutputPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*">
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </PackageReference>
-    <PackageReference Include="ZLinq" Version="1.5.4" />
-  </ItemGroup>
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+    <PropertyGroup>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <IntermediateOutputPath>$(SolutionDir)obj/$(MSBuildProjectName)/revit$(RevitVersion)/</IntermediateOutputPath>
+        <MSBuildProjectExtensionsPath>$(SolutionDir)obj/$(MSBuildProjectName)/revit$(RevitVersion)/</MSBuildProjectExtensionsPath>
+        <OutputPath>$(SolutionDir)bin/$(MSBuildProjectName)/revit$(RevitVersion)/</OutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*">
+            <ExcludeAssets>runtime</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="ZLinq" Version="1.5.4" />
+    </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <AssemblyName>Mason.Core</AssemblyName>
-    <RootNamespace>Mason.Core</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <AssemblyName>Mason.Core</AssemblyName>
+        <RootNamespace>Mason.Core</RootNamespace>
+    </PropertyGroup>
 </Project>

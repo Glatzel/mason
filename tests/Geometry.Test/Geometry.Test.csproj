@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <RootNamespace>Geometry.Test</RootNamespace>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Mason.Geometry\Mason.Geometry.csproj" />
-  </ItemGroup>
+    <PropertyGroup>
+        <RootNamespace>Geometry.Test</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Mason.Geometry\Mason.Geometry.csproj" />
+    </ItemGroup>
 </Project>
