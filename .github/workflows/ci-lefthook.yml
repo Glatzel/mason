@@ -27,7 +27,7 @@ jobs:
         with:
           path: |
             ./lefthook/.pixi
-          key: lefthook-${{ hashFiles('lefthook.yaml','./lefthook/*.*')}}
+          key: lefthook-${{ hashFiles('lefthook.yaml','./lefthook/pixi*')}}
           restore-keys: |
             lefthook
 
