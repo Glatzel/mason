@@ -7,7 +7,6 @@
         <UseWindowsForms>true</UseWindowsForms>
         <UseWPF>true</UseWPF>
         <AnalysisLevel>latest-Recommended</AnalysisLevel>
-        <CSharpier_LogLevel>Warning</CSharpier_LogLevel>
         <Configurations>Release;Debug</Configurations>
         <RevitVersion Condition="'$(RevitVersion)'==''">2020</RevitVersion>
     </PropertyGroup>
@@ -54,3 +53,4 @@
         </PackageReference>
     </ItemGroup>
 </Project>
+
