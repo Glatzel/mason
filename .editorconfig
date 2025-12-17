@@ -1,4 +1,4 @@
-# # This File is automatically synchronized from https://github.com/Glatzel/template
+﻿# This File is automatically synchronized from https://github.com/Glatzel/template
 root = true
 
 [*]
@@ -15,6 +15,11 @@ indent_style = space
 indent_size = 2
 
 [*.cs]
+
+##########
+# General .NET settings
+##########
+
 dotnet_hide_advanced_members = true
 dotnet_member_insertion_location = with_other_members_of_the_same_kind
 dotnet_property_generation_behavior = prefer_throwing_properties
@@ -23,91 +28,158 @@ dotnet_separate_import_directive_groups = true
 dotnet_sort_system_directives_first = true
 file_header_template = unset
 
-dotnet_style_qualification_for_event = true
-dotnet_style_qualification_for_field = true
-dotnet_style_qualification_for_method = true
-dotnet_style_qualification_for_property = true
-dotnet_style_predefined_type_for_locals_parameters_members = true
-dotnet_style_predefined_type_for_member_access = true
-dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity
-dotnet_style_parentheses_in_other_binary_operators = always_for_clarity
-dotnet_style_parentheses_in_other_operators = always_for_clarity
-dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity
-dotnet_style_require_accessibility_modifiers = always
-dotnet_prefer_system_hash_code = true
-dotnet_style_coalesce_expression = true
-dotnet_style_collection_initializer = true
-dotnet_style_explicit_tuple_names = true
-dotnet_style_namespace_match_folder = true
-dotnet_style_null_propagation = true
-dotnet_style_object_initializer = true
-dotnet_style_operator_placement_when_wrapping = beginning_of_line
-dotnet_style_prefer_auto_properties = true
-dotnet_style_prefer_collection_expression = true
-dotnet_style_prefer_compound_assignment = true
-dotnet_style_prefer_conditional_expression_over_assignment = true
-dotnet_style_prefer_conditional_expression_over_return = true
-dotnet_style_prefer_foreach_explicit_cast_in_source = always
-dotnet_style_prefer_inferred_anonymous_type_member_names = true
-dotnet_style_prefer_inferred_tuple_names = true
-dotnet_style_prefer_is_null_check_over_reference_equality_method = true
-dotnet_style_prefer_simplified_boolean_expressions = true
-dotnet_style_prefer_simplified_interpolation = true
-dotnet_style_readonly_field = true
-dotnet_code_quality_unused_parameters = all
-dotnet_remove_unnecessary_suppression_exclusions = none
-dotnet_style_allow_multiple_blank_lines_experimental = false
-dotnet_style_allow_statement_immediately_after_block_experimental = true
 
-csharp_style_var_elsewhere = true
-csharp_style_var_for_built_in_types = true
-csharp_style_var_when_type_is_apparent = true
-csharp_style_expression_bodied_accessors = true
-csharp_style_expression_bodied_constructors = true
-csharp_style_expression_bodied_indexers = true
-csharp_style_expression_bodied_lambdas = true
-csharp_style_expression_bodied_local_functions = true
-csharp_style_expression_bodied_methods = true
-csharp_style_expression_bodied_operators = true
-csharp_style_expression_bodied_properties = true
-csharp_style_pattern_matching_over_as_with_null_check = true
-csharp_style_pattern_matching_over_is_with_cast_check = true
-csharp_style_prefer_extended_property_pattern = true
-csharp_style_prefer_not_pattern = true
-csharp_style_prefer_pattern_matching = true
-csharp_style_prefer_switch_expression = true
-csharp_style_conditional_delegate_call = true
-csharp_prefer_static_anonymous_function = true
-csharp_prefer_static_local_function = true
-csharp_preferred_modifier_order = public,internal,private,protected,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async
-csharp_style_prefer_readonly_struct = true
-csharp_style_prefer_readonly_struct_member = true
-csharp_prefer_braces = true
-csharp_prefer_simple_using_statement = true
-csharp_prefer_system_threading_lock = true
-csharp_style_namespace_declarations = file_scoped
-csharp_style_prefer_method_group_conversion = true
-csharp_style_prefer_primary_constructors = true
-csharp_style_prefer_top_level_statements = true
-csharp_prefer_simple_default_expression = true
-csharp_style_deconstructed_variable_declaration = true
-csharp_style_implicit_object_creation_when_type_is_apparent = true
-csharp_style_inlined_variable_declaration = true
-csharp_style_prefer_index_operator = true
-csharp_style_prefer_local_over_anonymous_function = true
-csharp_style_prefer_null_check_over_type_check = true
-csharp_style_prefer_range_operator = true
-csharp_style_prefer_tuple_swap = true
-csharp_style_prefer_utf8_string_literals = true
-csharp_style_throw_expression = true
-csharp_style_unused_value_assignment_preference = discard_variable
-csharp_style_unused_value_expression_statement_preference = discard_variable
+##########
+# Qualification
+##########
+
+dotnet_style_qualification_for_event = true:warn
+dotnet_style_qualification_for_field = true:warn
+dotnet_style_qualification_for_method = true:warn
+dotnet_style_qualification_for_property = true:warn
+
+
+##########
+# Type usage
+##########
+
+dotnet_style_predefined_type_for_locals_parameters_members = true:warn
+dotnet_style_predefined_type_for_member_access = true:warn
+
+
+##########
+# Parentheses
+##########
+
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:warn
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:warn
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:warn
+dotnet_style_parentheses_in_other_operators = always_for_clarity:warn
+
+
+##########
+# Modifiers / structure (ENFORCED)
+##########
+
+dotnet_style_require_accessibility_modifiers = always:warn
+dotnet_style_readonly_field = true:warn
+dotnet_code_quality_unused_parameters = all:warn
+dotnet_remove_unnecessary_suppression_exclusions = none
+
+
+##########
+# Expression / language preferences
+##########
+
+dotnet_style_coalesce_expression = true:warn
+dotnet_style_collection_initializer = true:warn
+dotnet_style_explicit_tuple_names = true:warn
+dotnet_style_namespace_match_folder = true:warn
+dotnet_style_null_propagation = true:warn
+dotnet_style_object_initializer = true:warn
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+dotnet_style_prefer_auto_properties = true:warn
+dotnet_style_prefer_collection_expression = true:warn
+dotnet_style_prefer_compound_assignment = true:warn
+dotnet_style_prefer_conditional_expression_over_assignment = true:warn
+dotnet_style_prefer_conditional_expression_over_return = true:warn
+dotnet_style_prefer_foreach_explicit_cast_in_source = always:warn
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:warn
+dotnet_style_prefer_inferred_tuple_names = true:warn
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warn
+dotnet_style_prefer_simplified_boolean_expressions = true:warn
+dotnet_style_prefer_simplified_interpolation = true:warn
+dotnet_prefer_system_hash_code = true:warn
+
+
+##########
+# C# var preferences
+##########
+
+csharp_style_var_elsewhere = true:warn
+csharp_style_var_for_built_in_types = true:warn
+csharp_style_var_when_type_is_apparent = true:warn
+
+
+##########
+# Expression-bodied members
+##########
+
+csharp_style_expression_bodied_accessors = true:warn
+csharp_style_expression_bodied_constructors = true:warn
+csharp_style_expression_bodied_indexers = true:warn
+csharp_style_expression_bodied_lambdas = true:warn
+csharp_style_expression_bodied_local_functions = true:warn
+csharp_style_expression_bodied_methods = true:warn
+csharp_style_expression_bodied_operators = true:warn
+csharp_style_expression_bodied_properties = true:warn
+
+
+##########
+# Pattern matching / modern C#
+##########
+
+csharp_style_pattern_matching_over_as_with_null_check = true:warn
+csharp_style_pattern_matching_over_is_with_cast_check = true:warn
+csharp_style_prefer_extended_property_pattern = true:warn
+csharp_style_prefer_not_pattern = true:warn
+csharp_style_prefer_pattern_matching = true:warn
+csharp_style_prefer_switch_expression = true:warn
+csharp_style_conditional_delegate_call = true:warn
+csharp_prefer_static_anonymous_function = true:warn
+csharp_prefer_static_local_function = true:warn
+
+
+##########
+# Structure / safety (ENFORCED)
+##########
+
+csharp_prefer_braces = true:warn
+csharp_prefer_simple_using_statement = true:warn
+csharp_prefer_system_threading_lock = true:warn
+csharp_style_prefer_readonly_struct = true:warn
+csharp_style_prefer_readonly_struct_member = true:warn
+
+
+##########
+# Modern file structure
+##########
+
+csharp_style_namespace_declarations = file_scoped:warn
+csharp_style_prefer_method_group_conversion = true:warn
+csharp_style_prefer_primary_constructors = true:warn
+csharp_style_prefer_top_level_statements = true:warn
+csharp_prefer_simple_default_expression = true:warn
+
+
+##########
+# Misc modern syntax
+##########
+
+csharp_style_deconstructed_variable_declaration = true:warn
+csharp_style_implicit_object_creation_when_type_is_apparent = true:warn
+csharp_style_inlined_variable_declaration = true:warn
+csharp_style_prefer_index_operator = true:warn
+csharp_style_prefer_local_over_anonymous_function = true:warn
+csharp_style_prefer_null_check_over_type_check = true:warn
+csharp_style_prefer_range_operator = true:warn
+csharp_style_prefer_tuple_swap = true:warn
+csharp_style_prefer_utf8_string_literals = true:warn
+csharp_style_throw_expression = true:warn
+csharp_style_unused_value_assignment_preference = discard_variable:warn
+csharp_style_unused_value_expression_statement_preference = discard_variable:warn
+
+
+##########
+# Using directives
+##########
+
 csharp_using_directive_placement = outside_namespace
-csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true
-csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental = true
-csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental = true
-csharp_style_allow_blank_lines_between_consecutive_braces_experimental = true
-csharp_style_allow_embedded_statements_on_same_line_experimental = true
+
+
+##########
+# Formatting (unchanged, editor-only)
+##########
 
 csharp_new_line_before_catch = true
 csharp_new_line_before_else = true
@@ -116,12 +188,14 @@ csharp_new_line_before_members_in_anonymous_types = true
 csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_open_brace = all
 csharp_new_line_between_query_expression_clauses = true
+
 csharp_indent_block_contents = true
 csharp_indent_braces = false
 csharp_indent_case_contents = true
 csharp_indent_case_contents_when_block = true
 csharp_indent_labels = one_less_than_current
 csharp_indent_switch_labels = true
+
 csharp_space_after_cast = false
 csharp_space_after_colon_in_inheritance_clause = true
 csharp_space_after_comma = true
@@ -144,27 +218,39 @@ csharp_space_between_method_declaration_name_and_open_parenthesis = false
 csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
+
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
 
-dotnet_naming_rule.interface_should_be_begins_with_i.severity = suggestion
+
+##########
+# Naming rules (Microsoft-aligned)
+##########
+
+dotnet_naming_rule.interface_should_be_begins_with_i.severity = warn
 dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
 dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
+
 dotnet_naming_rule.types_should_be_pascal_case.severity = warning
 dotnet_naming_rule.types_should_be_pascal_case.symbols = types
 dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
+
 dotnet_naming_rule.non_field_members_should_be_pascal_case.severity = warning
 dotnet_naming_rule.non_field_members_should_be_pascal_case.symbols = non_field_members
 dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
+
 dotnet_naming_symbols.interface.applicable_kinds = interface
 dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.interface.required_modifiers =
+
 dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
 dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.types.required_modifiers =
+
 dotnet_naming_symbols.non_field_members.applicable_kinds = property, event, method
 dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.non_field_members.required_modifiers =
+
 dotnet_naming_style.pascal_case.required_prefix =
 dotnet_naming_style.pascal_case.required_suffix =
 dotnet_naming_style.pascal_case.word_separator =
