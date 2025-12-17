@@ -109,10 +109,12 @@ pre-commit:
           - name: cargo-machete
             run: |
               pwsh -CommandWithArgs '''
+              $ErrorActionPreference = \"Stop\"
               $PSNativeCommandUseErrorActionPreference = $true;
+              $ROOT = git rev-parse --show-toplevel;
               foreach ($file in $args) {
                   Set-Location (Split-Path (Resolve-Path $file) -Parent)
-                  Write-Output "Cargo machete in: $pwd"
+                  Write-Output \"Cargo machete in: $pwd\"
                   cargo machete
                   Set-Location $ROOT
               }''' {staged_files}
@@ -120,6 +122,7 @@ pre-commit:
           - name: cargo-clippy
             run: |
               pwsh -CommandWithArgs '''
+              $ErrorActionPreference = \"Stop\"
               $PSNativeCommandUseErrorActionPreference = $true;
               $ROOT = git rev-parse --show-toplevel;
               if ($env:CI) {
@@ -129,7 +132,7 @@ pre-commit:
               foreach ($file in $args) {
                   $dir = (Split-Path (Resolve-Path $file) -Parent)
                   Set-Location $dir
-                  Write-Output "Cargo clippy in: $pwd"
+                  Write-Output \"Cargo clippy in: $pwd\"
                   if (Test-Path ./scripts/setup.ps1) {
                       &./scripts/setup.ps1
                       Set-Location $dir
@@ -143,6 +146,7 @@ pre-commit:
           - name: cargo-fmt
             run: |
               pwsh -CommandWithArgs '''
+              $ErrorActionPreference = \"Stop\"
               $PSNativeCommandUseErrorActionPreference = $true;
               $ROOT = git rev-parse --show-toplevel;
               if ($env:CI) {
@@ -151,7 +155,7 @@ pre-commit:
               }
               foreach ($file in $args) {
                   Set-Location (Split-Path (Resolve-Path $file) -Parent)
-                  Write-Output "Cargo fmt in: $pwd"
+                  Write-Output \"Cargo fmt in: $pwd\"
                   cargo +nightly fmt --all --quiet
                   Set-Location $ROOT
               }
