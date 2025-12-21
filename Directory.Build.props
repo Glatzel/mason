@@ -9,12 +9,13 @@
         <AnalysisLevel>latest-Recommended</AnalysisLevel>
         <Configurations>Release;Debug</Configurations>
         <RevitVersion Condition="'$(RevitVersion)'==''">2020</RevitVersion>
+        <DefineConstants>$(DefineConstants);REVIT$(RevitVersion)</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition="$(Configuration)=='Debug'">
-        <DefineConstants>$(DefineConstants);Debug;REVIT$(RevitVersion)</DefineConstants>
+        <DefineConstants>$(DefineConstants);Debug</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition="$(Configuration)=='Release'">
-        <DefineConstants>$(DefineConstants);Release;REVIT$(RevitVersion)</DefineConstants>
+        <DefineConstants>$(DefineConstants);Release</DefineConstants>
         <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
         <DebugType>none</DebugType>
         <DebugSymbols>false</DebugSymbols>
