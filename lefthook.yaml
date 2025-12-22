@@ -29,8 +29,6 @@ pre-commit:
       group:
         jobs:
           - name: check-json
-            exclude:
-              - "**/.zed/**"
             glob: "**/*.json"
             run: pixi {run} check-json {staged_files}
           - name: check-toml
