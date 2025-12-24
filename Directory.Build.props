@@ -9,12 +9,13 @@
         <AnalysisLevel>latest-Recommended</AnalysisLevel>
         <Configurations>Release;Debug</Configurations>
         <RevitVersion Condition="'$(RevitVersion)'==''">2020</RevitVersion>
+        <DefineConstants>$(DefineConstants);REVIT$(RevitVersion)</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition="$(Configuration)=='Debug'">
-        <DefineConstants>$(DefineConstants);Debug;REVIT$(RevitVersion)</DefineConstants>
+        <DefineConstants>$(DefineConstants);Debug</DefineConstants>
     </PropertyGroup>
     <PropertyGroup Condition="$(Configuration)=='Release'">
-        <DefineConstants>$(DefineConstants);Release;REVIT$(RevitVersion)</DefineConstants>
+        <DefineConstants>$(DefineConstants);Release</DefineConstants>
         <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
         <DebugType>none</DebugType>
         <DebugSymbols>false</DebugSymbols>
@@ -35,15 +36,15 @@
     </ItemGroup>
     <!--analyser-->
     <ItemGroup>
-        <PackageReference Include="Roslynator.Analyzers" Version="4.14.1">
+        <PackageReference Include="Roslynator.Analyzers" Version="4.15.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.14.1">
+        <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.15.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.14.1">
+        <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.15.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
