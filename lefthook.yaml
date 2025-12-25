@@ -106,6 +106,18 @@ pre-commit:
       glob: "**/Cargo.toml"
       group:
         jobs:
+          - name: cargo-update
+            run: |
+              pwsh -CommandWithArgs '''
+              $ErrorActionPreference = \"Stop\"
+              $PSNativeCommandUseErrorActionPreference = $true;
+              $ROOT = git rev-parse --show-toplevel;
+              foreach ($file in $args) {
+                  Set-Location (Split-Path (Resolve-Path $file) -Parent)
+                  Write-Output \"Cargo update in: $pwd\"
+                  cargo update
+                  Set-Location $ROOT
+              }''' {staged_files}
           - name: cargo-machete
             run: |
               pwsh -CommandWithArgs '''
