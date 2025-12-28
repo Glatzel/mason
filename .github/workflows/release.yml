@@ -1,43 +1,64 @@
-name: Release
+# This File is automatically synchronized from https://github.com/Glatzel/template
+
+name: release
 
 on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to release (e.g., v1.2.3)"
         type: string
         required: true
+        description: "Tag to release (e.g., v1.2.3)"
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
+permissions:
+  contents: write
 
 jobs:
-  build:
-    runs-on: windows-latest
+  create-release:
+    if: ${{!failure()}}
+    runs-on: ubuntu-slim
     steps:
+      - id: check-tag
+        run: |
+          $tag="${{inputs.tag}}"
+          Write-Output "tag: $tag"
+          if("$tag" -match '^v\d+\.\d+\.\d+$' ){"IS_PRE_RELEASE=false" >> "$env:GITHUB_OUTPUT"}
+          elseif("$tag" -match '^v\d+\.\d+\.\d+-.*$') {"IS_PRE_RELEASE=true" >> "$env:GITHUB_OUTPUT"}
+          else{throw "Unknown version: '$tag'"}
+        shell: pwsh
+
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: clear-tag-and-release
+        run: |
+          if($(gh api /repos/${{github.repository}}/tags --jq '.[].name') -contains "${{inputs.tag}}")
+          {
+              write-output "tag ${{inputs.tag}} exists."
+              gh release delete ${{inputs.tag}} --cleanup-tag -y
+          }
+          else{
+              write-output "tag ${{inputs.tag}} does not exist."
+          }
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+
       - name: Set up pixi
         uses: prefix-dev/setup-pixi@v0.9.3
         with:
           run-install: false
 
-      - name: build
-        run: ./rattler/ci-mason.ps1
-        shell: pwsh
+      - name: Generate a changelog
+        run: |
+          pixi global install git-cliff
+          git-cliff --unreleased --tag ${{inputs.tag}} --strip header > release_changelog.md
 
-      - name: upload
-        uses: actions/upload-artifact@v6
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: mason
-          path: ./rattler/output/win-64/*.conda
-          if-no-files-found: error
-
-  release:
-    needs: [build]
-    uses: Glatzel/template/.github/workflows/release.yml@main
-    with:
-      override: true
-      tag: ${{ inputs.tag }}
-      have-changelog: true
-      assets: true
+          body_path: release_changelog.md
+          tag_name: ${{inputs.tag}}
+          draft: true
+          prerelease: ${{steps.check-tag.outputs.is_pre_release}}
