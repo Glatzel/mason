@@ -10,7 +10,7 @@ lefthook-run = "lefthook run pre-commit --all-files --no-auto-install"
 [dependencies]
 actionlint = "==1.7.9"
 cargo-machete = "==0.9.1"
-lefthook = "==2.0.12"
+lefthook = "==2.0.13"
 markdownlint-cli2 = "==0.20.0"
 numpydoc = "==1.10.0"
 pre-commit-hooks = "==5.0.0"
