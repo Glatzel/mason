@@ -1,5 +1,4 @@
-using System;
-
+﻿using System;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
@@ -9,50 +8,36 @@ namespace Mason.Core;
 public abstract class AbsCommand(bool autoTransaction = false) : AbsContext, IExternalCommand
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
-    private readonly bool _autoTransaction = autoTransaction;
+    private readonly bool AutoTransaction = autoTransaction;
 
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
         RevitContext.Init(commandData.Application);
-
-        string commandName = GetType().FullName ?? "UnknownCommand";
-        string documentTitle = Doc?.Title ?? "NoDocument";
-
-        Log.Info($"Document: {documentTitle} | Start Execute Command: {commandName}");
-
+        Log.Info($"Document: {Doc.Title}|Start Execute Command: {GetType().FullName}");
         try
         {
-            if (_autoTransaction)
+            if (AutoTransaction)
             {
-                using Transaction tx = new(Doc, commandName);
-                tx.Start();
-
+                using Transaction ts = new(Doc, GetType().Name);
+                ts.Start();
                 CommandBody();
-
-                tx.Commit();
-                Log.Debug($"Transaction committed for command {commandName}.");
+                ts.Commit();
             }
             else
             {
                 CommandBody();
             }
         }
-        catch (Autodesk.Revit.Exceptions.OperationCanceledException ex)
+        catch (Autodesk.Revit.Exceptions.OperationCanceledException e)
         {
-            Log.Warn($"{commandName}: {ex}");
-            return Result.Cancelled;
+            Log.Warn($"{GetType().FullName}: {e}");
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Log.Error($"{commandName}: {ex}");
-            TaskDialog.Show(commandName, ex.Message);
-            return Result.Failed;
+            Log.Error($"{GetType().FullName}: {e}");
+            TaskDialog.Show(GetType().FullName, e.Message);
         }
-        finally
-        {
-            Log.Info($"Document: {documentTitle} | Finish Execute Command: {commandName}");
-        }
-
+        Log.Info($"Document: {Doc.Title}|Finish Execute Command: {GetType().FullName}");
         return Result.Succeeded;
     }
 

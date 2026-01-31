@@ -1,10 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-
 using Mason.Core;
 
 namespace Mason.ClashAndJoin.Command.Bench;
@@ -16,10 +14,10 @@ public class BenchClashDetect : AbsCommand
 
     public override void CommandBody()
     {
-        List<Element> elements =
-        [
-            .. Selection.PickObjects(ObjectType.Element).Select(Doc.GetElement),
-        ];
+        List<Element> elements = Selection
+            .PickObjects(ObjectType.Element)
+            .Select(Doc.GetElement)
+            .ToList();
         long timeScalar = MethodScalar(elements);
         long timeVector = MethodVector(elements);
         TaskDialog.Show(
