@@ -37,9 +37,6 @@ jobs:
         with:
           run-install: false
 
-      # rust setup
-      - uses: Swatinem/rust-cache@v2
-
       # pre-commit
       - name: lefthook
         run: pixi run --manifest-path ./lefthook/pixi.toml lefthook-run
