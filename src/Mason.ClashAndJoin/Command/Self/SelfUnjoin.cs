@@ -9,7 +9,7 @@ namespace Mason.ClashAndJoin.Command.Self;
 /// Iterates over all selected ProxyElements and unjoins any joined pairs.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class SelfUnjoin : AbsCommand
+public class SelfUnjoin () : AbsCommand(true)
 {
     /// <summary>
     /// Pipeline for clash and join operations.
@@ -20,12 +20,6 @@ public class SelfUnjoin : AbsCommand
     /// Logger for command operations.
     /// </summary>
     internal static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
-
-    /// <summary>
-    /// Initializes a new instance of <see cref="SelfUnjoin"/>.
-    /// </summary>
-    public SelfUnjoin()
-        : base(true) { }
 
     /// <summary>
     /// Executes the unjoin operation on all selected ProxyElements.

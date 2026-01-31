@@ -8,13 +8,12 @@ namespace Mason.ClashAndJoin.Command.Group;
 /// Command to join elements between two cached groups if they are not already joined and their bounding boxes intersect.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class GroupJoin : AbsCommand
+public class GroupJoin() : AbsCommand(true)
 {
     /// <summary>
     /// Shared pipeline instance for clash and join operations.
     /// </summary>
     internal static readonly ClashAndJoinPipeline pipeline = new();
-
     /// <summary>
     /// Logger for the command.
     /// </summary>

@@ -6,7 +6,7 @@ namespace Mason.ClashAndJoin.Command.Group;
 /// Command to clear the cached second group of selected elements.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class ClearGroup2 : AbsCommand
+public class ClearGroup2 () : AbsCommand(false)
 {
     /// <summary>
     /// Logger for this command.

@@ -8,7 +8,7 @@ namespace Mason.ClashAndJoin.Command.Group;
 /// Command to append selected elements to GroupCache2.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class AppendGroup2 : AbsCommand
+public class AppendGroup2() : AbsCommand(false)
 {
     /// <summary>
     /// Logger for this command.
@@ -40,7 +40,7 @@ public class AppendGroup2 : AbsCommand
         SelectUtils.GroupCache2.AddRange(elements);
 
         Log.Info(
-            $"Appended {elements.Count} elements to Group2. Current count: {SelectUtils.GroupCache2.Count}."
+            $"Appended {elements.Count} elements to Group2."
         );
     }
 }

@@ -1,5 +1,7 @@
 using System;
 
+using Mason.Core;
+
 using NLog;
 
 namespace Mason.Command.DevTool;
@@ -8,7 +10,7 @@ namespace Mason.Command.DevTool;
 /// Opens the Autodesk Revit API documentation for the current Revit version in the default web browser.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class OpenRevitAPI : Core.AbsCommand
+public class OpenRevitAPI() : AbsCommand(false)
 {
     /// <summary>Logger for the command.</summary>
     private static readonly Logger Log = NLog.LogManager.GetCurrentClassLogger();

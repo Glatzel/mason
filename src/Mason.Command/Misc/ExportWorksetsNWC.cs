@@ -16,7 +16,7 @@ namespace Mason.Command.Misc;
 /// Each export isolates the workset in the active view.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class ExportWorksetsNWC : AbsCommand
+public class ExportWorksetsNWC() : AbsCommand(false)
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 
