@@ -39,8 +39,6 @@ public class AppendGroup2() : AbsCommand(false)
         // Append selected elements
         SelectUtils.GroupCache2.AddRange(elements);
 
-        Log.Info(
-            $"Appended {elements.Count} elements to Group2."
-        );
+        Log.Info($"Appended {elements.Count} elements to Group2.");
     }
 }

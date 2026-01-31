@@ -14,6 +14,7 @@ public class GroupJoin() : AbsCommand(true)
     /// Shared pipeline instance for clash and join operations.
     /// </summary>
     internal static readonly ClashAndJoinPipeline pipeline = new();
+
     /// <summary>
     /// Logger for the command.
     /// </summary>

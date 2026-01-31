@@ -7,7 +7,7 @@ namespace Mason.ClashAndJoin.Command.Group;
 /// Stores the selected elements in <see cref="SelectUtils.GroupCache2"/>.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class SelectGroup2 () : AbsCommand(false)
+public class SelectGroup2() : AbsCommand(false)
 {
     /// <summary>
     /// Executes the group selection and caches the selected elements.

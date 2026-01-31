@@ -14,7 +14,7 @@ namespace Mason.Command.Misc;
 /// Each view hides all worksets except the one it represents.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class CreateWorksetView () : AbsCommand(false)
+public class CreateWorksetView() : AbsCommand(false)
 {
     /// <summary>Logger for this command.</summary>
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();

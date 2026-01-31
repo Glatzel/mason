@@ -10,10 +10,12 @@ namespace Mason.ClashAndJoin;
 /// Provides a fluent pipeline for checking clashes and joining/unjoining elements in Revit.
 /// </summary>
 internal sealed class ClashAndJoinPipeline
-{    /// <summary>
-     /// Logger for command operations.
-     /// </summary>
+{
+    /// <summary>
+    /// Logger for command operations.
+    /// </summary>
     internal static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
+
     /// <summary>
     /// Flag indicating whether the pipeline should continue processing.
     /// </summary>
@@ -53,8 +55,7 @@ internal sealed class ClashAndJoinPipeline
     {
         if (!ContinueFlag)
             return this;
-        ContinueFlag =
-            E1.IntId == E2.IntId ? continueIfIdentical : !continueIfIdentical;
+        ContinueFlag = E1.IntId == E2.IntId ? continueIfIdentical : !continueIfIdentical;
         return this;
     }
 

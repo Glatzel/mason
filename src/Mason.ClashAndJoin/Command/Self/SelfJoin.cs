@@ -22,8 +22,6 @@ public class SelfJoin() : AbsCommand(true)
     /// </summary>
     internal static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 
-
-
     /// <summary>
     /// Executes the join operation for all selected elements.
     /// </summary>
