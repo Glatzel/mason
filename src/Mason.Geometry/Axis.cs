@@ -1,4 +1,4 @@
-﻿namespace Mason.Geometry;
+namespace Mason.Geometry;
 
 public enum Axis
 {

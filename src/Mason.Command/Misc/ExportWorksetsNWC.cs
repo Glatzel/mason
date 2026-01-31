@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+
 using Mason.Core.Utils;
 
 namespace Mason.Command.Misc;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
