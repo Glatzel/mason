@@ -8,7 +8,7 @@ namespace Mason.ClashAndJoin.Command.Group;
 /// Command to switch the join status of elements between two cached groups.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class GroupSwitchJoin : AbsCommand
+public class GroupSwitchJoin() : AbsCommand(true)
 {
     /// <summary>
     /// Shared pipeline instance for clash and join operations.

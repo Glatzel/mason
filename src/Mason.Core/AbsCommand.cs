@@ -6,7 +6,7 @@ using Autodesk.Revit.UI;
 namespace Mason.Core;
 
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public abstract class AbsCommand(bool autoTransaction = false) : AbsContext, IExternalCommand
+public abstract class AbsCommand(bool autoTransaction) : AbsContext, IExternalCommand
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
     private readonly bool _autoTransaction = autoTransaction;

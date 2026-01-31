@@ -1,12 +1,14 @@
 using Autodesk.Revit.UI;
 
+using Mason.Core;
+
 namespace Mason.Command.DevTool;
 
 /// <summary>
 /// A simple Revit command that demonstrates basic usage by showing a "Hello World" message.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class HelloWorld : Core.AbsCommand
+public class HelloWorld() : AbsCommand(false)
 {
     /// <summary>Logger for the command.</summary>
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();

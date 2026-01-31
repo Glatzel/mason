@@ -9,7 +9,7 @@ namespace Mason.ClashAndJoin.Command.Group;
 /// Command to perform clash detection between two cached groups of elements.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class GroupClashDetection : AbsCommand
+public class GroupClashDetection() : AbsCommand(false)
 {
     /// <summary>
     /// Logger for this command.

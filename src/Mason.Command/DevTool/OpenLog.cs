@@ -1,5 +1,7 @@
 using System;
 
+using Mason.Core;
+
 using NLog;
 
 namespace Mason.Command.DevTool;
@@ -8,7 +10,7 @@ namespace Mason.Command.DevTool;
 /// Opens the latest Mason log file in the default system viewer.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class OpenLog : Core.AbsCommand
+public class OpenLog() : AbsCommand(false)
 {
     /// <summary>Logger for the command.</summary>
     private static readonly Logger Log = NLog.LogManager.GetCurrentClassLogger();

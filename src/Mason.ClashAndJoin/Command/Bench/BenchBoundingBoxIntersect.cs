@@ -12,7 +12,7 @@ using Mason.Geometry;
 namespace Mason.ClashAndJoin.Command.Bench;
 
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class BenchBoundingBoxIntersect : AbsCommand
+public class BenchBoundingBoxIntersect() : AbsCommand(false)
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 

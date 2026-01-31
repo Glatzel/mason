@@ -8,7 +8,7 @@ namespace Mason.ClashAndJoin.Command.Group;
 /// Command to unjoin elements between two cached groups.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class GroupUnjoin : AbsCommand
+public class GroupUnjoin() : AbsCommand(true)
 {
     /// <summary>
     /// Shared pipeline instance for clash and join operations.

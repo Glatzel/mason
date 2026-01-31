@@ -7,13 +7,8 @@ namespace Mason.ClashAndJoin.Command.Group;
 /// Stores the selected elements in <see cref="SelectUtils.GroupCache1"/>.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class SelectGroup1 : AbsCommand
+public class SelectGroup1() : AbsCommand(false)
 {
-    /// <summary>
-    /// Logger for the command.
-    /// </summary>
-    internal static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
-
     /// <summary>
     /// Executes the group selection and caches the selected elements.
     /// </summary>
@@ -22,7 +17,5 @@ public class SelectGroup1 : AbsCommand
         System.Collections.Generic.List<ProxyElement> selectedElements =
             SelectUtils.SelectProxyElements(Selection) ?? [];
         SelectUtils.GroupCache1 = selectedElements;
-
-        Log.Info($"Selected {selectedElements.Count} elements and cached for group operations.");
     }
 }

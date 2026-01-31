@@ -10,7 +10,7 @@ namespace Mason.ClashAndJoin.Command.Self;
 /// then runs the clash detection filter for each pair.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class SelfClashDetection : AbsCommand
+public class SelfClashDetection() : AbsCommand(false)
 {
     /// <summary>
     /// Pipeline for clash and join operations.
@@ -37,10 +37,7 @@ public class SelfClashDetection : AbsCommand
         }
 
         // Initialize filters for all elements
-        elements.ForEach(e =>
-        {
-            e.InitFilter();
-        });
+        elements.ForEach(e => e.InitFilter());
 
         // Iterate through all unique pairs of elements
         for (int i = 0; i < elements.Count - 1; i++)

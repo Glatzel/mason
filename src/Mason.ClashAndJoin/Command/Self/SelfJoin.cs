@@ -10,7 +10,7 @@ namespace Mason.ClashAndJoin.Command.Self;
 /// if their bounding boxes intersect and they are not already joined.
 /// </summary>
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class SelfJoin : AbsCommand
+public class SelfJoin() : AbsCommand(true)
 {
     /// <summary>
     /// Pipeline for clash and join operations.
@@ -21,12 +21,6 @@ public class SelfJoin : AbsCommand
     /// Logger for command operations.
     /// </summary>
     internal static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
-
-    /// <summary>
-    /// Initializes a new instance of <see cref="SelfJoin"/>.
-    /// </summary>
-    public SelfJoin()
-        : base(true) { }
 
     /// <summary>
     /// Executes the join operation for all selected elements.

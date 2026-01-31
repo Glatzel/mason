@@ -15,13 +15,21 @@ internal static class SelectUtils
     internal static List<ProxyElement> GroupCache1
     {
         get => [.. groupCache1.Distinct()];
-        set => groupCache1 = value;
+        set
+        {
+            groupCache1 = value;
+            Log.Info($"Current Group1 count: {GroupCache1.Count}.");
+        }
     }
 
     internal static List<ProxyElement> GroupCache2
     {
         get => [.. groupCache2.Distinct()];
-        set => groupCache2 = value;
+        set
+        {
+            groupCache2 = value;
+            Log.Info($"Current Group2 count: {GroupCache2.Count}.");
+        }
     }
 
     public static List<ProxyElement> SelectProxyElements(Selection selection, bool cacheBBox = true)

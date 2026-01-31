@@ -10,7 +10,7 @@ using Mason.Core;
 namespace Mason.ClashAndJoin.Command.Bench;
 
 [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-public class BenchClashDetect : AbsCommand
+public class BenchClashDetect() : AbsCommand(false)
 {
     private static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
 

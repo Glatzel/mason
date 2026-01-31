@@ -12,6 +12,11 @@ namespace Mason.ClashAndJoin;
 internal sealed class ClashAndJoinPipeline
 {
     /// <summary>
+    /// Logger for command operations.
+    /// </summary>
+    internal static readonly NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();
+
+    /// <summary>
     /// Flag indicating whether the pipeline should continue processing.
     /// </summary>
     public bool ContinueFlag { get; private set; }
@@ -50,14 +55,7 @@ internal sealed class ClashAndJoinPipeline
     {
         if (!ContinueFlag)
             return this;
-
-#if REVIT2018 || REVIT2019 || REVIT2020 || REVIT2021 || REVIT2022 || REVIT2023
-        ContinueFlag =
-            E1.Id.IntegerValue == E2.Id.IntegerValue ? continueIfIdentical : !continueIfIdentical;
-#endif
-#if REVIT2024 || REVIT2025
-        ContinueFlag = E1.Id.Value == E2.Id.Value ? continueIfIdentical : !continueIfIdentical;
-#endif
+        ContinueFlag = E1.IntId == E2.IntId ? continueIfIdentical : !continueIfIdentical;
         return this;
     }
 
@@ -96,14 +94,13 @@ internal sealed class ClashAndJoinPipeline
     {
         if (!ContinueFlag)
             return;
-
         try
         {
             JoinGeometryUtils.JoinGeometry(Doc, E1.E, E2.E);
         }
         catch
         {
-            // ignore exceptions to allow fluent chaining
+            Log.Warn($"Join Failed: {E1.IntId}, {E2.IntId}");
         }
     }
 
@@ -121,7 +118,7 @@ internal sealed class ClashAndJoinPipeline
         }
         catch
         {
-            // ignore exceptions
+            Log.Warn($"Unjoin Failed: {E1.IntId}, {E2.IntId}");
         }
     }
 
@@ -132,8 +129,14 @@ internal sealed class ClashAndJoinPipeline
     {
         if (!ContinueFlag)
             return;
-
-        JoinGeometryUtils.SwitchJoinOrder(Doc, E1.E, E2.E);
+        try
+        {
+            JoinGeometryUtils.SwitchJoinOrder(Doc, E1.E, E2.E);
+        }
+        catch
+        {
+            Log.Warn($"Switch join Failed: {E1.IntId}, {E2.IntId}");
+        }
     }
 
     /// <summary>
