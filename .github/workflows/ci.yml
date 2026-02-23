@@ -24,6 +24,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lefthook:
+    uses: ./.github/workflows/ci-lefthook.yml
+    with:
+      cache-rust: true
   build:
     runs-on: windows-latest
     steps:
@@ -58,3 +62,9 @@ jobs:
           report_type: test_results
           fail_ci_if_error: true
           files: ./tests/*/TestResults/TestResults.xml
+  check-point:
+    if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
+    needs: [lefthook,build]
+    runs-on: ubuntu-slim
+    steps:
+      - run: exit 1
