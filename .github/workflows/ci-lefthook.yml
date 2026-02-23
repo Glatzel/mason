@@ -3,21 +3,13 @@
 name: lefthook
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - ready_for_review
   workflow_dispatch:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
-  cancel-in-progress: true
-
-permissions: read-all
-
+  workflow_call:
+    inputs:
+      cache-rust:
+        type: boolean
+        default: false
+        required: false
 jobs:
   lefthook:
     runs-on: ubuntu-latest
@@ -36,6 +28,9 @@ jobs:
         uses: prefix-dev/setup-pixi@main
         with:
           run-install: false
+
+      - if: inputs.cache-rust
+        uses: Swatinem/rust-cache@v2
 
       # pre-commit
       - name: lefthook
