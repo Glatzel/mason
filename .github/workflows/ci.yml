@@ -21,7 +21,7 @@ permissions: read-all
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name != 'push'}}
 
 jobs:
   lefthook:
