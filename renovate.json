@@ -3,5 +3,8 @@
   "extends": [
     "config:recommended",
     "github>Glatzel/template//renovate"
+  ],
+  "ignorePaths": [
+    "lefthook/**"
   ]
 }
