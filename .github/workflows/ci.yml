@@ -14,8 +14,6 @@ on:
       - ready_for_review
     paths-ignore:
       - "*.md"
-  schedule:
-    - cron: 0 16 * * *
 
 permissions: read-all
 
