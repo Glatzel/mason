@@ -111,24 +111,20 @@ pre-commit:
               pwsh -CommandWithArgs '''
               $ErrorActionPreference = \"Stop\"
               $PSNativeCommandUseErrorActionPreference = $true;
-              $ROOT = git rev-parse --show-toplevel;
               foreach ($file in $args) {
                   Set-Location (Split-Path (Resolve-Path $file) -Parent)
                   Write-Output \"Cargo update in: $pwd\"
                   cargo update
-                  Set-Location $ROOT
               }''' {staged_files}
           - name: cargo-machete
             run: |
               pwsh -CommandWithArgs '''
               $ErrorActionPreference = \"Stop\"
               $PSNativeCommandUseErrorActionPreference = $true;
-              $ROOT = git rev-parse --show-toplevel;
               foreach ($file in $args) {
                   Set-Location (Split-Path (Resolve-Path $file) -Parent)
                   Write-Output \"Cargo machete in: $pwd\"
                   cargo machete
-                  Set-Location $ROOT
               }''' {staged_files}
 
           - name: cargo-clippy
@@ -136,7 +132,6 @@ pre-commit:
               pwsh -CommandWithArgs '''
               $ErrorActionPreference = \"Stop\"
               $PSNativeCommandUseErrorActionPreference = $true;
-              $ROOT = git rev-parse --show-toplevel;
               if ($env:CI) {
                   rustup toolchain install stable --profile=minimal
                   rustup component add clippy --toolchain stable
@@ -151,7 +146,6 @@ pre-commit:
                   }
                   cargo +stable clippy --fix --all-features --quiet
                   cargo +stable clippy --all-features --quiet -- -Dwarnings
-                  Set-Location $ROOT
               }
               ''' {staged_files}
 
@@ -160,7 +154,6 @@ pre-commit:
               pwsh -CommandWithArgs '''
               $ErrorActionPreference = \"Stop\"
               $PSNativeCommandUseErrorActionPreference = $true;
-              $ROOT = git rev-parse --show-toplevel;
               if ($env:CI) {
                   rustup toolchain install nightly --profile=minimal
                   rustup component add rustfmt --toolchain nightly
@@ -169,6 +162,5 @@ pre-commit:
                   Set-Location (Split-Path (Resolve-Path $file) -Parent)
                   Write-Output \"Cargo fmt in: $pwd\"
                   cargo +nightly fmt --all --quiet
-                  Set-Location $ROOT
               }
               ''' {staged_files}
