@@ -109,29 +109,34 @@ pre-commit:
           - name: cargo-update
             run: |
               pwsh -CommandWithArgs '''
-              $ErrorActionPreference = \"Stop\"
+              $ErrorActionPreference = "Stop"
               $PSNativeCommandUseErrorActionPreference = $true;
+              $root=Resolve-Path $pwd
               foreach ($file in $args) {
                   Set-Location (Split-Path (Resolve-Path $file) -Parent)
-                  Write-Output \"Cargo update in: $pwd\"
+                  Write-Output "Cargo update in: $pwd"
                   cargo update
+                  Set-Location $root
               }''' {staged_files}
           - name: cargo-machete
             run: |
               pwsh -CommandWithArgs '''
-              $ErrorActionPreference = \"Stop\"
+              $ErrorActionPreference = "Stop"
               $PSNativeCommandUseErrorActionPreference = $true;
+              $root=Resolve-Path $pwd
               foreach ($file in $args) {
                   Set-Location (Split-Path (Resolve-Path $file) -Parent)
-                  Write-Output \"Cargo machete in: $pwd\"
+                  Write-Output "Cargo machete in: $pwd"
                   cargo machete
+                  Set-Location $root
               }''' {staged_files}
 
           - name: cargo-clippy
             run: |
               pwsh -CommandWithArgs '''
-              $ErrorActionPreference = \"Stop\"
+              $ErrorActionPreference = "Stop"
               $PSNativeCommandUseErrorActionPreference = $true;
+              $root=Resolve-Path $pwd
               if ($env:CI) {
                   rustup toolchain install stable --profile=minimal
                   rustup component add clippy --toolchain stable
@@ -139,28 +144,31 @@ pre-commit:
               foreach ($file in $args) {
                   $dir = (Split-Path (Resolve-Path $file) -Parent)
                   Set-Location $dir
-                  Write-Output \"Cargo clippy in: $pwd\"
+                  Write-Output "Cargo clippy in: $pwd"
                   if (Test-Path ./scripts/setup.ps1) {
                       &./scripts/setup.ps1
                       Set-Location $dir
                   }
                   cargo +stable clippy --fix --all-features --quiet
                   cargo +stable clippy --all-features --quiet -- -Dwarnings
+                  Set-Location $root
               }
               ''' {staged_files}
 
           - name: cargo-fmt
             run: |
               pwsh -CommandWithArgs '''
-              $ErrorActionPreference = \"Stop\"
+              $ErrorActionPreference = "Stop"
               $PSNativeCommandUseErrorActionPreference = $true;
+              $root=Resolve-Path $pwd
               if ($env:CI) {
                   rustup toolchain install nightly --profile=minimal
                   rustup component add rustfmt --toolchain nightly
               }
               foreach ($file in $args) {
                   Set-Location (Split-Path (Resolve-Path $file) -Parent)
-                  Write-Output \"Cargo fmt in: $pwd\"
+                  Write-Output "Cargo fmt in: $pwd"
                   cargo +nightly fmt --all --quiet
+                  Set-Location $root
               }
               ''' {staged_files}
