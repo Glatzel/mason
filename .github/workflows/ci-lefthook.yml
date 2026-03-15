@@ -5,11 +5,6 @@ name: lefthook
 on:
   workflow_dispatch:
   workflow_call:
-    inputs:
-      cache-rust:
-        type: boolean
-        default: false
-        required: false
 jobs:
   lefthook:
     runs-on: ubuntu-latest
@@ -28,9 +23,6 @@ jobs:
         uses: prefix-dev/setup-pixi@main
         with:
           run-install: false
-
-      - if: inputs.cache-rust
-        uses: Swatinem/rust-cache@v2
 
       # pre-commit
       - name: lefthook
