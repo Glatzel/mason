@@ -5,12 +5,16 @@ name: lefthook
 on:
   workflow_dispatch:
   workflow_call:
+permissions:
+  contents: read
 jobs:
   lefthook:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/cache@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: |
             ./lefthook/.pixi
@@ -20,7 +24,7 @@ jobs:
 
       #  pixi setup
       - name: Set up pixi
-        uses: prefix-dev/setup-pixi@main
+        uses: prefix-dev/setup-pixi@a0af7a228712d6121d37aba47adf55c1332c9c2e # v0.9.4
         with:
           run-install: false
 
@@ -29,5 +33,5 @@ jobs:
         run: pixi run --manifest-path ./lefthook/pixi.toml lefthook-run
         shell: pwsh
 
-      - uses: pre-commit-ci/lite-action@v1.1.0
+      - uses: pre-commit-ci/lite-action@5d6cc0eb514c891a40562a58a8e71576c5c7fb43 # v1.1.0
         if: always()
