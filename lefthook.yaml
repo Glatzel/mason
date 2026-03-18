@@ -57,7 +57,7 @@ pre-commit:
             run: taplo format -o 'reorder_keys=true'
 
           - name: actionlint
-            glob: ".github/workflows/*.yml"
+            glob: ".github/workflows/*.{yml,yaml}"
             run: actionlint {staged_files}
 
           - name: typos
@@ -103,18 +103,6 @@ pre-commit:
       glob: "**/Cargo.toml"
       group:
         jobs:
-          - name: cargo-update
-            run: |
-              pwsh -CommandWithArgs '''
-              $ErrorActionPreference = "Stop"
-              $PSNativeCommandUseErrorActionPreference = $true;
-              $root=Resolve-Path $pwd
-              foreach ($file in $args) {
-                  Set-Location (Split-Path (Resolve-Path $file) -Parent)
-                  Write-Output "Cargo update in: $pwd"
-                  cargo update
-                  Set-Location $root
-              }''' {staged_files}
           - name: cargo-machete
             run: |
               pwsh -CommandWithArgs '''
