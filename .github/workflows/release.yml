@@ -13,7 +13,7 @@ on:
         type: boolean
         required: false
         default: true
-        description: is it a latest release
+        description: latest
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
           else{throw "Unknown version: '${{inputs.tag}}'"}
         shell: pwsh
       - name: check-tag-pre-release
-        if: ! inputs.latest
+        if: ${{!inputs.latest}}
         run: |
           Write-Output "tag: ${{inputs.tag}}"
           if("${{inputs.tag}}" -match '^v\d+\.\d+\.\d+-.*$') {}
@@ -69,3 +69,5 @@ jobs:
 
       - name: Release
         run: gh release create ${{inputs.tag}} -F release_changelog.md --draft ${{inputs.latest && '--latest' || '--prerelease'}}
+        env:
+          GH_TOKEN: ${{ github.token }}
