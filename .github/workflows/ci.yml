@@ -24,6 +24,8 @@ concurrency:
 jobs:
   lefthook:
     uses: ./.github/workflows/ci-lefthook.yml
+    permissions:
+      contents: write
   build:
     runs-on: windows-latest
     steps:
