@@ -33,7 +33,7 @@ jobs:
         run: pixi run --manifest-path ./lefthook/pixi.toml lefthook-run
 
       - name: Auto commit fixes
-        if: ${{ !cancelled() && startsWith(github.ref, 'refs/pull/') && github.actor != 'github-actions[bot]' }}
+        if: ${{ !cancelled() && startsWith(github.ref, 'refs/pull/') }}
         shell: pwsh
         run: |
           git config --global user.name "github-actions[bot]"
