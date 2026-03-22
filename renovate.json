@@ -5,6 +5,7 @@
     "github>Glatzel/template//renovate"
   ],
   "ignorePaths": [
-    "lefthook/**"
+    "lefthook/**",
+    ".github/actions/**"
   ]
 }
