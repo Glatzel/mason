@@ -49,7 +49,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuuid-2.41.3-h5347b49_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuv-1.51.0-hb03c661_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libzlib-1.3.1-hb9d3cd8_2.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.21.0-hbf95b10_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.22.0-h5ac6406_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/markupsafe-3.0.3-py313h3dea7bd_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.5-h2d0b736_3.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/nodejs-25.7.0-he4ff34a_0.conda
@@ -726,15 +726,14 @@ packages:
   license_family: Other
   size: 55476
   timestamp: 1727963768015
-- conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.21.0-hbf95b10_0.conda
-  sha256: 6d9c555f70ce09a734196c55d0299e7326ba3c75376ed59c4b54d26711acdbed
-  md5: c9e47f9b302a36068714ca2e0903315d
+- conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.22.0-h5ac6406_0.conda
+  sha256: 66acbb959dac1a450a0fd5b994e6de6ff8912bd9abb3fe4004dde96da8305684
+  md5: 051cc15720f313e0bd791973cec5c844
   depends:
   - nodejs
   license: MIT
-  license_family: MIT
-  size: 1942792
-  timestamp: 1771213340802
+  size: 1965811
+  timestamp: 1774148164511
 - conda: https://conda.anaconda.org/conda-forge/linux-64/markupsafe-3.0.3-py313h3dea7bd_1.conda
   sha256: 72ed7c0216541d65a17b171bf2eec4a3b81e9158d8ed48e59e1ecd3ae302d263
   md5: aeb9b9da79fd0258b3db091d1fefcd71
