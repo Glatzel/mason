@@ -47,6 +47,8 @@ jobs:
         run: ./scripts/test.ps1
 
       - uses: ./.github/actions/common/codecov
+        with:
+          test-results-files: ./tests/*/TestResults/TestResults.xml
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
     needs: [lefthook,build]
