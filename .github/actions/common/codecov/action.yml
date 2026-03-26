@@ -1,0 +1,19 @@
+# This file is automatically synchronized from https://github.com/Glatzel/template
+
+name: codecov
+description: Upload coverage and test results to Codecov
+
+inputs:
+runs:
+  using: composite
+  steps:
+    - name: Upload coverage to Codecov
+      if: ${{ !cancelled() }}
+      uses: codecov/codecov-action@1af58845a975a7985b0beb0cbe6fbbb71a41dbad # v5.5.3
+
+    - name: Upload test results to Codecov
+      if: ${{ !cancelled() }}
+      uses: codecov/codecov-action@1af58845a975a7985b0beb0cbe6fbbb71a41dbad # v5.5.3
+      with:
+        report_type: test_results
+        fail_ci_if_error: true
