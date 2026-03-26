@@ -24,6 +24,7 @@ pre-commit:
   exclude:
     - "**/external/**"
     - "**.snap"
+    - "**.patch"
   jobs:
     - name: pre-commit-hook
       stage_fixed: true
