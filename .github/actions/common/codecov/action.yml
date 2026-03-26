@@ -2,12 +2,6 @@
 
 name: codecov
 description: Upload coverage and test results to Codecov
-inputs:
-  test-results-files:
-    description: >
-      Comma-separated explicit list of files to upload. These will be added to the coverage files found for upload.
-      If you wish to only upload the specified files, please consider using "disable_search" to disable uploading other files.
-    required: false
 runs:
   using: composite
   steps:
@@ -21,4 +15,3 @@ runs:
       with:
         report_type: test_results
         fail_ci_if_error: true
-        files: ${{ inputs.test-results-files }}
