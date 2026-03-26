@@ -45,6 +45,7 @@ jobs:
       # test
       - run: ./scripts/test.ps1
       - uses: ./.github/actions/common/codecov
+        if: ${{ !cancelled() }}
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
     needs: [lefthook,build]
