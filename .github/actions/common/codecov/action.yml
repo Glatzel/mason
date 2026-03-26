@@ -2,8 +2,6 @@
 
 name: codecov
 description: Upload coverage and test results to Codecov
-
-inputs:
 runs:
   using: composite
   steps:
