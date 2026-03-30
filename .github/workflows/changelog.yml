@@ -1,6 +1,6 @@
 # This File is automatically synchronized from https://github.com/Glatzel/template
 
-name: update-changelog
+name: Update Changelog
 
 on:
   workflow_dispatch:
@@ -23,25 +23,31 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
-          persist-credentials: false
       - name: Set up pixi
         uses: prefix-dev/setup-pixi@a0af7a228712d6121d37aba47adf55c1332c9c2e # v0.9.4
         with:
           run-install: false
 
-      - run: pixi global install git-cliff
-
-      - run: git-cliff -o CHANGELOG.md
-
       - name: Create pull request
-        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: update changelog.md"
-          title: "chore: update changelog.md"
-          branch: update-changelog
-          base: main
-          delete-branch: true
-          add-paths: CHANGELOG.md
-          assignees: Glatzel
-          draft: false
+        shell: pwsh
+        run: |
+          git checkout -b "update-changelog"
+          pixi global install git-cliff
+          git-cliff -o CHANGELOG.md
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if (-not (git diff --cached --quiet)) {
+              git commit -m "chore: update changelog.md"
+              git push -u origin update-changelog --force-with-lease
+          } else {
+              echo "No changes to commit"
+              exit 0
+          }
+          gh pr create `
+            --title "chore: update changelog.md" `
+            --body "" `
+            --base main `
+            --head update-changelog
+        env:
+          GH_TOKEN: ${{ github.token }}
