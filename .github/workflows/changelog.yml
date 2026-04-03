@@ -31,9 +31,9 @@ jobs:
       - name: Create pull request
         shell: pwsh
         run: |
-          git checkout -b "update-changelog"
           pixi global install git-cliff
           git-cliff -o CHANGELOG.md
+          git checkout -b "update-changelog"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
