@@ -68,6 +68,6 @@ jobs:
           git-cliff --unreleased --tag ${{inputs.tag}} --strip header > release_changelog.md
 
       - name: Release
-        run: gh release create ${{inputs.tag}} -F release_changelog.md --draft ${{inputs.latest && '--latest' || '--prerelease'}}
+        run: gh release create ${{inputs.tag}} --title ${{inputs.tag}} --notes-file release_changelog.md --draft ${{inputs.latest && '--latest' || '--prerelease'}}
         env:
           GH_TOKEN: ${{ github.token }}

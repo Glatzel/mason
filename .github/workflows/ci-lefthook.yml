@@ -59,20 +59,26 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add -A
           COMMENT_BODY=""
+
           if ! git diff --cached --quiet; then
             if git commit -m "apply lefthook fixes"; then
               if git push; then
-                COMMENT_BODY="Lefthook done. Fixes applied and pushed."
+                COMMENT_BODY="**Lefthook finished**
+          ✅ Fixes applied and pushed successfully."
               else
-                COMMENT_BODY="Lefthook done. Fixes committed locally, but push failed."
+                COMMENT_BODY="**Lefthook finished**
+          ⚠️ Fixes committed locally, but **push failed**."
               fi
             else
-              COMMENT_BODY="Lefthook done. Failed to commit fixes."
+              COMMENT_BODY="**Lefthook finished**
+          ❌ Failed to commit fixes."
             fi
           else
-            COMMENT_BODY="Lefthook done. No changes to commit."
+            COMMENT_BODY="**Lefthook finished**
+          ℹ️ No changes were required."
           fi
 
           # Always attempt to comment
