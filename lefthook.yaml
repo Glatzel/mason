@@ -51,11 +51,11 @@ pre-commit:
       stage_fixed: true
       group:
         jobs:
-          - name: taplo
+          - name: tombi
             glob: "**/*.toml"
             env:
               RUST_LOG: warn
-            run: taplo format -o 'reorder_keys=true'
+            run: tombi format
 
           - name: actionlint
             glob: ".github/workflows/*.{yml,yaml}"
