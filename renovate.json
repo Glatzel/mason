@@ -6,6 +6,9 @@
   ],
   "ignorePaths": [
     "lefthook/**",
-    ".github/actions/**"
+    ".github/actions/**",
+    ".gitHub/workflows/ci-lefthook.yml",
+    ".gitHub/workflows/release.yml",
+    ".gitHub/workflows/changelog.yml"
   ]
 }
