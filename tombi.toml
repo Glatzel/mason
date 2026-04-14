@@ -1,0 +1,4 @@
+# This File is automatically synchronized from https://github.com/Glatzel/template
+
+[lsp]
+goto-type-definition.enabled = false
