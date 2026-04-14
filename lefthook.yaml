@@ -23,8 +23,8 @@ glob_matcher: doublestar
 pre-commit:
   exclude:
     - "**/external/**"
-    - "**.snap"
-    - "**.patch"
+    - "**/*.snap"
+    - "**/*.patch"
   jobs:
     - name: pre-commit-hook
       stage_fixed: true
