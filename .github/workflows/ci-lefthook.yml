@@ -7,9 +7,9 @@ on:
   workflow_call:
   issue_comment:
     types: [created]
-# permissions:
-#   contents: write
-#   pull-requests: write
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   lefthook:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.issue.pull_request != null && contains(github.event.comment.body, 'lefthook')) }}
@@ -27,14 +27,14 @@ jobs:
         with:
           ref: ${{ (github.event_name == 'issue_comment' && github.event.issue.pull_request != null) && steps.get-branch.outputs.branch || github.head_ref }}
 
-      # - name: comment if triggered by comment
-      #   id: comment
-      #   if: github.event_name == 'issue_comment' && github.event.issue.pull_request != null
-      #   run: |
-      #     url=$(gh pr comment "${{ github.event.issue.number }}" --body "Lefthook is running.")
-      #     echo "comment_url=${url}" >> "$GITHUB_OUTPUT"
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
+      - name: comment if triggered by comment
+        id: comment
+        if: github.event_name == 'issue_comment' && github.event.issue.pull_request != null
+        run: |
+          url=$(gh pr comment "${{ github.event.issue.number }}" --body "Lefthook is running.")
+          echo "comment_url=${url}" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
@@ -52,45 +52,42 @@ jobs:
 
       # pre-commit
       - name: lefthook
+        run: pixi run --manifest-path ./lefthook/pixi.toml lefthook-run
+      - if: ${{!cancelled()}}
         run: |
-          pixi run --manifest-path ./lefthook/pixi.toml lefthook-run
-
           if ! git diff --quiet || ! git diff --cached --quiet; then
             echo "❌ Lefthook modified files. Please run lefthook locally and commit the fixes."
             git --no-pager diff
             exit 1
           fi
-      - uses: pre-commit-ci/lite-action@5d6cc0eb514c891a40562a58a8e71576c5c7fb43 # v1.1.0
+      - name: Auto commit fixes
         if: ${{ github.event_name == 'issue_comment' && github.event.issue.pull_request != null && contains(github.event.comment.body, 'lefthook') && !cancelled() }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # - name: Auto commit fixes
-      #   if: ${{ github.event_name == 'issue_comment' && github.event.issue.pull_request != null && contains(github.event.comment.body, 'lefthook') && !cancelled() }}
-      #   run: |
-      #     git config --global user.name "github-actions[bot]"
-      #     git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          COMMENT_BODY=""
 
-      #     git add -A
-      #     COMMENT_BODY=""
+          if ! git diff --cached --quiet; then
+            if git commit -m "apply lefthook fixes"; then
+              if git push; then
+                COMMENT_BODY="**Lefthook finished**
+          ✅ Fixes applied and pushed successfully."
+              else
+                COMMENT_BODY="**Lefthook finished**
+          ⚠️ Fixes committed locally, but **push failed**."
+              fi
+            else
+              COMMENT_BODY="**Lefthook finished**
+          ❌ Failed to commit fixes."
+            fi
+          else
+            COMMENT_BODY="**Lefthook finished**
+          ℹ️ No changes were required."
+          fi
 
-      #     if ! git diff --cached --quiet; then
-      #       if git commit -m "apply lefthook fixes"; then
-      #         if git push; then
-      #           COMMENT_BODY="**Lefthook finished**
-      #     ✅ Fixes applied and pushed successfully."
-      #         else
-      #           COMMENT_BODY="**Lefthook finished**
-      #     ⚠️ Fixes committed locally, but **push failed**."
-      #         fi
-      #       else
-      #         COMMENT_BODY="**Lefthook finished**
-      #     ❌ Failed to commit fixes."
-      #       fi
-      #     else
-      #       COMMENT_BODY="**Lefthook finished**
-      #     ℹ️ No changes were required."
-      #     fi
-
-      #     # Always attempt to comment
-      #     gh pr comment "${GITHUB_EVENT_ISSUE_NUMBER}" --edit-last --body "${COMMENT_BODY}" || echo "Failed to comment on PR"
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
+          # Always attempt to comment
+          gh pr comment "${GITHUB_EVENT_ISSUE_NUMBER}" --edit-last --body "${COMMENT_BODY}" || echo "Failed to comment on PR"
+        env:
+          GH_TOKEN: ${{ github.token }}
