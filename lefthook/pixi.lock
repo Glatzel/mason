@@ -49,7 +49,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuuid-2.42-h5347b49_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuv-1.51.0-hb03c661_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libzlib-1.3.2-h25fd6f3_2.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.22.0-h5ac6406_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.22.1-h5ac6406_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/markupsafe-3.0.3-py313h3dea7bd_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.5-h2d0b736_3.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/nodejs-25.8.2-he4ff34a_0.conda
@@ -76,9 +76,9 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/sphinxcontrib-qthelp-2.0.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/sphinxcontrib-serializinghtml-1.1.10-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_h366c992_103.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/tombi-0.9.20-hb17b654_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/tombi-0.10.1-hb17b654_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tomli-2.4.1-pyhcf101f3_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.45.1-hb17b654_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.46.0-hb17b654_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/urllib3-2.6.3-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.7-hb78ec9c_6.conda
@@ -517,15 +517,15 @@ packages:
   license_family: Other
   size: 63629
   timestamp: 1774072609062
-- conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.22.0-h5ac6406_0.conda
-  sha256: 66acbb959dac1a450a0fd5b994e6de6ff8912bd9abb3fe4004dde96da8305684
-  md5: 051cc15720f313e0bd791973cec5c844
+- conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.22.1-h5ac6406_0.conda
+  sha256: d33773bcfb7715e32a63c58a348dccdd4e6fb9bcbcc254e4389c12ecc00fd437
+  md5: 3d146f9361f377ee2008611301331cba
   depends:
   - nodejs
   license: MIT
   license_family: MIT
-  size: 1965811
-  timestamp: 1774148164511
+  size: 1973271
+  timestamp: 1776892296825
 - conda: https://conda.anaconda.org/conda-forge/linux-64/markupsafe-3.0.3-py313h3dea7bd_1.conda
   sha256: 72ed7c0216541d65a17b171bf2eec4a3b81e9158d8ed48e59e1ecd3ae302d263
   md5: aeb9b9da79fd0258b3db091d1fefcd71
@@ -851,17 +851,17 @@ packages:
   license_family: BSD
   size: 3301196
   timestamp: 1769460227866
-- conda: https://conda.anaconda.org/conda-forge/linux-64/tombi-0.9.20-hb17b654_0.conda
-  sha256: 06d771893afab968ccca5edc290ba6d5651213e8827565d60fdbcda05c9b2c16
-  md5: a10b7dc979a20633e2ca71c82ad6fb5a
+- conda: https://conda.anaconda.org/conda-forge/linux-64/tombi-0.10.1-hb17b654_0.conda
+  sha256: fd66937c060e7b8177acf5e3b2127996f78ff6fe886b5eade269dbe33a3fa36d
+  md5: f71e4966e4459f59116d14d7fd690690
   depends:
-  - __glibc >=2.17,<3.0.a0
   - libgcc >=14
+  - __glibc >=2.17,<3.0.a0
   constrains:
   - __glibc >=2.17
   license: MIT
-  size: 6843499
-  timestamp: 1776646381107
+  size: 6919501
+  timestamp: 1777568138936
 - conda: https://conda.anaconda.org/conda-forge/noarch/tomli-2.4.1-pyhcf101f3_0.conda
   sha256: 91cafdb64268e43e0e10d30bd1bef5af392e69f00edd34dfaf909f69ab2da6bd
   md5: b5325cf06a000c5b14970462ff5e4d58
@@ -872,17 +872,17 @@ packages:
   license_family: MIT
   size: 21561
   timestamp: 1774492402955
-- conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.45.1-hb17b654_0.conda
-  sha256: 51c8fda53a6b9ed6d9379d3f5c61038b988f8c3142655bdf0781b2e93e8b0293
-  md5: 9b5b19ac1630e7190ca35e361456badd
+- conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.46.0-hb17b654_0.conda
+  sha256: 1d20e86f517c4a63239db13dd34d86dcd44503ba5796b48fb43374363214c003
+  md5: dc2d7fd2c3c43c22a14db9986d6673b9
   depends:
   - __glibc >=2.17,<3.0.a0
   - libgcc >=14
   constrains:
   - __glibc >=2.17
   license: MIT OR Apache-2.0
-  size: 3359580
-  timestamp: 1776192165109
+  size: 3365492
+  timestamp: 1777571676488
 - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
   sha256: 1d30098909076af33a35017eed6f2953af1c769e273a0626a04722ac4acaba3c
   md5: ad659d0a2b3e47e38d829aa8cad2d610
