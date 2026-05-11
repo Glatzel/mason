@@ -84,7 +84,7 @@ jobs:
             fi
           else
             COMMENT_BODY="**Lefthook finished**
-          ℹ️ No changes were required."
+          ✅️ No changes were required."
           fi
 
           # Always attempt to comment
