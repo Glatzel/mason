@@ -45,7 +45,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ruamel.yaml.clib-0.2.15-py313h54dd161_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ruff-0.15.14-h994f30f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_h366c992_103.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/tombi-0.11.7-hb17b654_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/tombi-1.0.0-hb17b654_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.46.3-hb17b654_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.7-hb78ec9c_6.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/alabaster-1.0.0-pyhd8ed1ab_1.conda
@@ -528,18 +528,17 @@ packages:
   license_family: BSD
   size: 3301196
   timestamp: 1769460227866
-- conda: https://conda.anaconda.org/conda-forge/linux-64/tombi-0.11.7-hb17b654_0.conda
-  sha256: e2d9489bc784bbb76d7ce7e90d6db4127698dbc051480ad1e0525830273d93d7
-  md5: fd6f1f135901f6f54964b8dea8dd5ade
+- conda: https://conda.anaconda.org/conda-forge/linux-64/tombi-1.0.0-hb17b654_0.conda
+  sha256: c98da63ad56f442b16714ec9cdb2722f5da93d02a1eaa0fd9b2f42b70873286f
+  md5: 3ba628cb18f9e89e70d94a533fc499aa
   depends:
   - __glibc >=2.17,<3.0.a0
   - libgcc >=14
   constrains:
   - __glibc >=2.17
   license: MIT
-  license_family: MIT
-  size: 7006971
-  timestamp: 1779520777431
+  size: 7007495
+  timestamp: 1779677417821
 - conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.46.3-hb17b654_0.conda
   sha256: 5ab1233b188e2ad00bd8d0338ace4764f8b4f553aad77accfe6abb75135b2731
   md5: 86fd598ce9a802b4260224edb409e214
