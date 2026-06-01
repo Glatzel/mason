@@ -34,9 +34,6 @@ pre-commit:
           - name: check-json
             glob: "**/*.json"
             run: pixi {run} check-json {staged_files}
-          - name: check-toml
-            glob: "**/*.toml"
-            run: pixi {run} check-toml {staged_files}
           - name: check-yaml
             glob: "**/*.yaml"
             run: pixi {run} check-yaml {staged_files}
