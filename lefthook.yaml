@@ -100,17 +100,16 @@ pre-commit:
       glob: "**/Cargo.toml"
       group:
         jobs:
-          - name: cargo-machete
+          - name: cargo-shear
             run: |
               pwsh -CommandWithArgs '''
               $ErrorActionPreference = "Stop"
               $PSNativeCommandUseErrorActionPreference = $true;
               $root=Resolve-Path $pwd
               foreach ($file in $args) {
-                  Set-Location (Split-Path (Resolve-Path $file) -Parent)
-                  Write-Output "Cargo machete in: $pwd"
-                  cargo machete
-                  Set-Location $root
+                  $dir=Split-Path (Resolve-Path $file) -Parent
+                  Write-Output "Cargo machete in: $dir"
+                  cargo shear --fix $dir
               }''' {staged_files}
 
           - name: cargo-fmt
