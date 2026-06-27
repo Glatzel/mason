@@ -1,5 +1,4 @@
 using System;
-
 using Autodesk.Revit.DB;
 
 namespace Mason.Core.Utils;
