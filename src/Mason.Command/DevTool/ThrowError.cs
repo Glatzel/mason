@@ -1,5 +1,4 @@
 using System;
-
 using Mason.Core;
 
 namespace Mason.Command.DevTool;

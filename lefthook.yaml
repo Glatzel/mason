@@ -67,20 +67,28 @@ pre-commit:
             glob: "**/*.md"
             run: markdownlint-cli2 --fix {staged_files}
 
+    - name: clang
+      stage_fixed: true
+      glob: "**/*.{c,cpp,h,hpp}"
+      group:
+        jobs:
+          - name: clang format
+            run: clang-format -i {staged_files}
+
     - name: csharp
       stage_fixed: true
       glob: "**/*.csproj"
       group:
         jobs:
-          - name: csharpier
-            run: dotnet tool install -g csharpier; csharpier format .; csharpier check .
           - name: dotnet format
             run: dotnet format
+          - name: csharpier
+            run: dotnet tool install -g csharpier; csharpier format .; csharpier check .
 
     - name: python
       glob: "**/*.{py,pyi}"
       exclude:
-        - "**external/**"
+        - "**/external/**"
       stage_fixed: true
       group:
         jobs:

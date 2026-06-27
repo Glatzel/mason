@@ -4,16 +4,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Media.Imaging;
-
 using Autodesk.Revit.UI;
-
 using Mason.ClashAndJoin.Command.Bench;
 using Mason.ClashAndJoin.Command.Group;
 using Mason.ClashAndJoin.Command.Self;
 using Mason.Command.MEP;
 using Mason.Command.Misc;
 using Mason.Command.Structural;
-
 using NLog;
 
 namespace Mason
