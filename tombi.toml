@@ -5,6 +5,3 @@ exclude = ["**/external/**/*.toml"]
 
 [format.rules]
 trailing-comment-alignment = true
-
-[lsp]
-goto-type-definition.enabled = false
