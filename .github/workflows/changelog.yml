@@ -48,7 +48,6 @@ jobs:
             --title "chore: update changelog.md" `
             --body "" `
             --base main `
-            --head update-changelog `
-            --draft
+            --head update-changelog
         env:
           GH_TOKEN: ${{ github.token }}
