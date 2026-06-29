@@ -1,5 +1,7 @@
 using System;
+
 using Autodesk.Revit.DB;
+
 using Mason.Geometry;
 
 namespace Mason.ClashAndJoin;
