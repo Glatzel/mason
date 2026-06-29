@@ -80,10 +80,10 @@ pre-commit:
       glob: "**/*.csproj"
       group:
         jobs:
-          - name: dotnet format
-            run: dotnet format
           - name: csharpier
             run: dotnet tool install -g csharpier; csharpier format .; csharpier check .
+          - name: dotnet format
+            run: dotnet format
 
     - name: python
       glob: "**/*.{py,pyi}"
