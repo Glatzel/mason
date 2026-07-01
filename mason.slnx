@@ -25,10 +25,6 @@
             <BuildType Solution="Debug|*" Project="Debug" />
             <Platform Project="x64" />
         </Project>
-        <Project Path="src\Mason.OTLS\Mason.OTLS.csproj">
-            <Platform Project="x64" />
-            <BuildType Solution="Debug|*" Project="Debug" />
-        </Project>
     </Folder>
     <Folder Name="/tests/">
         <Project Path="tests\Geometry.Test\Geometry.Test.csproj">
