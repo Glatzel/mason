@@ -1,5 +1,5 @@
 $ROOT = git rev-parse --show-toplevel
 Set-Location $PSScriptRoot
 Set-Location ..
-dotnet test -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml
+dotnet test -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-junit
 Set-Location $ROOT
