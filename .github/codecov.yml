@@ -10,3 +10,7 @@ coverage:
         informational: true
 comment:
   behavior: default
+
+flag_management:
+  default_rules:
+    carryforward: true
