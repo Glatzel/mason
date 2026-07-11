@@ -1,0 +1,20 @@
+# This File is automatically synchronized from https://github.com/Glatzel/template
+
+[workspace]
+channels = ["https://prefix.dev/glatzel", "conda-forge"]
+platforms = ["linux-64"]
+
+[tasks]
+lefthook-run = "lefthook run pre-commit --all-files --no-auto-install"
+
+[dependencies]
+actionlint = "==1.7.12"
+cargo-shear = "==1.13.1"
+lefthook = "==2.1.10"
+markdownlint-cli2 = "==0.23.0"
+numpydoc = "==1.10.0"
+pre-commit-hooks = "==5.0.0"
+python = "3.13.*"
+ruff = "==0.15.21"
+tombi = "==1.2.0"
+typos = "==1.48.0"
