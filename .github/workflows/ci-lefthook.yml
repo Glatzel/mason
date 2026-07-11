@@ -31,7 +31,7 @@ jobs:
         id: comment
         if: github.event_name == 'issue_comment' && github.event.issue.pull_request != null
         run: |
-          url=$(gh pr comment "${{ github.event.issue.number }}" --body "Lefthook is running.")
+          url=$(gh pr comment "${{ github.event.issue.number }}" --body "Lefthook is running 🚀")
           echo "comment_url=${url}" >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: ${{ github.token }}
@@ -40,7 +40,7 @@ jobs:
         with:
           path: |
             ./lefthook/.pixi
-          key: lefthook-${{ hashFiles('lefthook.yaml','./lefthook/pixi*')}}
+          key: lefthook-${{ hashFiles('lefthook.yaml','./.github/actions/lefthook/pixi*')}}
           restore-keys: |
             lefthook
 
@@ -52,7 +52,7 @@ jobs:
 
       # pre-commit
       - name: lefthook
-        run: pixi run --manifest-path ./lefthook/pixi.toml lefthook-run
+        run: pixi run --manifest-path ./.github/actions/lefthook/pixi.toml lefthook-run
       - if: ${{!cancelled()}}
         run: |
           if ! git diff --quiet || ! git diff --cached --quiet; then
