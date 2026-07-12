@@ -4,7 +4,6 @@
     "github>Glatzel/template//renovate"
   ],
   "ignorePaths": [
-    "lefthook/**",
     ".github/actions/**",
     ".gitHub/workflows/ci-lefthook.yml",
     ".gitHub/workflows/release.yml",
