@@ -4,17 +4,38 @@
 channels = ["https://prefix.dev/glatzel", "conda-forge"]
 platforms = ["linux-64"]
 
-[tasks]
+[feature.lefthook.tasks]
 lefthook-run = "lefthook run pre-commit --all-files --no-auto-install"
 
-[dependencies]
-actionlint = "==1.7.12"
-cargo-shear = "==1.13.1"
+[feature.lefthook.dependencies]
 lefthook = "==2.1.10"
-markdownlint-cli2 = "==0.23.0"
+
+[feature.python.dependencies]
 numpydoc = "==1.10.0"
-pre-commit-hooks = "==5.0.0"
 python = "3.13.*"
 ruff = "==0.15.21"
+
+[feature.rust.dependencies]
+cargo-shear = "==1.13.1"
+
+[feature.misc.dependencies]
+python = "3.13.*"
+actionlint = "==1.7.12"
+markdownlint-cli2 = "==0.23.0"
+pre-commit-hooks = "==5.0.0"
 tombi = "==1.2.0"
 typos = "==1.48.0"
+
+[feature.clang.dependencies]
+clang-format = "22.1.8"
+
+[feature.dotnet.dependencies]
+dotnet = "10.0.100"
+
+[environments]
+lefthook = ["lefthook"]
+python = ["python"]
+rust = ["rust"]
+misc = ["misc"]
+clang = ["clang"]
+dotnet = ["dotnet"]
