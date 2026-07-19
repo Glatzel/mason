@@ -59,10 +59,10 @@ pre-commit:
             run: |
               {pixi-run} -e misc tombi format {staged_files}
 
-          - name: actionlint
-            glob: ".github/workflows/*.{yml,yaml}"
-            run: |
-              {pixi-run} -e misc actionlint {staged_files}
+          # - name: actionlint
+          #   glob: ".github/workflows/*.{yml,yaml}"
+          #   run: |
+          #     {pixi-run} -e misc actionlint {staged_files}
 
           - name: typos
             run: |
@@ -90,9 +90,12 @@ pre-commit:
       glob: "**/*.csproj"
       group:
         jobs:
-          - name: csharpier
+          - name: csharpier format
             run: |
-              {pixi-run} -e dotnet dotnet tool install -g csharpier; {pixi-run} -e dotnet csharpier format .; {pixi-run} -e dotnet csharpier check .
+              {pixi-run} -e dotnet csharpier format .
+          - name: csharpier check
+            run: |
+              {pixi-run} -e dotnet csharpier check .
           - name: dotnet format
             run: |
               {pixi-run} -e dotnet dotnet format

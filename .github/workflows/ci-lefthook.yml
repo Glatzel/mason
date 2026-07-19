@@ -15,6 +15,18 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.issue.pull_request != null && contains(github.event.comment.body, 'lefthook')) }}
     runs-on: ubuntu-latest
     steps:
+      - parallel:
+        - name: comment if triggered by comment
+          if: github.event_name == 'issue_comment' && github.event.issue.pull_request != null
+          run: |
+            url=$(gh pr comment "${{ github.event.issue.number }}" --body "Lefthook is running 🚀")
+            echo "comment_url=${url}" >> "$GITHUB_OUTPUT"
+          env:
+            GH_TOKEN: ${{ github.token }}
+        - name: Set up pixi
+          uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f # v0.10.0
+          with:
+            run-install: false
       - id: get-branch
         if: github.event_name == 'issue_comment' && github.event.issue.pull_request != null
         run: echo "branch=$(gh pr view "$PR_NO" --repo "$REPO" --json headRefName --jq '.headRefName')" >> "$GITHUB_OUTPUT"
@@ -26,29 +38,12 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ (github.event_name == 'issue_comment' && github.event.issue.pull_request != null) && steps.get-branch.outputs.branch || github.head_ref }}
-
-      - name: comment if triggered by comment
-        id: comment
-        if: github.event_name == 'issue_comment' && github.event.issue.pull_request != null
-        run: |
-          url=$(gh pr comment "${{ github.event.issue.number }}" --body "Lefthook is running 🚀")
-          echo "comment_url=${url}" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ github.token }}
-
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ./.github/actions/lefthook/.pixi
           key: lefthook-${{ hashFiles('lefthook.yaml','./.github/actions/lefthook/pixi*')}}
           restore-keys: |
             lefthook
-
-      #  pixi setup
-      - name: Set up pixi
-        uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f # v0.10.0
-        with:
-          run-install: false
-
       # pre-commit
       - name: lefthook
         run: pixi run --manifest-path ./.github/actions/lefthook/pixi.toml lefthook-run
