@@ -20,48 +20,48 @@ permissions:
 
 jobs:
   create-release:
-    if: ${{!failure()}}
     runs-on: ubuntu-slim
     steps:
-      - name: check-tag-release
-        if: ${{inputs.latest }}
-        run: |
-          Write-Output "tag: ${{inputs.tag}}"
-          if("${{inputs.tag}}" -match '^v\d+\.\d+\.\d+$' ){}
-          else{throw "Unknown version: '${{inputs.tag}}'"}
-        shell: pwsh
+      - parallel:
+        - name: check-tag-release
+          if: ${{inputs.latest }}
+          run: |
+            Write-Output "tag: ${{inputs.tag}}"
+            if("${{inputs.tag}}" -match '^v\d+\.\d+\.\d+$' ){}
+            else{throw "Unknown version: '${{inputs.tag}}'"}
+          shell: pwsh
 
-      - name: check-tag-pre-release
-        if: ${{!inputs.latest }}
-        run: |
-          Write-Output "tag: ${{inputs.tag}}"
-          if("${{inputs.tag}}" -match '^v\d+\.\d+\.\d+-.*$') {}
-          else{throw "Unknown version: '${{inputs.tag}}'"}
-        shell: pwsh
+        - name: check-tag-pre-release
+          if: ${{!inputs.latest }}
+          run: |
+            Write-Output "tag: ${{inputs.tag}}"
+            if("${{inputs.tag}}" -match '^v\d+\.\d+\.\d+-.*$') {}
+            else{throw "Unknown version: '${{inputs.tag}}'"}
+          shell: pwsh
 
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        with:
-          fetch-depth: 0
-          persist-credentials: false
+        - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+          with:
+            fetch-depth: 0
+            persist-credentials: false
 
-      - name: clear-tag-and-release
-        run: |
-          if($(gh api /repos/${{github.repository}}/tags --jq '.[].name') -contains "${{inputs.tag}}")
-          {
-              write-output "tag ${{inputs.tag}} exists."
-              gh release delete ${{inputs.tag}} --cleanup-tag -y
-          }
-          else{
-              write-output "tag ${{inputs.tag}} does not exist."
-          }
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: pwsh
+        - name: clear-tag-and-release
+          run: |
+            if($(gh api /repos/${{github.repository}}/tags --jq '.[].name') -contains "${{inputs.tag}}")
+            {
+                write-output "tag ${{inputs.tag}} exists."
+                gh release delete ${{inputs.tag}} --cleanup-tag -y
+            }
+            else{
+                write-output "tag ${{inputs.tag}} does not exist."
+            }
+          env:
+            GH_TOKEN: ${{ github.token }}
+          shell: pwsh
 
-      - name: Set up pixi
-        uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f # v0.10.0
-        with:
-          run-install: false
+        - name: Set up pixi
+          uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f # v0.10.0
+          with:
+            run-install: false
 
       - name: Generate a changelog
         run: |
