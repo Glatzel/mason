@@ -38,10 +38,11 @@ jobs:
           uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f # v0.10.0
           with:
             run-install: false
+        - run: cp ./.github/actions/lefthook/lefthook.yaml ./lefthook.yaml
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ./.github/actions/lefthook/.pixi
-          key: lefthook-${{ hashFiles('lefthook.yaml','./.github/actions/lefthook/pixi*')}}
+          key: lefthook-${{ hashFiles('./.github/actions/lefthook/lefthook.yaml','./.github/actions/lefthook/pixi*')}}
           restore-keys: |
             lefthook
       # pre-commit

@@ -113,13 +113,13 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.48.0-hb17b654_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.7-hb78ec9c_6.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.6.17-hbd8a1cb_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.23.1-h5ac6406_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.23.2-h24b164e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pre-commit-hooks-6.0.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.13-8_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/ruamel.yaml-0.19.1-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tomli-2.4.1-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
-      - conda: https://prefix.dev/glatzel/linux-64/tombi-1.2.2-ha709c6e_0.conda
+      - conda: https://prefix.dev/glatzel/linux-64/tombi-1.2.5-ha709c6e_0.conda
   python:
     channels:
     - url: https://prefix.dev/glatzel/
@@ -146,7 +146,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/openssl-3.6.3-h35e630c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/python-3.13.14-h6add32d_100_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/readline-8.3-h853b02a_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/ruff-0.15.22-h462bb3b_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/ruff-0.16.1-h462bb3b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_hd70dff1_3.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.7-hb78ec9c_6.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/alabaster-1.0.0-pyhd8ed1ab_1.conda
@@ -189,7 +189,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-20_gnu.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libgcc-15.2.0-he0feb66_19.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libgomp-15.2.0-he0feb66_19.conda
-      - conda: https://prefix.dev/glatzel/linux-64/cargo-shear-1.13.2-hf804674_0.conda
+      - conda: https://prefix.dev/glatzel/linux-64/cargo-shear-1.13.3-hf804674_0.conda
 packages:
 - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-20_gnu.conda
   build_number: 20
@@ -994,10 +994,10 @@ packages:
   run_exports: {}
   size: 149946
   timestamp: 1766159512977
-- conda: https://conda.anaconda.org/conda-forge/linux-64/ruff-0.15.22-h462bb3b_0.conda
+- conda: https://conda.anaconda.org/conda-forge/linux-64/ruff-0.16.1-h462bb3b_0.conda
   noarch: python
-  sha256: 2002c7869a95ed94b03303a033fcc24b608597bdd01c8f01d90c47175616edb9
-  md5: ad7d8b2d37a1098a04ddd8b34b962481
+  sha256: 7dc0b128718ada4a3b8254a59ff37decabc1c68fc8d4a44bb478064f1eb1568b
+  md5: c2ef67e77b435ed8fef8a84f7f680a3d
   depends:
   - python
   - __glibc >=2.17,<3.0.a0
@@ -1006,8 +1006,8 @@ packages:
   - __glibc >=2.17
   license: MIT
   run_exports: {}
-  size: 9333318
-  timestamp: 1784237314764
+  size: 9449104
+  timestamp: 1785485613405
 - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_hd70dff1_3.conda
   build_number: 103
   sha256: 43624eab22f5f29df7d6ffe914cf442f28fd559b55b290906255492826e636e8
@@ -1227,15 +1227,15 @@ packages:
   run_exports: {}
   size: 3095909
   timestamp: 1778268932148
-- conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.23.1-h5ac6406_0.conda
-  sha256: a96fa194449e5d903684a4d5099e1465e30ab50e38e0746337b53bb3531355f5
-  md5: d77a60eac4275f518626c88a50c20745
+- conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.23.2-h24b164e_0.conda
+  sha256: 08d5b94d9ebc34b3ccf7155737acb9dc67be5ef6f1f6b987dbf3249333d701c9
+  md5: d5393b1764b14e83a94fc4fc9174cf65
   depends:
   - nodejs
   license: MIT
   run_exports: {}
-  size: 2233224
-  timestamp: 1784297658364
+  size: 2241022
+  timestamp: 1785154531757
 - conda: https://conda.anaconda.org/conda-forge/noarch/numpydoc-1.10.0-pyhcf101f3_0.conda
   sha256: 482d94fce136c4352b18c6397b9faf0a3149bfb12499ab1ffebad8db0cb6678f
   md5: 3aa4b625f20f55cf68e92df5e5bf3c39
@@ -1489,27 +1489,27 @@ packages:
   run_exports: {}
   size: 103560
   timestamp: 1778188657149
-- conda: https://prefix.dev/glatzel/linux-64/cargo-shear-1.13.2-hf804674_0.conda
-  sha256: 34af4082f9826393b81a0db900443c67e265a271a3c886f3bed211ef0ffa8f4d
-  md5: cc22e040adf5b2f74ef847f5b88c038a
+- conda: https://prefix.dev/glatzel/linux-64/cargo-shear-1.13.3-hf804674_0.conda
+  sha256: 96b58233e18d49901b388383e1fadac15a46c18fa43e11d5073aa18556e66ba3
+  md5: 80330b35c5cf15d18c46f0c06d3bad43
   depends:
   - libgcc >=14
   - __glibc >=2.28,<3.0.a0
   constrains:
   - __glibc >=2.17
   run_exports: {}
-  size: 1186203
-  timestamp: 1784240670049
-- conda: https://prefix.dev/glatzel/linux-64/tombi-1.2.2-ha709c6e_0.conda
-  sha256: 856ff9bd354921b2ffc4a9f4935c936f77a07404f8a7f4278216613c1fabe7c6
-  md5: f1e30b2001f42c5fdaa16288501f979c
+  size: 1194217
+  timestamp: 1785016617594
+- conda: https://prefix.dev/glatzel/linux-64/tombi-1.2.5-ha709c6e_0.conda
+  sha256: 0783c82817ca4981f56ccfb7e37ae48729a1813a43f6f55e381ed80196ea1086
+  md5: ef9cd7047d1d88656f560503d71a6a6f
   depends:
   - __glibc >=2.28,<3.0.a0
   constrains:
   - __glibc >=2.17
   run_exports: {}
-  size: 5320508
-  timestamp: 1784373233030
+  size: 5331029
+  timestamp: 1785490246687
 - conda: https://prefix.dev/glatzel/noarch/csharpier-1.2.6-h4616a5c_0.conda
   sha256: 617afeb586ec477f263fe93c245aab0f8e58a5c6aa21e02dd83da0f62bebba41
   md5: 42e9d19b6e32f49304606007f7288f43
