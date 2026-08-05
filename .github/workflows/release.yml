@@ -43,25 +43,24 @@ jobs:
           with:
             fetch-depth: 0
             persist-credentials: false
-
-        - name: clear-tag-and-release
-          run: |
-            if($(gh api /repos/${{github.repository}}/tags --jq '.[].name') -contains "${{inputs.tag}}")
-            {
-                write-output "tag ${{inputs.tag}} exists."
-                gh release delete ${{inputs.tag}} --cleanup-tag -y
-            }
-            else{
-                write-output "tag ${{inputs.tag}} does not exist."
-            }
-          env:
-            GH_TOKEN: ${{ github.token }}
-          shell: pwsh
-
         - name: Set up pixi
           uses: prefix-dev/setup-pixi@a09b6247153796b190642a2b53fac4241043cf6f # v0.10.0
           with:
             run-install: false
+
+      - name: clear-tag-and-release
+        run: |
+          if($(gh api /repos/${{github.repository}}/tags --jq '.[].name') -contains "${{inputs.tag}}")
+          {
+              write-output "tag ${{inputs.tag}} exists."
+              gh release delete ${{inputs.tag}} --cleanup-tag -y
+          }
+          else{
+              write-output "tag ${{inputs.tag}} does not exist."
+          }
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
 
       - name: Generate a changelog
         run: |
