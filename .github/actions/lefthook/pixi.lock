@@ -57,10 +57,10 @@ environments:
     packages:
       linux-64:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-20_gnu.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-10.0.100-ha770c72_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-aspnetcore-10.0.0-ha770c72_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-runtime-10.0.0-h84d6215_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-sdk-10.0.100-h84d6215_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-10.0.302-ha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-aspnetcore-10.0.10-ha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-runtime-10.0.10-hb700be7_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-sdk-10.0.302-hb700be7_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/icu-78.3-h33c6efd_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libgcc-15.2.0-he0feb66_19.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libgomp-15.2.0-he0feb66_19.conda
@@ -110,7 +110,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/readline-8.3-h853b02a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ruamel.yaml.clib-0.2.15-py313h54dd161_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_hd70dff1_3.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.48.0-hb17b654_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.49.0-hb17b654_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.7-hb78ec9c_6.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.6.17-hbd8a1cb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/markdownlint-cli2-0.23.2-h24b164e_0.conda
@@ -119,7 +119,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ruamel.yaml-0.19.1-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tomli-2.4.1-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
-      - conda: https://prefix.dev/glatzel/linux-64/tombi-1.2.5-ha709c6e_0.conda
+      - conda: https://prefix.dev/glatzel/linux-64/tombi-1.2.6-ha709c6e_0.conda
   python:
     channels:
     - url: https://prefix.dev/glatzel/
@@ -410,54 +410,50 @@ packages:
   run_exports: {}
   size: 115679
   timestamp: 1781741196856
-- conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-10.0.100-ha770c72_0.conda
-  sha256: 7012b1842ffe09fa2b61a3222db17af2c061f16d1e79cd3b58c73c43dccf68a0
-  md5: abe49f771c5fecc9855a5705b0e437d7
+- conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-10.0.302-ha770c72_0.conda
+  sha256: 5c4c3f6db8a053161b1f8c468c7f40ec001eae1bd680ecb21298080bac30e9b7
+  md5: 5b25bddae32a0d8e80d4d7e7be1f6c20
   depends:
-  - dotnet-aspnetcore 10.0.0.*
-  - dotnet-runtime 10.0.0.*
-  - dotnet-sdk 10.0.100.*
+  - dotnet-aspnetcore 10.0.10.*
+  - dotnet-runtime 10.0.10.*
+  - dotnet-sdk 10.0.302.*
   license: MIT
-  license_family: MIT
   run_exports: {}
-  size: 14498
-  timestamp: 1764576558044
-- conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-aspnetcore-10.0.0-ha770c72_0.conda
-  sha256: 79b784418a2520a0f7531b25e7cca51dbf8285d976306d2b38141c31dda2a6e7
-  md5: 107daf40acd021436b34fb3e52c936a6
+  size: 15461
+  timestamp: 1785855280657
+- conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-aspnetcore-10.0.10-ha770c72_0.conda
+  sha256: fce7f2b1f7b73bfa8a69568c257025b1bbbcadd5e5fc999daf58faa9d162c5e4
+  md5: 2bb65b1b9fa082870928a2e556251d7d
   depends:
-  - dotnet-runtime 10.0.0.*
+  - dotnet-runtime 10.0.10.*
   license: MIT
-  license_family: MIT
   run_exports: {}
-  size: 9231956
-  timestamp: 1764576329593
-- conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-runtime-10.0.0-h84d6215_0.conda
-  sha256: 6cd38decdc40b67427c532beeb1bebb7d43881f005ac405b07f0c0ebccb0817d
-  md5: aae41f008fb51777cfada693ee8c2019
+  size: 9209826
+  timestamp: 1785855108378
+- conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-runtime-10.0.10-hb700be7_0.conda
+  sha256: da83b949b15b57e603b6c18ca8bb3dca6da4b57445421b510a04ba0e9da52fe9
+  md5: 73dad35b398709c5fbc201be3dd2ed0e
   depends:
   - __glibc >=2.17,<3.0.a0
   - icu
-  - libgcc >=13
-  - libstdcxx >=13
+  - libgcc >=14
+  - libstdcxx >=14
   license: MIT
-  license_family: MIT
   run_exports: {}
-  size: 28731851
-  timestamp: 1764576298576
-- conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-sdk-10.0.100-h84d6215_0.conda
-  sha256: 00b9b82d63c9aa797e79f3a85296271d22c29addc6111e22d06183b85557b5a6
-  md5: 5bd7e88caab18d6fa1d1808232513b30
+  size: 29012868
+  timestamp: 1785855082841
+- conda: https://conda.anaconda.org/conda-forge/linux-64/dotnet-sdk-10.0.302-hb700be7_0.conda
+  sha256: f2d4662f2eaa24148de4cf9fd13af3c4a59e1f9b6eb732d151ba7721ff805544
+  md5: ecf62159477024b891f3686c38489342
   depends:
   - __glibc >=2.17,<3.0.a0
-  - dotnet-runtime 10.0.0.*
-  - libgcc >=13
-  - libstdcxx >=13
+  - dotnet-runtime 10.0.10.*
+  - libgcc >=14
+  - libstdcxx >=14
   license: MIT
-  license_family: MIT
   run_exports: {}
-  size: 136504807
-  timestamp: 1764576365568
+  size: 134521671
+  timestamp: 1785855129678
 - conda: https://conda.anaconda.org/conda-forge/linux-64/icu-78.3-h33c6efd_0.conda
   sha256: fbf86c4a59c2ed05bbffb2ba25c7ed94f6185ec30ecb691615d42342baa1a16a
   md5: c80d8a3b84358cb967fa81e7075fbc8a
@@ -1024,9 +1020,9 @@ packages:
     - tk >=8.6.13,<8.7.0a0
   size: 3550916
   timestamp: 1784229071544
-- conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.48.0-hb17b654_0.conda
-  sha256: b8cd6270cf71afa1ea5abb21c5ea65d9f4f0ec2614d3af3d0d2185011a1ff3b4
-  md5: a66c11d121cd29ee901edb4eb50d1075
+- conda: https://conda.anaconda.org/conda-forge/linux-64/typos-1.49.0-hb17b654_0.conda
+  sha256: b6994cf156ebe1bf3b2232405745a05b308e7debb52fe3263e08f825f783a913
+  md5: 828f5b9817630eea0b19852df832987e
   depends:
   - libgcc >=14
   - __glibc >=2.17,<3.0.a0
@@ -1034,8 +1030,8 @@ packages:
   - __glibc >=2.17
   license: MIT OR Apache-2.0
   run_exports: {}
-  size: 3366192
-  timestamp: 1782859608728
+  size: 3381607
+  timestamp: 1785783572767
 - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.7-hb78ec9c_6.conda
   sha256: 68f0206ca6e98fea941e5717cec780ed2873ffabc0e1ed34428c061e2c6268c7
   md5: 4a13eeac0b5c8e5b8ab496e6c4ddd829
@@ -1500,16 +1496,16 @@ packages:
   run_exports: {}
   size: 1194217
   timestamp: 1785016617594
-- conda: https://prefix.dev/glatzel/linux-64/tombi-1.2.5-ha709c6e_0.conda
-  sha256: 0783c82817ca4981f56ccfb7e37ae48729a1813a43f6f55e381ed80196ea1086
-  md5: ef9cd7047d1d88656f560503d71a6a6f
+- conda: https://prefix.dev/glatzel/linux-64/tombi-1.2.6-ha709c6e_0.conda
+  sha256: 891292dc60984d17f6fc250270221361b6a6ec31dac82eea9e0aaf7e13f34e4b
+  md5: 156ddebbc899b73ac000f7acd3817cb5
   depends:
   - __glibc >=2.28,<3.0.a0
   constrains:
   - __glibc >=2.17
   run_exports: {}
-  size: 5331029
-  timestamp: 1785490246687
+  size: 5331381
+  timestamp: 1785742276228
 - conda: https://prefix.dev/glatzel/noarch/csharpier-1.2.6-h4616a5c_0.conda
   sha256: 617afeb586ec477f263fe93c245aab0f8e58a5c6aa21e02dd83da0f62bebba41
   md5: 42e9d19b6e32f49304606007f7288f43
