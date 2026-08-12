@@ -27,18 +27,18 @@ jobs:
         with:
           ref: ${{ (github.event_name == 'issue_comment' && github.event.issue.pull_request != null) && steps.get-branch.outputs.branch || github.head_ref }}
       - parallel:
-        - name: comment if triggered by comment
-          if: github.event_name == 'issue_comment' && github.event.issue.pull_request != null
-          run: |
-            url=$(gh pr comment "${{ github.event.issue.number }}" --body "Lefthook is running 🚀")
-            echo "comment_url=${url}" >> "$GITHUB_OUTPUT"
-          env:
-            GH_TOKEN: ${{ github.token }}
-        - name: Set up pixi
-          uses: prefix-dev/setup-pixi@f00437f565399d418b0acc85936d12c1fb668347 # v0.10.1
-          with:
-            run-install: false
-        - run: cp ./.github/actions/lefthook/lefthook.yaml ./lefthook.yaml
+          - name: comment if triggered by comment
+            if: github.event_name == 'issue_comment' && github.event.issue.pull_request != null
+            run: |
+              url=$(gh pr comment "${{ github.event.issue.number }}" --body "Lefthook is running 🚀")
+              echo "comment_url=${url}" >> "$GITHUB_OUTPUT"
+            env:
+              GH_TOKEN: ${{ github.token }}
+          - name: Set up pixi
+            uses: prefix-dev/setup-pixi@f00437f565399d418b0acc85936d12c1fb668347 # v0.10.1
+            with:
+              run-install: false
+          - run: cp ./.github/actions/lefthook/lefthook.yaml ./lefthook.yaml
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ./.github/actions/lefthook/.pixi
