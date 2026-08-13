@@ -20,11 +20,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lefthook:
-    uses: ./.github/workflows/ci-lefthook.yml
-    permissions:
-      contents: write
-      pull-requests: write
   build:
     runs-on: windows-latest
     steps:
@@ -49,7 +44,7 @@ jobs:
         if: ${{!cancelled()}}
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
-    needs: [lefthook,build]
+    needs: [build]
     runs-on: ubuntu-slim
     steps:
       - run: exit 1
