@@ -4,15 +4,14 @@ name: Lefthook
 
 on:
   workflow_dispatch:
-  pull_request:
-  issue_comment:
-    types: [created]
+  workflow_call:
 permissions:
   contents: write
   pull-requests: write
 jobs:
   lefthook:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.issue.pull_request != null && contains(github.event.comment.body, 'lefthook')) }}
     runs-on: ubuntu-latest
     steps:
-      - uses: Glatzel/template/.github/actions/common/lefthook@752af13a2123fba7f794078dc19ab4ae67e16b94 # v2026.8.22
+      - uses: Glatzel/template/.github/actions/common/lefthook@e5b6ee4c6d9ddb2d5e329fc7d338b1787e40d204 # v2026.8.24
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
