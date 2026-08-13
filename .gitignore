@@ -10,3 +10,4 @@ TestResults
 .pixi/*
 !.pixi/config.toml
 rattler/output
+CSharpier
