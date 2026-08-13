@@ -4,8 +4,8 @@
     "github>Glatzel/template:renovate.jsonc"
   ],
   "ignorePaths": [
-    ".gitHub/workflows/ci-lefthook.yml",
-    ".gitHub/workflows/release.yml",
-    ".gitHub/workflows/changelog.yml"
+    ".github/workflows/ci-lefthook.yml",
+    ".github/workflows/release.yml",
+    ".github/workflows/changelog.yml"
   ]
 }
