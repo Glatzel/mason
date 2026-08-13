@@ -45,7 +45,7 @@ jobs:
 
       # test
       - run: ./scripts/test.ps1
-      - uses: Glatzel/template/actions/common/codecov@e99cfd79d24aeb304968de9978752503b6ef1a2d # v2026.8.16
+      - uses: Glatzel/template/.github/actions/common/codecov@e99cfd79d24aeb304968de9978752503b6ef1a2d # v2026.8.16
         if: ${{!cancelled()}}
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
